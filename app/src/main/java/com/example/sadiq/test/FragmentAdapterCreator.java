@@ -3,6 +3,8 @@ package com.example.sadiq.test;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ListFragment;
 
 import java.util.LinkedList;
 
@@ -12,15 +14,15 @@ import java.util.LinkedList;
 public class FragmentAdapterCreator extends FragmentPagerAdapter {
 
     private LinkedList<Fragment> fragmentList;
-
-    public FragmentAdapterCreator(FragmentManager fm,LinkedList<Fragment> fragmentList){
+    ListFragment a;
+    public FragmentAdapterCreator(FragmentManager fm,LinkedList fragmentList){
         super(fm);
         this.fragmentList=fragmentList;
 
     }
 
     public Fragment getItem(int Position){
-        return this.fragmentList.get(Position);
+        return  this.fragmentList.get(Position);
     }
 
     public int getCount(){

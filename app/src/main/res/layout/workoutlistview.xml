@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/workoutlistview"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<com.example.sadiq.test.workOutListView
+    android:id="@+id/workoutlistview1"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+    <TextView
+        android:id="@+id/bodypart"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dip"
+        android:textColor="#000000"
+        android:paddingLeft="10dip"
+        android:textStyle="bold"
+
+        android:gravity="center"
+
+        />
+
+
+</LinearLayout>

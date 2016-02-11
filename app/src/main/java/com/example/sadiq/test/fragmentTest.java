@@ -1,6 +1,7 @@
 package com.example.sadiq.test;
 
 import android.app.ActionBar;
+import android.app.ListActivity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -61,7 +63,13 @@ public class fragmentTest extends Fragment {
         tbl.setActivated(true);
         //tbl.addView(tr.findFocus());
 */
-RelativeLayout test = new RelativeLayout(getActivity());
+        //ListView list = new ListView(getActivity());
+
+    //    ListActivity list=new ListActivity();
+
+
+
+        RelativeLayout test = new RelativeLayout(getActivity());
 
 TableLayout table = new TableLayout(getActivity());
         table.addView(row1());
@@ -100,6 +108,7 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
         text.setText("#This is a test");
         tablerow.addView(text);
         tablerow.setClickable(true);
+        //getActivity().setContentView();
 
 
         tablerow.setOnClickListener(new View.OnClickListener() {

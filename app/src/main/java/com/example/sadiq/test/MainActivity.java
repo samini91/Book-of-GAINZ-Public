@@ -2,6 +2,7 @@ package com.example.sadiq.test;
 
 import android.app.Activity;
 
+import android.app.FragmentContainer;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private ViewPager mPager;
     private PagerAdapter mPageAdapter;
-    private LinkedList<Fragment> fragmentList;
+    private LinkedList fragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +68,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mPager = (ViewPager) findViewById(R.id.pager);
         fragmentList = new LinkedList<Fragment>();
+
+
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
-        fragmentList.add(new fragmentTest());
-        fragmentList.add(new fragmentTest());
+        //fragmentList.add(new fragmentTest());
+      //  fragmentList.add(new fragmentTest());
+        fragmentList.add(new workOutList());
+
         FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
 
         mPager.setAdapter(FragmentAdapter);
