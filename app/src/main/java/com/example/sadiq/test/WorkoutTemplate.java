@@ -9,8 +9,12 @@ import java.util.LinkedList;
 public class WorkoutTemplate {
     public String Name;
     public ArrayList<String> Exersice;
+    public int id;
     public WorkoutTemplate(String Name,ArrayList<String> Exersice){
         this.Name=Name;
         this.Exersice=Exersice;
+
 }
+
+
 }

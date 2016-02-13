@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     private ViewPager mPager;
     private PagerAdapter mPageAdapter;
     private LinkedList fragmentList;
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
         //fragmentList.add(new fragmentTest());
       //  fragmentList.add(new fragmentTest());
-        fragmentList.add(new workOutList());
+       // fragmentList.add(new workOutList());
+        fragmentList.add(new addExersice());
 
         FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
 

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * Created by Sadiq on 2/10/2016.
  */
-//singleton class
+//singleton class for the database
 public class Database {
 
     private static Database db= new Database();
