@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="bodyParts">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
+        <item>Quads</item>
+        <item>Hamstrings</item>
+        <item>Calves</item>
+        <item>Glutes</item>
+        <item>Chest</item>
+        <item>UpperChest</item>
+        <item>LowerChest</item>
+        <item>Triceps</item>
+        <item>Biceps</item>
+        <item>Lats</item>
+        <item>Mid Back</item>
+        <item>Lower Back</item>
+        <item>Traps</item>
+        <item>Abs</item>
     </string-array>
 </resources>

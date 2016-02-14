@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.example.sadiq.test.CustomDataTypes.muscleGroupList;
+
 import java.util.ArrayList;
 
 /**
@@ -36,12 +38,52 @@ public class addExersice extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addexersice,container,false);
-        //LinearLayout e = (LinearLayout) inflater.inflate(R.layout.addexersice,container,false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addexersice, container, false);
 
-      //  e.addView(new TextView(getActivity()));
+        muscleGroupList primaryMuscleList = (muscleGroupList) root.findViewById(R.id.leftListView);
+       // muscleGroupList secondaryMuscleList = (muscleGroupList) root.findViewById(R.id.rightListView);
 
-                
+        primaryMuscleList.create(getActivity());
+        //secondaryMuscleList.create(getActivity());
+        return root;
+//        return super.onCreateView(inflater, container, savedInstanceState);
+
+
+    }
+
+}
+/*
+* leftList.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //leftList.getItemAtPosition(position);
+                //leftList.setItemChecked(position,false);
+
+                System.out.println(leftList.isItemChecked(position) + "         asdfasdf");
+                if (leftList.isItemChecked(position)) {
+
+                    leftList.setItemChecked(position, false);
+
+                    view.setBackgroundColor(Color.WHITE);
+                } else {
+                    leftList.setItemChecked(position, true);
+                    view.setBackgroundColor(Color.GREEN);
+                    System.out.println(position);
+                }
+
+                bodyPartListAdapter.notifyDataSetChanged();
+                System.out.println(leftList.isItemChecked(position) + "         asdfasdfasdfasdfasdfasdfa");
+
+            }
+        });
+*
+* */
+//LinearLayout e = (LinearLayout) inflater.inflate(R.layout.addexersice,container,false);
+
+//  e.addView(new TextView(getActivity()));
+
+        /*
         TextView nameOfExerisiceDialog= (TextView) root.findViewById(R.id.nameofexersice);
 
         final ListView leftList = (ListView)root.findViewById(R.id.leftListView);
@@ -80,39 +122,4 @@ public class addExersice extends Fragment {
                 }
             }
         });
-
-
-return root;
-//        return super.onCreateView(inflater, container, savedInstanceState);
-
-
-    }
-
-}
-/*
-* leftList.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //leftList.getItemAtPosition(position);
-                //leftList.setItemChecked(position,false);
-
-                System.out.println(leftList.isItemChecked(position) + "         asdfasdf");
-                if (leftList.isItemChecked(position)) {
-
-                    leftList.setItemChecked(position, false);
-
-                    view.setBackgroundColor(Color.WHITE);
-                } else {
-                    leftList.setItemChecked(position, true);
-                    view.setBackgroundColor(Color.GREEN);
-                    System.out.println(position);
-                }
-
-                bodyPartListAdapter.notifyDataSetChanged();
-                System.out.println(leftList.isItemChecked(position) + "         asdfasdfasdfasdfasdfasdfa");
-
-            }
-        });
-*
-* */
+*/
