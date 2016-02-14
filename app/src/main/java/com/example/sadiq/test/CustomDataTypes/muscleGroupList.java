@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.sadiq.test.R;
@@ -18,8 +19,8 @@ import java.util.ArrayList;
 public class muscleGroupList extends ListView {
     private boolean[] bodyPartsStateinList;
     private String[] bodyParts;
-
-
+    private BodyPartHolder[] bodyPartHolder;
+    muscleGroupListAdpater<BodyPartHolder> bodyPartListAdapter;
     public muscleGroupList(Context activityContext){
         super(activityContext);
     }
@@ -43,6 +44,11 @@ public class muscleGroupList extends ListView {
 
     public void create(Context Activity){
         bodyParts= getResources().getStringArray(R.array.bodyParts);
+        bodyPartHolder=new BodyPartHolder[bodyParts.length];
+        for(int i =0;i<bodyParts.length;i++){
+            bodyPartHolder[i]=new BodyPartHolder();
+            bodyPartHolder[i].name=bodyParts[i];
+        }
 
         ArrayList<String> temptext= new ArrayList<>();
        // temptext.add("asdf");temptext.add("asdf");temptext.add("asdf");temptext.add("asdf");temptext.add("asdf");
@@ -56,38 +62,49 @@ public class muscleGroupList extends ListView {
 
         //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
         //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
-        final muscleGroupListAdpater<String> bodyPartListAdapter= new muscleGroupListAdpater<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
+        //final muscleGroupListAdpater<String> bodyPartListAdapter= new muscleGroupListAdpater<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
+        bodyPartListAdapter = new muscleGroupListAdpater<BodyPartHolder>(Activity,R.layout.row_layout,R.id.listText,bodyPartHolder);
 
 
         this.setAdapter(bodyPartListAdapter);
-        this.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-
-
+        //this.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         this.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(position);
+
                 if (bodyPartsStateinList[position] == false) {
                     bodyPartsStateinList[position] = true;
                     //parent.getChildAt(position).setBackgroundColor(Color.GREEN);
 
                     //parent.getItemAtPosition(position);
-
-                    view.setBackgroundColor(Color.GREEN);
+                    BodyPartHolder t = (BodyPartHolder) parent.getItemAtPosition(position);
+                    t.backGroundColor = Color.GREEN;
+                    // view.setBackgroundColor(Color.GREEN);
 
 
                 } else {
+                    BodyPartHolder t = (BodyPartHolder) parent.getItemAtPosition(position);
+                    t.backGroundColor = Color.WHITE;
                     bodyPartsStateinList[position] = false;
                     //parent.getChildAt(position).setBackgroundColor(Color.WHITE);
 
-                    view.setBackgroundColor(Color.WHITE);
-
+                    // view.setBackgroundColor(Color.WHITE);
                 }
+                System.out.println(position + "  :  " + bodyPartsStateinList[position]);
                 bodyPartListAdapter.notifyDataSetChanged();
             }
         });
+
+
+    }
+
+    public void clear(){
+        for (int i = 0; i < bodyPartHolder.length; i++) {
+            bodyPartHolder[i].backGroundColor = Color.WHITE;
+            bodyPartsStateinList[i] = false;
+        }
+        bodyPartListAdapter.notifyDataSetChanged();
     }
 
 }

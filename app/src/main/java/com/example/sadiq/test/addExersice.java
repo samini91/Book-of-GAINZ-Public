@@ -5,12 +5,17 @@ import android.app.LauncherActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -38,13 +43,61 @@ public class addExersice extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addexersice, container, false);
 
-        muscleGroupList primaryMuscleList = (muscleGroupList) root.findViewById(R.id.leftListView);
-       // muscleGroupList secondaryMuscleList = (muscleGroupList) root.findViewById(R.id.rightListView);
+        final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addexersice, container, false);
+
+        final muscleGroupList primaryMuscleList = (muscleGroupList) root.findViewById(R.id.leftListView);
+        final muscleGroupList secondaryMuscleList = (muscleGroupList) root.findViewById(R.id.rightListView);
 
         primaryMuscleList.create(getActivity());
-        //secondaryMuscleList.create(getActivity());
+        secondaryMuscleList.create(getActivity());
+
+        final EditText nameOfExersice = (EditText)root.findViewById(R.id.nameofexersice);
+
+        nameOfExersice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                }
+            }
+        });
+
+        nameOfExersice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    System.out.println(v.getText());
+                    return false;
+                }
+                return false;
+            }
+        });
+
+
+        Button clear = (Button) root.findViewById(R.id.clear);
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                primaryMuscleList.clear();
+                secondaryMuscleList.clear();
+            }
+        });
+
+        //TODO find a way to sync the data with the db after you create the db
+        Button submit= (Button) root.findViewById(R.id.submit);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Do something  with db
+            }
+        });
+
+
+
+        //nameOfExersice.setText()
         return root;
 //        return super.onCreateView(inflater, container, savedInstanceState);
 

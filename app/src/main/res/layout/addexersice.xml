@@ -3,16 +3,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     >
 
-    <TextView
+    <EditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/nameofexersice"
         android:gravity="center"
-        android:text="Enter the Name of the Exersice"
+        android:singleLine="true"
         android:layout_weight="0.25"
-        android:editable="true"
+        android:imeOptions="actionDone"
+        android:hint="Enter Exersice Name"
         />
 
     <LinearLayout
@@ -30,6 +33,7 @@
         android:editable="false"
         android:layout_weight=".50"
         />
+
     <EditText
         android:layout_width="107dp"
         android:layout_height="wrap_content"
@@ -45,7 +49,9 @@
         android:layout_width="match_parent"
         android:layout_height="364dp"
         android:layout_gravity="center_horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_weight=".35"
+        >
 
         <com.example.sadiq.test.CustomDataTypes.muscleGroupList
 
@@ -57,7 +63,7 @@
             android:layout_weight=".50"
             />
 
-        <!--
+
         <com.example.sadiq.test.CustomDataTypes.muscleGroupList
 
             android:layout_width="0dp"
@@ -67,6 +73,36 @@
             android:choiceMode="singleChoice"
             android:layout_weight=".50"
             />
--->
+
+
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1"
+        android:layout_weight=".20"
+        >
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Clear"
+            android:id="@+id/clear"
+            android:layout_weight=".50"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Submit"
+            android:id="@+id/submit"
+            android:layout_weight=".50"
+            />
+
+
+    </LinearLayout>
+
+
 </LinearLayout>
