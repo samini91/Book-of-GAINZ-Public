@@ -106,5 +106,8 @@ public class muscleGroupList extends ListView {
         }
         bodyPartListAdapter.notifyDataSetChanged();
     }
+    public boolean[] getBodyPartsState(){
+        return this.bodyPartsStateinList;
+    }
 
 }

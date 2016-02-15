@@ -39,6 +39,7 @@ public class addWorkoutActivity extends Activity{
         String te= Boolean.toString(view.isActivated());
         Toast.makeText(addWorkoutActivity.this,te,Toast.LENGTH_LONG).show();
         View vie = new View(addWorkoutActivity.this);
+
         view.setOnTouchListener(new OnSwipeTouchListener(addWorkoutActivity.this) {
 
             public void onSwipeTop() {

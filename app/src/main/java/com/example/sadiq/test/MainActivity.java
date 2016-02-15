@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
         //fragmentList.add(new fragmentTest());
       //  fragmentList.add(new fragmentTest());
-       // fragmentList.add(new workOutList());
-        fragmentList.add(new addExersice());
+        //fragmentList.add(new workOutList());
+        //fragmentList.add(new addExersice());
+        fragmentList.add(new mainMenu());
 
         FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
 
@@ -93,12 +94,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         final Context context = this;
 
         //Fragment agf = new Fragment();
-
 
         Button moveToAddWorkout = (Button) findViewById(R.id.moveToAddWorkout);
 
