@@ -75,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
         //fragmentList.add(new fragmentTest());
       //  fragmentList.add(new fragmentTest());
+        //fragmentList.add(new test());
         //fragmentList.add(new workOutList());
-        //fragmentList.add(new addExersice());
+        fragmentList.add(new addWorkout());
+        fragmentList.add(new addExersice());
         fragmentList.add(new mainMenu());
 
         FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);

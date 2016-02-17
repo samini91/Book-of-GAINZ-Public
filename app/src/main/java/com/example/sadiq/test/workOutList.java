@@ -50,6 +50,11 @@ public class workOutList extends android.support.v4.app.ListFragment {
         ex.add("frontsquats");
 
         workOutValues.add(new WorkoutTemplate("Legs",ex));
+        workOutValues.add(new WorkoutTemplate("Legs",ex));
+        workOutValues.add(new WorkoutTemplate("Legs",ex));
+        workOutValues.add(new WorkoutTemplate("Legs",ex));
+        workOutValues.add(new WorkoutTemplate("Legs",ex));
+        workOutValues.add(new WorkoutTemplate("Legs",ex));
         WorkOutAdapter workOutAdapter= new WorkOutAdapter(getActivity(),R.layout.workoutlistview,workOutValues);
 
 

@@ -52,11 +52,25 @@ public class WorkOutAdapter extends ArrayAdapter<WorkoutTemplate> {
 
             handler.BodyPart=(TextView)row.findViewById(R.id.bodypart);
 
-
-
-
-
 //            handler.Exersice=(TextView)row.findViewById(R.id.exersice);
+
+            handler.BodyPart.setText(t.Name);
+
+            LinearLayout linearLayout= (LinearLayout)row.findViewById(R.id.workoutlistview);
+
+            for (String exer:t.Exersice){
+                TextView a = new TextView(this.getContext());
+                a.setText(exer);
+                a.setGravity(Gravity.CENTER);
+
+                //a.setLayoutParams(new LinearLayout.LayoutParams(30,231));
+                linearLayout.addView(a);
+                // es.inflate(layoutResourceId,);
+                //a.et
+                System.out.println("fasdf");
+            }
+
+
 
             row.setTag(handler);
         }
@@ -64,7 +78,7 @@ public class WorkOutAdapter extends ArrayAdapter<WorkoutTemplate> {
             handler=(multipleTextViewHandler)row.getTag();
 
         }
-
+/*
         handler.BodyPart.setText(t.Name);
 
         LinearLayout linearLayout= (LinearLayout)row.findViewById(R.id.workoutlistview);
@@ -73,17 +87,31 @@ public class WorkOutAdapter extends ArrayAdapter<WorkoutTemplate> {
             TextView a = new TextView(this.getContext());
             a.setText(exer);
             a.setGravity(Gravity.CENTER);
+
             //a.setLayoutParams(new LinearLayout.LayoutParams(30,231));
             linearLayout.addView(a);
             // es.inflate(layoutResourceId,);
             //a.et
+            System.out.println("fasdf");
         }
-
+*/
 
         return row;
 
     }
 
 
+    @Override
+
+    public int getViewTypeCount() {
+
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        return position;
+    }
 
     }
