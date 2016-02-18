@@ -37,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
+import com.example.sadiq.test.CustomDataTypes.myViewPager;
+import com.example.sadiq.test.Database.DatabaseDisplayFragment;
 import com.example.sadiq.test.dateManipulator;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ViewPager mPager;
-    private PagerAdapter mPageAdapter;
+    private myViewPager mPager;
+
     private LinkedList fragmentList;
 
     @Override
@@ -67,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.);
         setContentView(R.layout.activity_main);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (myViewPager) findViewById(R.id.pager);
+
         fragmentList = new LinkedList<Fragment>();
 
 
@@ -77,13 +80,20 @@ public class MainActivity extends AppCompatActivity {
       //  fragmentList.add(new fragmentTest());
         //fragmentList.add(new test());
         //fragmentList.add(new workOutList());
-        fragmentList.add(new addWorkout());
+
+        //fragmentList.add(new addWorkout());
+
         fragmentList.add(new addExersice());
-        fragmentList.add(new mainMenu());
+        //fragmentList.add(new mainMenu());
+        //fragmentList.add(new DatabaseDisplayFragment());
+
+
 
         FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
 
         mPager.setAdapter(FragmentAdapter);
+
+
 
        // mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         //mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());

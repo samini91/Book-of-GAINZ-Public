@@ -44,6 +44,7 @@ public class muscleGroupList extends ListView {
 
     public void create(Context Activity){
         bodyParts= getResources().getStringArray(R.array.bodyParts);
+
         bodyPartHolder=new BodyPartHolder[bodyParts.length];
         for(int i =0;i<bodyParts.length;i++){
             bodyPartHolder[i]=new BodyPartHolder();
