@@ -1,19 +1,31 @@
 package com.example.sadiq.test.CustomDataTypes;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.util.Pair;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sadiq.test.Database.Database;
+import com.example.sadiq.test.PopUpWindow.PopUpListView;
 import com.example.sadiq.test.R;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 
-
-
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 /**
  * Created by Sadiq on 2/16/2016.
@@ -23,13 +35,25 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
 
     private int mLayoutId;
     private int mGrabHandleId;
+    private Context context;
+    private PopUpListView popUpListView;
+    private PopupWindow popupWindow=null;
+    private ViewGroup root;
+    private LinearLayout popUpLayout;
+    private muscleGroupList leftList;
+    private muscleGroupList rightList;
 
-    public addWorkoutListAdapter(ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+
+
+    public addWorkoutListAdapter(Context context,ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
         setHasStableIds(true);
         setItemList(list);
+        this.context=context;
+        popUpListView=new PopUpListView(context);
+
     }
 
     @Override
@@ -61,7 +85,109 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
 
         @Override
         public void onItemClicked(View view) {
-            Toast.makeText(view.getContext(), "Item clicked", Toast.LENGTH_SHORT).show();
+
+            if(popupWindow==null){
+                popupWindow=new PopupWindow(context);
+                LinearLayout layout = new LinearLayout(context);
+                ViewGroup root= (ViewGroup)layout;
+                popUpLayout = (LinearLayout) View.inflate(context, R.layout.popuplayout, root);
+                leftList = (muscleGroupList) popUpLayout.findViewById(R.id.leftListView);
+                rightList =(muscleGroupList) popUpLayout.findViewById(R.id.rightListView);
+            }
+            else{
+                popupWindow.dismiss();
+            }
+            //listView=(ListView)listView.findViewById(R.id.leftListView);
+
+            Cursor cursor=Database.getDatabaseInstance(context).getPrimaryMoverForExersice((int) getItemId());
+            String data ="";
+            BodyPartHolder primaryBodyPartHolder[] = new BodyPartHolder[cursor.getCount()];
+
+            for (int i=0;i<cursor.getCount();i++){
+                primaryBodyPartHolder[i]=new BodyPartHolder();
+                primaryBodyPartHolder[i].name=cursor.getString(2);
+                cursor.moveToNext();
+            }
+
+            System.out.println(data);
+            cursor=Database.getDatabaseInstance(context).getSecondaryMoverForExersice((int) getItemId());
+
+            BodyPartHolder secondaryBodyPartHolder [] = new BodyPartHolder[cursor.getCount()];
+
+            for (int i=0;i<cursor.getCount();i++){
+                secondaryBodyPartHolder[i]=new BodyPartHolder();
+                secondaryBodyPartHolder[i].name=cursor.getString(2);
+                cursor.moveToNext();
+            }
+
+/*
+            BodyPartHolder bodyPartHolder[] = new BodyPartHolder[2];
+            bodyPartHolder[0]=new BodyPartHolder();
+            bodyPartHolder[0].name="Quads";
+            bodyPartHolder[1]=new BodyPartHolder();
+            bodyPartHolder[1].name="Lats";
+*/
+            BodyPartHolder bodyPartHolder1[] = new BodyPartHolder[2];
+            bodyPartHolder1[0]=new BodyPartHolder();
+            bodyPartHolder1[0].name="Quadasdfs";
+            bodyPartHolder1[1]=new BodyPartHolder();
+            bodyPartHolder1[1].name="Latsasdf";
+
+
+            muscleGroupListAdpater<BodyPartHolder> leftListAdapter=new muscleGroupListAdpater<>(context,R.layout.row_layout,R.id.listText,primaryBodyPartHolder);
+
+            muscleGroupListAdpater<BodyPartHolder> rightListAdapter=new muscleGroupListAdpater<>(context,R.layout.row_layout,R.id.listText,secondaryBodyPartHolder);
+
+            leftList.setAdapter(leftListAdapter);
+            rightList.setAdapter(rightListAdapter);
+            /*
+            Button dismissButton = (Button)popUpLayout.findViewById(R.id.dismisspopupwindow);
+            dismissButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                }
+            });*/
+            //layout.setOrientation(LinearLayout.HORIZONTAL);
+            //popupWindow.setContentView(popUpLayout);
+            //popupWindow.setHeight(((View) view.getParent()).getHeight());
+            //popupWindow.setWidth(((View) view.getParent()).getWidth());
+            //popupWindow.setHeight(popUpLayout.getHeight());
+            //popupWindow.setWidth(popUpLayout.getWidth());
+            //popUpLayout.setClickable(true);
+            //root.setClickable(true);
+            /*
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("askdfjal;skdjf;laskjdfl;aksjdfl;kajs;df");
+                    popupWindow.dismiss();
+                }
+            });
+*/
+            popupWindow.setHeight(1500);
+            popupWindow.setWidth(800);
+            //layout.addView(listViewleft);
+
+            //layout.addView(listViewright);
+
+//            popupWindow.setContentView(layout);
+            popupWindow.setContentView(popUpLayout);
+
+            popupWindow.showAtLocation(popUpLayout, Gravity.BOTTOM, 10, 10);
+
+            //popupWindow.update(50, 50, 300, 80);
+
+
+            popupWindow.setFocusable(true);
+
+            popupWindow.update();
+
+            Toast.makeText(context,
+                    //Integer.toString(view.getId())
+                    ((TextView)((FrameLayout) view).getChildAt(0)).getText()
+                    ,Toast.LENGTH_SHORT).show();
+
         }
 
         @Override

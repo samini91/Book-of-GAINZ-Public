@@ -73,26 +73,34 @@ public class muscleGroupList extends ListView {
         this.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BodyPartHolder bodyPartHolderInstance = (BodyPartHolder) parent.getItemAtPosition(position);
 
-                if (bodyPartsStateinList[position] == false) {
+
+                //if (bodyPartsStateinList[position] == false) {
+                if(bodyPartHolderInstance.activate==false){
+
                     bodyPartsStateinList[position] = true;
+
                     //parent.getChildAt(position).setBackgroundColor(Color.GREEN);
 
                     //parent.getItemAtPosition(position);
-                    BodyPartHolder t = (BodyPartHolder) parent.getItemAtPosition(position);
-                    t.backGroundColor = Color.GREEN;
+                    bodyPartHolderInstance.activate=true;
+                    bodyPartHolderInstance.backGroundColor = Color.GREEN;
+
                     // view.setBackgroundColor(Color.GREEN);
 
 
-                } else {
-                    BodyPartHolder t = (BodyPartHolder) parent.getItemAtPosition(position);
-                    t.backGroundColor = Color.WHITE;
+                }
+                else {
+
+                    bodyPartHolderInstance.backGroundColor = Color.WHITE;
+                    bodyPartHolderInstance.activate=false;
                     bodyPartsStateinList[position] = false;
                     //parent.getChildAt(position).setBackgroundColor(Color.WHITE);
 
                     // view.setBackgroundColor(Color.WHITE);
                 }
-                System.out.println(position + "  :  " + bodyPartsStateinList[position]);
+                System.out.println(position + "  :  " + bodyPartsStateinList[position]+bodyPartHolderInstance.activate);
                 bodyPartListAdapter.notifyDataSetChanged();
             }
         });
@@ -103,12 +111,14 @@ public class muscleGroupList extends ListView {
     public void clear(){
         for (int i = 0; i < bodyPartHolder.length; i++) {
             bodyPartHolder[i].backGroundColor = Color.WHITE;
+            bodyPartHolder[i].activate=false;
             bodyPartsStateinList[i] = false;
         }
         bodyPartListAdapter.notifyDataSetChanged();
     }
-    public boolean[] getBodyPartsState(){
-        return this.bodyPartsStateinList;
+
+    public BodyPartHolder[] getBodyPartsState(){
+        return this.bodyPartHolder;
     }
 
 }

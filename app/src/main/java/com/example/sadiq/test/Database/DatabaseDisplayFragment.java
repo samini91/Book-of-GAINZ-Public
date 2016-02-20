@@ -23,8 +23,7 @@ public class DatabaseDisplayFragment extends Fragment {
 
         final Database database = Database.getDatabaseInstance(getActivity());
 
-        database.createRecords("132", "3asdfasdf");
-        database.createRecords("13", "3sdf");
+
 
 
 
@@ -40,11 +39,32 @@ public class DatabaseDisplayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String data = "";
-                Cursor cursor = database.selectRecords();
+                //Cursor cursor = database.selectRecords();
+                //Cursor cursor = database.getPrimaryMoverForAllExersices();
+                //Cursor cursor = database.getPrimaryMoverForExersice(4);
+                //Cursor cursor = database.getAllExersice();
+                //Cursor cursor = database.getAllWorkouts();
+
+                Cursor cursor = database.getExersicesforWorkout(6);
+                /*
                 do {   //
                     data += cursor.getString(0) + "  " + cursor.getString(1) + "\n";
                     //}
                 } while (cursor.moveToNext());
+                */
+                for(int i = 0;i<cursor.getColumnCount();i++){
+                    data+=cursor.getColumnName(i)+"   ";
+                }
+                data += "\n";
+                for (int i=0;i<cursor.getCount();i++){
+                    for(int k =0;k<cursor.getColumnCount();k++){
+                        data+=cursor.getString(k)+"   ";
+                    }
+                    data += "\n";
+                    cursor.moveToNext();
+                }
+
+
 
                 data+=Integer.toString(database.lastInsertRow());
 

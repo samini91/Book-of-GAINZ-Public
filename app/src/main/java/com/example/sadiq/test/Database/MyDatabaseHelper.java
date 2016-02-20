@@ -13,10 +13,23 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int VERSION= 2;
     private static String CreateTables="";
 
-    private static final String CreateExersiceTable= "create table Exersices (_id integer primary key autoincrement, name varchar(39));";
+    private static final String CreateExersiceTable= "create table Exersices (_Id integer primary key autoincrement, name varchar(39));";
 
-    private static final String CreatePrimaryMuscleTable="create table PrimaryMover (_id integer primary key autoincrement, ExersicesId integer, bodyPart varchar(20), " +
-            "Foreign key(ExersicesId) references Exersices(_id));";
+    private static final String CreatePrimaryMuscleTable="create table PrimaryMover (_Id integer primary key autoincrement, ExersicesId integer, bodyPart varchar(20), " +
+            "Foreign key(ExersicesId) references Exersices(_Id));";
+
+    private static final String CreateSecondaryMuscleTable="create table SecondaryMover (_Id integer primary key autoincrement, ExersicesId integer, bodyPart varchar(20), " +
+            "Foreign key(ExersicesId) references Exersices(_Id));";
+
+
+
+    public static final String CreateWorkoutTable="create table WorkOut (_Id integer primary key autoincrement, WorkOutName varchar(20))";
+
+
+    public static final String CreateWorkoutExersicesTable="create table WorkOutExersices (_Id integer primary key autoincrement, WorkOutId integer ,ExersicesId integer, ExersicesOrder integer, " +
+            "Foreign key (WorkOutId) references WorkOut(_Id))";
+
+
 
     private static MyDatabaseHelper databaseHelper;
 
@@ -43,6 +56,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CreateExersiceTable);
 
         db.execSQL(CreatePrimaryMuscleTable);
+
+        db.execSQL(CreateSecondaryMuscleTable);
+
+        db.execSQL(CreateWorkoutTable);
+
+        db.execSQL(CreateWorkoutExersicesTable);
 
     }
 

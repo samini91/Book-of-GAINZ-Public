@@ -18,7 +18,7 @@ public class addWorkoutActivity extends Activity{
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         //getWindow().setWindowAnimations();
         setContentView(R.layout.addworkout);
-        View view = findViewById(R.id.entire_view);
+        View view = findViewById(R.id.add_workout_topVertical);
 
         final EditText editText1 = (EditText) findViewById(R.id.editText1);
         editText1.setText("asdffdassadff");

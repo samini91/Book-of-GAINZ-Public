@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.LauncherActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -21,8 +22,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
 import com.example.sadiq.test.CustomDataTypes.muscleGroupList;
+import com.example.sadiq.test.Database.Database;
 
 import java.util.ArrayList;
 
@@ -54,14 +58,7 @@ public class addExersice extends Fragment {
 
         final EditText nameOfExersice = (EditText)root.findViewById(R.id.nameofexersice);
 
-        nameOfExersice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
 
-                }
-            }
-        });
 
         nameOfExersice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -91,7 +88,18 @@ public class addExersice extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Do something  with db
+                //go thorugh the muscleGroupLists and send a set of movers to the db
+                if(!(nameOfExersice.getText().length() ==0)) {
+                    BodyPartHolder[] primaryMovers = primaryMuscleList.getBodyPartsState();
+                    BodyPartHolder[] secondaryMovers = secondaryMuscleList.getBodyPartsState();
+                    Database.getDatabaseInstance(getActivity()).addExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+                    primaryMuscleList.clear();
+                    secondaryMuscleList.clear();
+                }
+                else {
+                    Toast.makeText(getActivity(),"Enter the name of the Exersice",Toast.LENGTH_SHORT).show();
+
+              }
             }
         });
 

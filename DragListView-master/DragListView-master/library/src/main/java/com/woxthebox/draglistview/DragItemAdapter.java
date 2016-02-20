@@ -17,6 +17,7 @@
 package com.woxthebox.draglistview;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -109,7 +110,7 @@ public abstract class DragItemAdapter<T, VH extends DragItemAdapter.ViewHolder> 
         public View mGrabView;
         public long mItemId;
 
-        public ViewHolder(final View itemView, int handleResId) {
+        public ViewHolder(final View itemView, final int handleResId) {
             super(itemView);
             mGrabView = itemView.findViewById(handleResId);
 
@@ -146,6 +147,7 @@ public abstract class DragItemAdapter<T, VH extends DragItemAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     onItemClicked(view);
                 }
             });

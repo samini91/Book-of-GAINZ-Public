@@ -22,11 +22,12 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScrollListener {
+public class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScrollListener {
 
     public interface DragItemListener {
         void onDragStarted(int itemPosition, float x, float y);
@@ -34,6 +35,8 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
         void onDragging(int itemPosition, float x, float y);
 
         void onDragEnded(int newItemPosition);
+
+        void onClick (View itemView, long id);
     }
 
     private enum DragState {
@@ -68,6 +71,8 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
         super(context, attrs, defStyle);
         init();
     }
+
+
 
     private void init() {
         mAutoScroller = new AutoScroller(getContext(), this);
@@ -258,6 +263,8 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
         mDragItemPosition = mAdapter.getPositionForItemId(mDragItemId);
         updateDragPositionAndScroll();
 
+        Log.d("asdfasdfasdfasdf", Long.toString(itemId));
+
         mAdapter.setDragItemId(mDragItemId);
         mAdapter.notifyDataSetChanged();
         if (mListener != null) {
@@ -266,6 +273,13 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
 
         invalidate();
     }
+
+
+    void onClick(View itemView,long itemId){
+        Log.d("swerve", Long.toString(itemId));
+        invalidate();
+    }
+
 
     void onDragging(float x, float y) {
         if (mDragState == DragState.DRAG_ENDED) {
@@ -291,6 +305,7 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
         if (mDragState == DragState.DRAG_ENDED) {
             return;
         }
+
 
         mAutoScroller.stopAutoScroll();
         setEnabled(false);
@@ -373,4 +388,5 @@ class DragItemRecyclerView extends RecyclerView implements AutoScroller.AutoScro
         invalidate();
         return item;
     }
+
 }

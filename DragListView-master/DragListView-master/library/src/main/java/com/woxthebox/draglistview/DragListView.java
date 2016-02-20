@@ -120,6 +120,12 @@ public class DragListView extends FrameLayout {
                     mDragListListener.onItemDragEnded(mDragStartPosition, newItemPosition);
                 }
             }
+
+            @Override
+            public void onClick(View itemView, long id) {
+
+            }
+
         });
         return recyclerView;
     }

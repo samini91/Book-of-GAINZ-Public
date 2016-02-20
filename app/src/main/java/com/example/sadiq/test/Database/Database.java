@@ -4,7 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.util.Pair;
 
+
+import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -18,17 +24,41 @@ public class Database {
     private SQLiteDatabase SQLDatabase;
     private static Database databaseInstance;
 
+    private final static String PrimaryKeyId="_Id";
+
 
     public final static String EMP_TABLE="Exersices"; // name of table
 
-    public final static String EMP_ID="_id"; // id value for employee
+    public final static String ExersiceTable="Exersices"; // name of table
+    public final static String Exersicetable_name="name";
+
+    public final static String PrimaryMoverTable="PrimaryMover";
+    public final static String PrimaryMoverTable_ExersicesId="ExersicesId";
+    public final static String PrimaryMoverTable_bodyPart="bodyPart";
+
+    public final static String SecondaryMoverTable="SecondaryMover";
+    public final static String SecondaryMoverTable_ExersicesId="ExersicesId";
+    public final static String SecondaryMoverTable_bodyPart="bodyPart";
+
+
+    public final static String WorkOutTable="WorkOut";
+    public final static String WorkOutTable_name= "WorkOutName";
+
+
+    public final static String WorkOutExersicesTable="WorkOutExersices";
+    public final static String WorkOutExersicesTable_WorkOutId="WorkOutId";
+    public final static String WorkOutExersicesTable_ExersicesId="ExersicesId";
+    public final static String WorkOutExersciesTable_ExersicesOrder="ExersicesOrder";
+
+
+
+
+    public final static String EMP_ID="_Id"; // id value for employee
     public final static String EMP_NAME="name";  // name of employee
     /**
      *
      * @param context
      */
-    //make it a singleton
-
     public static synchronized Database getDatabaseInstance(Context context){
         if(databaseInstance==null){
             databaseInstance=new Database(context);
@@ -36,9 +66,6 @@ public class Database {
         return databaseInstance;
 
     }
-
-
-
 
     private Database(Context context){
         dbHelper = MyDatabaseHelper.getDatabaseHelper(context);
@@ -54,11 +81,59 @@ public class Database {
 
     }
 
+    public Cursor getPrimaryMoverForAllExersices(){
+        String[] cols = new String[] {PrimaryMoverTable_bodyPart, PrimaryMoverTable_ExersicesId,PrimaryKeyId};
+        //Cursor mCursor = SQLDatabase.query(true, PrimaryMoverTable,cols,null, null, null, null, null, null);
+
+        Cursor mCursor = SQLDatabase.rawQuery("select "+ExersiceTable+"."+PrimaryKeyId +" , " +ExersiceTable +"."+Exersicetable_name +" , "+PrimaryMoverTable+"."+PrimaryMoverTable_bodyPart +
+                " from "+PrimaryMoverTable+ "," +ExersiceTable +
+                " where "+ PrimaryMoverTable +"."+PrimaryMoverTable_ExersicesId
+                +"=" + ExersiceTable+"."+PrimaryKeyId
+                ,null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
+
+    public Cursor getPrimaryMoverForExersice(int ExersiceId){
+
+        Cursor mCursor = SQLDatabase.rawQuery("select "+ExersiceTable+"."+PrimaryKeyId +" , " +ExersiceTable +"."+Exersicetable_name +" , "+PrimaryMoverTable+"."+PrimaryMoverTable_bodyPart +
+                " from "+PrimaryMoverTable+ "," +ExersiceTable +
+                " where "+ PrimaryMoverTable +"."+PrimaryMoverTable_ExersicesId
+                +"=" + ExersiceTable+"."+PrimaryKeyId+" and "+ ExersiceTable+"."+PrimaryKeyId+"="+ExersiceId
+                ,null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
+
+    public Cursor getSecondaryMoverForExersice(int ExersiceId){
+
+        Cursor mCursor = SQLDatabase.rawQuery("select "+ExersiceTable+"."+PrimaryKeyId +" , " +ExersiceTable +"."+Exersicetable_name +" , "+SecondaryMoverTable+"."+SecondaryMoverTable_bodyPart +
+                " from "+SecondaryMoverTable+ "," +ExersiceTable +
+                " where "+ SecondaryMoverTable +"."+SecondaryMoverTable_ExersicesId
+                +"=" + ExersiceTable+"."+PrimaryKeyId+" and "+ ExersiceTable+"."+PrimaryKeyId+"="+ExersiceId
+                ,null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+    }
+
+
+
+
+
     public Cursor selectRecords() {
         //String[] cols = new String[] {EMP_ID, EMP_NAME};
         String[] cols = new String[] {EMP_NAME, EMP_ID};
 
-        Cursor mCursor = SQLDatabase.query(true, EMP_TABLE,cols,null
+        Cursor mCursor = SQLDatabase.query(true, EMP_TABLE, cols, null
                 , null, null, null, null, null);
 
         if (mCursor != null) {
@@ -84,6 +159,87 @@ public class Database {
         int Id = cursor.getInt(0);
         cursor.close();
         return Id;
+    }
+
+    public void addExersice(String exersiceName,BodyPartHolder[] primaryBodyPartHolders,BodyPartHolder[] secondaryBodyPartHolders){
+        ContentValues values = new ContentValues();
+        values.put("name", exersiceName);
+        SQLDatabase.insert(ExersiceTable, null, values);
+        int Id=this.lastInsertRow();
+        values.clear();
+        //for(BodyPartHolder i: primaryBodyPartHolders){
+        for (int i = 0;i<primaryBodyPartHolders.length;i++){
+            if(primaryBodyPartHolders[i].activate==true){
+                values.put(PrimaryMoverTable_ExersicesId,Id);
+                values.put(PrimaryMoverTable_bodyPart,primaryBodyPartHolders[i].name);
+                SQLDatabase.insert(PrimaryMoverTable,null,values);
+                values.clear();
+            }
+            if(secondaryBodyPartHolders[i].activate==true){
+                values.put(SecondaryMoverTable_ExersicesId,Id);
+                values.put(SecondaryMoverTable_bodyPart,secondaryBodyPartHolders[i].name);
+                SQLDatabase.insert(SecondaryMoverTable,null,values);
+                values.clear();
+            }
+        }
+    }
+
+    public void addWorkout(String workOutName, ArrayList<Pair<Long,String>> exersices){
+        ContentValues values = new ContentValues();
+        values.put(WorkOutTable_name, workOutName);
+        SQLDatabase.insert(WorkOutTable, null, values);
+        int Id = this.lastInsertRow();
+        values.clear();
+        for (int i = 0 ;i < exersices.size();i++){
+            values.put(WorkOutExersicesTable_ExersicesId, exersices.get(i).first.intValue());
+            values.put(WorkOutExersicesTable_WorkOutId, Id);
+            values.put(WorkOutExersciesTable_ExersicesOrder,i+1);
+            SQLDatabase.insert(WorkOutExersicesTable,null,values);
+            values.clear();
+        }
+
+    }
+
+
+    /**
+     *  Table Contents:
+     *  name varchar
+     **/
+
+    public Cursor getAllExersice(){
+        String[] cols = new String[] {PrimaryKeyId, Exersicetable_name};
+        Cursor mCursor = SQLDatabase.query(true, ExersiceTable, cols, null
+                , null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor; // iterate to get each value.
+
+        //HashSet
+    }
+
+    public Cursor getAllWorkouts(){
+        String[] cols = new String[] {PrimaryKeyId,WorkOutTable_name};
+        Cursor mCursor = SQLDatabase.query(true,WorkOutTable,cols,null,null,null,null,null,null);
+        if(mCursor!=null){
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+    public Cursor getExersicesforWorkout(int Id){
+
+        Cursor cursor = SQLDatabase.rawQuery(
+                " select * " +
+                        "from "+ WorkOutTable +","+WorkOutExersicesTable+" " +
+                        " where "+ WorkOutTable+"."+PrimaryKeyId+"="+WorkOutExersicesTable+"."+WorkOutExersicesTable_WorkOutId
+                        +" and "+ WorkOutTable+"."+PrimaryKeyId+"="+Id,null);
+
+        if(cursor!=null){
+            cursor.moveToFirst();
+        }
+        return cursor;
     }
 
 
