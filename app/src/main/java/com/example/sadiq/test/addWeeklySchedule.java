@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.sadiq.test.CustomDataTypes.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Database;
 import com.woxthebox.draglistview.BoardView;
+import com.woxthebox.draglistview.DragItemRecyclerView;
 
 import java.util.ArrayList;
 
@@ -30,13 +31,13 @@ public class addWeeklySchedule extends Fragment {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addweeklyscedule, container, false);
 
 
-        ListView daysOfTheWeekView = (ListView)root.findViewById(R.id.daysOfTheWeek);
+        //ListView daysOfTheWeekView = (ListView)root.findViewById(R.id.daysOfTheWeek);
 
         String daysOfTheWeek[] ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
         ArrayAdapter<String> daysOfTheWeekAdapter = new ArrayAdapter<String>(getActivity(),R.layout.row_layout,R.id.listText,daysOfTheWeek);
 
-        daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
+        //daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
 
 
         ArrayList<Pair<Long, String>> allExersice = new ArrayList<>();
@@ -65,9 +66,38 @@ public class addWeeklySchedule extends Fragment {
         mBoardView.addColumnList(workOutexersicesAdapter, null, true);
 
 
+
+
+
+
+
+        final DragItemRecyclerView v = new DragItemRecyclerView(getActivity());
+        //v.setAdapter(allExersiceAdapter);
+
+        BoardView testBackground = (BoardView) root.findViewById(R.id.weekdaysbackground);
+
+        ArrayList<Pair<Long, String>> empty = new ArrayList<>();
+        ArrayList<Pair<Long, String>> background = new ArrayList<>();
+
+
+        for(int i =0;i<daysOfTheWeek.length;i++){
+        background.add(new Pair<Long, String>((long)i,daysOfTheWeek[i]));
+        }
+
+        addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.column_item,R.id.item_layout,true);
+        addWorkoutListAdapter emptyAdapter = new addWorkoutListAdapter(getActivity(),empty,R.layout.column_item,R.id.item_layout,true);
+
+
+
+        v.setAdapter(backgroundAdapter);
+
+        testBackground.addColumnList(emptyAdapter,null,true);
+        testBackground.addColumnList(backgroundAdapter,null,true);
+        
+        v.clearFocus();
+       // root.addView(v);
+
         mBoardView.bringToFront();
-
-
         //daysOfTheWeekView.bringToFront();
 
         return root;

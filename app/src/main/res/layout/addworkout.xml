@@ -34,8 +34,6 @@
         android:weightSum="1"
         android:layout_weight=".10"
         >
-
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -50,9 +48,5 @@
             android:id="@+id/submit"
             android:layout_weight=".50"
             />
-
-
     </LinearLayout>
-
-
 </LinearLayout>

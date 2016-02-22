@@ -4,12 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.SyncStateContract;
 import android.support.v4.util.Pair;
 
 
 import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -50,6 +52,10 @@ public class Database {
     public final static String WorkOutExersicesTable_ExersicesId="ExersicesId";
     public final static String WorkOutExersciesTable_ExersicesOrder="ExersicesOrder";
 
+
+    public final static String DateWorkOutTable="DateWorkOut";
+    public final static String DateWorkOutTable_DateinMilli="DateinMilli";
+    public final static String DateWorkOutTable_WorkOutId="WorkOutId";
 
 
 
@@ -228,13 +234,13 @@ public class Database {
         return mCursor;
     }
 
-    public Cursor getExersicesforWorkout(int Id){
+    public Cursor getExersicesforWorkout(int Id) {
 
         Cursor cursor = SQLDatabase.rawQuery(
                 " select * " +
-                        "from "+ WorkOutTable +","+WorkOutExersicesTable+" " +
-                        " where "+ WorkOutTable+"."+PrimaryKeyId+"="+WorkOutExersicesTable+"."+WorkOutExersicesTable_WorkOutId
-                        +" and "+ WorkOutTable+"."+PrimaryKeyId+"="+Id,null);
+                        "from " + WorkOutTable + "," + WorkOutExersicesTable + " " +
+                        " where " + WorkOutTable + "." + PrimaryKeyId + "=" + WorkOutExersicesTable + "." + WorkOutExersicesTable_WorkOutId
+                        + " and " + WorkOutTable + "." + PrimaryKeyId + "=" + Id, null);
 
         if(cursor!=null){
             cursor.moveToFirst();
@@ -242,5 +248,23 @@ public class Database {
         return cursor;
     }
 
+
+    public void addDateforWorkout(long WorkOutId, Date date){
+        ContentValues values = new ContentValues();
+        values.put(DateWorkOutTable_WorkOutId,WorkOutId);
+        values.put(DateWorkOutTable_DateinMilli,date.getTime());
+        SQLDatabase.insert(DateWorkOutTable,null,values);
+    }
+
+    public Cursor getDateforWorkout(Date date){
+        String[] cols = new String[] {PrimaryKeyId,DateWorkOutTable_WorkOutId,DateWorkOutTable_DateinMilli};
+        String[] where = new String[]{date.getTime()+"="+DateWorkOutTable_DateinMilli};
+        Cursor mCursor = SQLDatabase.query(true,DateWorkOutTable,cols,date.getTime()+"="+DateWorkOutTable_DateinMilli,null,null,null,null,null);
+
+        if(mCursor!=null){
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
 
 }

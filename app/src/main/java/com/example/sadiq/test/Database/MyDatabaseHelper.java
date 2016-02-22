@@ -22,7 +22,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "Foreign key(ExersicesId) references Exersices(_Id));";
 
 
-
     public static final String CreateWorkoutTable="create table WorkOut (_Id integer primary key autoincrement, WorkOutName varchar(20))";
 
 
@@ -30,6 +29,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "Foreign key (WorkOutId) references WorkOut(_Id))";
 
 
+    public static final String CreateDateWorkoutTable="create table DateWorkOut (_Id integer primary key autoincrement, DateinMilli Integer, WorkOutId Integer," +
+            "Foreign key (WorkOutId) references WorkOut(_Id))";
 
     private static MyDatabaseHelper databaseHelper;
 
@@ -62,6 +63,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CreateWorkoutTable);
 
         db.execSQL(CreateWorkoutExersicesTable);
+
+        db.execSQL(CreateDateWorkoutTable);
 
     }
 
