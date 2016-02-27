@@ -57,6 +57,10 @@ public class Database {
     public final static String DateWorkOutTable_DateinMilli="DateinMilli";
     public final static String DateWorkOutTable_WorkOutId="WorkOutId";
 
+    public final static String WeeklyScheduleTable="WeeklySchedule";
+    public final static String WeeklyScheduleTable_DayofTheWeek="DayOfTheWeekId";
+    public final static String WeeklyScheduleTable_WorkOutId="WorkOutId";
+
 
 
     public final static String EMP_ID="_Id"; // id value for employee
@@ -252,8 +256,8 @@ public class Database {
     public void addDateforWorkout(long WorkOutId, Date date){
         ContentValues values = new ContentValues();
         values.put(DateWorkOutTable_WorkOutId,WorkOutId);
-        values.put(DateWorkOutTable_DateinMilli,date.getTime());
-        SQLDatabase.insert(DateWorkOutTable,null,values);
+        values.put(DateWorkOutTable_DateinMilli, date.getTime());
+        SQLDatabase.insert(DateWorkOutTable, null, values);
     }
 
     public Cursor getDateforWorkout(Date date){
@@ -264,6 +268,36 @@ public class Database {
         if(mCursor!=null){
             mCursor.moveToFirst();
         }
+        return mCursor;
+    }
+
+    public void addWeeklyExersice(long dayOfTheWeek, long WorkOutId){
+        ContentValues values = new ContentValues();
+        SQLDatabase.delete(WeeklyScheduleTable, WeeklyScheduleTable_DayofTheWeek+"="+dayOfTheWeek,null);
+        values.put(WeeklyScheduleTable_DayofTheWeek, (int)dayOfTheWeek);
+        values.put(WeeklyScheduleTable_WorkOutId, (int) WorkOutId);
+        SQLDatabase.insert(WeeklyScheduleTable, null, values);
+    }
+    //needtochange
+    public Cursor getWeeklyExersice(long dayOfTheWeek){
+        //String[] cols = new String[]{WeeklyScheduleTable_DayofTheWeek,WeeklyScheduleTable_WorkOutId};
+        //Cursor mCursor = SQLDatabase.query(true,WeeklyScheduleTable,cols,WeeklyScheduleTable_DayofTheWeek+"="+dayOfTheWeek,null,null,null,null,null);
+
+
+
+        Cursor mCursor = SQLDatabase.rawQuery("Select * " +
+                "from " + WeeklyScheduleTable + "," + WorkOutExersicesTable +","+ExersiceTable+ " " +
+                "where " + WeeklyScheduleTable + "." + WeeklyScheduleTable_DayofTheWeek + "=" + Long.toString(dayOfTheWeek) +
+                " and " + WeeklyScheduleTable + "." + WeeklyScheduleTable_WorkOutId + "=" + WorkOutExersicesTable + "." + WorkOutExersicesTable_WorkOutId+
+                " and " + WorkOutExersicesTable+"."+WorkOutExersicesTable_WorkOutId +"="+ExersiceTable+"."+PrimaryKeyId
+
+
+                , null);
+
+        if(mCursor!=null){
+            mCursor.moveToFirst();
+        }
+
         return mCursor;
     }
 

@@ -48,7 +48,7 @@ public class addWeeklySchedule extends Fragment {
         addWorkoutListAdapter allExersiceAdapter;
         addWorkoutListAdapter workOutexersicesAdapter;
 
-        Cursor cursor= Database.getDatabaseInstance(getActivity()).getAllExersice();
+        Cursor cursor= Database.getDatabaseInstance(getActivity()).getAllWorkouts();
         for (int i =0; i<cursor.getCount();i++){
             allExersice.add(new Pair<>(Long.parseLong(cursor.getString(0)), cursor.getString(1)));
             cursor.moveToNext();
@@ -93,7 +93,7 @@ public class addWeeklySchedule extends Fragment {
 
         testBackground.addColumnList(emptyAdapter,null,true);
         testBackground.addColumnList(backgroundAdapter,null,true);
-        
+
         v.clearFocus();
        // root.addView(v);
 

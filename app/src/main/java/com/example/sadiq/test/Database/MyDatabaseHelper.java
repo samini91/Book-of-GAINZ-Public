@@ -22,15 +22,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             "Foreign key(ExersicesId) references Exersices(_Id));";
 
 
-    public static final String CreateWorkoutTable="create table WorkOut (_Id integer primary key autoincrement, WorkOutName varchar(20))";
+    private static final String CreateWorkoutTable="create table WorkOut (_Id integer primary key autoincrement, WorkOutName varchar(20))";
 
 
-    public static final String CreateWorkoutExersicesTable="create table WorkOutExersices (_Id integer primary key autoincrement, WorkOutId integer ,ExersicesId integer, ExersicesOrder integer, " +
+    private static final String CreateWorkoutExersicesTable="create table WorkOutExersices (_Id integer primary key autoincrement, WorkOutId integer ,ExersicesId integer, ExersicesOrder integer, " +
             "Foreign key (WorkOutId) references WorkOut(_Id))";
 
 
-    public static final String CreateDateWorkoutTable="create table DateWorkOut (_Id integer primary key autoincrement, DateinMilli Integer, WorkOutId Integer," +
+    private static final String CreateDateWorkoutTable="create table DateWorkOut (_Id integer primary key autoincrement, DateinMilli Integer, WorkOutId Integer," +
             "Foreign key (WorkOutId) references WorkOut(_Id))";
+
+    //_Id will be weekday ie. sunday = 0, monday =1 etc. so the table will only have 7 days so maybe like 50 rows at max no need to normalize that. May change this for additional functionality
+    private  static final String CreateWeeklyScheduleTable="create table WeeklySchedule (_Id integer primary key autoincrement, DayOfTheWeekId Integer, WorkOutId Integer," +
+            "Foreign Key (WorkOutId) references WorkOut(_Id))";
+
 
     private static MyDatabaseHelper databaseHelper;
 
@@ -65,6 +70,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CreateWorkoutExersicesTable);
 
         db.execSQL(CreateDateWorkoutTable);
+
+        db.execSQL(CreateWeeklyScheduleTable);
 
     }
 

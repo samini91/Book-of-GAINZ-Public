@@ -39,7 +39,8 @@ public class fragmentTest extends Fragment {
 
   //asdf
         // Inflate the layout for this fragment
-        ViewGroup view;
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.calandar,container,false);
+
                 //=  (ViewGroup)inflater.inflate(R.layout.fragment_blank, container, false);
 
 
@@ -68,10 +69,10 @@ public class fragmentTest extends Fragment {
     //    ListActivity list=new ListActivity();
 
 
-
+/*
         RelativeLayout test = new RelativeLayout(getActivity());
 
-TableLayout table = new TableLayout(getActivity());
+        TableLayout table = new TableLayout(getActivity());
         table.addView(row1());
 
 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -95,7 +96,7 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
                 Snackbar.make(getView(), "fragementtest", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         return view;
     }
@@ -117,7 +118,7 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
 
                 ColorDrawable buttonColor = (ColorDrawable) v.getBackground();
 
-                if (buttonColor!=null && buttonColor.getColor()==Color.GREEN) {
+                if (buttonColor != null && buttonColor.getColor() == Color.GREEN) {
                     v.setBackgroundColor(Color.rgb(225, 225, 225));
 
                 } else {

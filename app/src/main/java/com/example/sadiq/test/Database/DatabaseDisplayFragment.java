@@ -45,7 +45,7 @@ public class DatabaseDisplayFragment extends Fragment {
                 //Cursor cursor = database.getAllExersice();
                 //Cursor cursor = database.getAllWorkouts();
 
-                Cursor cursor = database.getExersicesforWorkout(6);
+                Cursor cursor = database.getWeeklyExersice(1);
                 /*
                 do {   //
                     data += cursor.getString(0) + "  " + cursor.getString(1) + "\n";

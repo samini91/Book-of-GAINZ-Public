@@ -1,0 +1,76 @@
+<android.support.v7.widget.CardView
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/card_view"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+card_view:cardCornerRadius="4dp"
+android:layout_margin="5dp"
+    android:descendantFocusability="afterDescendants"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:descendantFocusability="afterDescendants"
+
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:id="@+id/weeklyworkoutid"
+
+        />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:descendantFocusability="afterDescendants"
+
+        >
+
+    <ImageButton
+        android:id="@+id/changeworkoutforweek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_input_add"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+
+        />
+
+    <TextView
+        android:id="@+id/DayOfTheWeek"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="dayofweek"
+        android:gravity="center|top"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="20dp"
+        android:layout_weight=".2"
+        />
+
+
+    </RelativeLayout>
+
+    <com.example.sadiq.test.WeeklyList.WorkOutExercisesWeeklyView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linearlayoutlist"
+
+        />
+    <!--
+    <ListView
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_weight=".8"
+        android:id="@+id/cardlist"
+        />
+        -->
+</LinearLayout>
+    </android.support.v7.widget.CardView>

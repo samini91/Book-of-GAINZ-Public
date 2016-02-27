@@ -165,8 +165,9 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
                 }
             });
 */
-            popupWindow.setHeight(1500);
-            popupWindow.setWidth(800);
+            //popupWindow.setHeight(1500);
+            popupWindow.setHeight(context.getResources().getDisplayMetrics().heightPixels);
+            popupWindow.setWidth(context.getResources().getDisplayMetrics().widthPixels);
             //layout.addView(listViewleft);
 
             //layout.addView(listViewright);
@@ -176,17 +177,9 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
 
             popupWindow.showAtLocation(popUpLayout, Gravity.BOTTOM, 10, 10);
 
-            //popupWindow.update(50, 50, 300, 80);
-
-
             popupWindow.setFocusable(true);
 
             popupWindow.update();
-
-            Toast.makeText(context,
-                    //Integer.toString(view.getId())
-                    ((TextView)((FrameLayout) view).getChildAt(0)).getText()
-                    ,Toast.LENGTH_SHORT).show();
 
         }
 

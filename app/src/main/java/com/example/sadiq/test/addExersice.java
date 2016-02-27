@@ -82,7 +82,7 @@ public class addExersice extends Fragment {
             }
         });
 
-        //TODO find a way to sync the data with the db after you create the db
+
         Button submit= (Button) root.findViewById(R.id.submit);
 
         submit.setOnClickListener(new View.OnClickListener() {
