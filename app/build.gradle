@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.example.sadiq.test"
+        applicationId "com.example.sadiq.test123"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -18,10 +18,53 @@ android {
         }
     }
 
+
+
+
+
+    sourceSets {
+        main {
+            manifest.srcFile '/src/main/AndroidManifest.xml'
+            java.srcDirs = ['/src/main/java', '.apt_generated']
+            aidl.srcDirs = ['/src/main/aidl', '.apt_generated']
+            assets.srcDirs = ['/src/main/assets']
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/SelectExerciseConfiguration',
+                            'src/main/res/layout/addworkout_customizable',
+                            'src/main/res/layout/popup',
+                            'src/main/res/layout/addworkout',
+                            'src/main/res/layout/addexersice',
+                            'src/main/res/layout',
+                            'src/main/res'
+
+                    ]
+        }
+    }
+
+
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.realm:realm-gradle-plugin:0.88.2"
+        classpath 'com.nineoldandroids:library:2.4.0'
+    }
+
+}
+
+apply plugin: 'realm-android'
+
+
+
+
+
+
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
@@ -30,4 +73,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile project(':library')
+    compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')
+
 }
+

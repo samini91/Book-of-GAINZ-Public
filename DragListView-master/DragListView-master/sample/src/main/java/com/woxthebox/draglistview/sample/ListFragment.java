@@ -74,7 +74,10 @@ public class ListFragment extends Fragment {
 
         mItemArray = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
-            mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));
+            if(i ==0)
+                mItemArray.add(new Pair<>(Long.valueOf(i), "Item al;skdjf;laskdjf;laskdjfl;aksdjfl;askdfjl;askdf;laskdfj;alskdfoa;isdjfl;akdovinzcz,.xmcvn.zx,mvnz,.xcmvnuiprongviuerfhaslkdfj" +
+                    "l;askdjfa;knaoibnornjigzmcvn ,zxvnuirnganjfajkn kj fiaj d aksdf as dflajkf asdn fasjd flasjd fkasd fkasj dfkajs df " + i));
+            else{mItemArray.add(new Pair<>(Long.valueOf(i), "Item " + i));}
         }
 
         setupListRecyclerView();

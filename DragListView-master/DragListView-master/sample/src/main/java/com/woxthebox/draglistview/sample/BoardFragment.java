@@ -96,9 +96,9 @@ public class BoardFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
 
         addColumnList();
-        addColumnList();
-        addColumnList();
-        addColumnList();
+        //addColumnList();
+        //addColumnList();
+        //addColumnList();
     }
 
     @Override

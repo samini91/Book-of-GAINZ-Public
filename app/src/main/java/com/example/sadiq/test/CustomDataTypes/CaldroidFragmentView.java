@@ -1252,7 +1252,7 @@ public class CaldroidFragmentView extends DialogFragment {
                 localInflater.inflate(R.layout.calendar_view, container, false);
 
         ViewGroup view = (ViewGroup)
-        localInflater.inflate(com.example.sadiq.test.R.layout.mainmenu, container, false);
+        localInflater.inflate(com.example.sadiq.test123.R.layout.mainmenu, container, false);
 */
         view=(ViewGroup)localInflater.inflate(com.example.sadiq.test.R.layout.mainmenu, container, false);
 

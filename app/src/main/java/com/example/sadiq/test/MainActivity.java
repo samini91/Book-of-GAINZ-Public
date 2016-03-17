@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,9 +19,11 @@ import android.support.v4.app.FragmentManager;
 import java.util.LinkedList;
 
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
-import com.example.sadiq.test.Database.Database;
 import com.example.sadiq.test.Database.DatabaseDisplayFragment;
+import com.example.sadiq.test.MainMenu.mainMenu;
+import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
+import com.example.sadiq.test.addworkout_customizable.addworkout_customizable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,16 +62,26 @@ public class MainActivity extends AppCompatActivity {
         //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
         //fragmentList.add(new fragmentTest());
       //  fragmentList.add(new fragmentTest());
-        //fragmentList.add(new test());
-        //fragmentList.add(new workOutList());
+        //fragmentList.add(new test123());
 
-       // fragmentList.add(new DatabaseDisplayFragment());
-        //fragmentList.add(new addExersice());
+        fragmentList.add(new addworkout_customizable());
+        fragmentList.add(new DatabaseDisplayFragment());
+        fragmentList.add(new addExersice());
         fragmentList.add(new addWorkout());
-        //fragmentList.add(new addWeeklySchedule());
+        //fragmentList.add(new test123());
+
+/*
+
+
+        fragmentList.add(new addWeeklySchedule());
         fragmentList.add(new WeeklyList());
-        //fragmentList.add(new fragmentTest());
         fragmentList.add(new mainMenu());
+        fragmentList.add(new workOutList());
+        */
+        //fragmentList.add(new fragmentTest());
+
+
+
 
 
 
@@ -187,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
   //              android.app.FragmentManager fragmentManager = getFragmentManager();
 //                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                //fragmentTest test = new fragmentTest();
-                //fragmentTransaction.replace(android.R.id.content, test);
+                //fragmentTest test123 = new fragmentTest();
+                //fragmentTransaction.replace(android.R.id.content, test123);
 
                 //fragmentTransaction.commit();
 

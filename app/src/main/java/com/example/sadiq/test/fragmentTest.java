@@ -49,11 +49,11 @@ public class fragmentTest extends Fragment {
         tbl.setEnabled(true);
         TableRow tr = new TableRow(getActivity());
 
-        EditText test = new EditText(getActivity());
-        test.setText("asdfdasdfasdfasdffasdfasdf234");
+        EditText test123 = new EditText(getActivity());
+        test123.setText("asdfdasdfasdfasdffasdfasdf234");
 
 
-        tr.addView(test);
+        tr.addView(test123);
 
         TableLayout.LayoutParams params=new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
         tbl.setLayoutParams(params);
@@ -70,7 +70,7 @@ public class fragmentTest extends Fragment {
 
 
 /*
-        RelativeLayout test = new RelativeLayout(getActivity());
+        RelativeLayout test123 = new RelativeLayout(getActivity());
 
         TableLayout table = new TableLayout(getActivity());
         table.addView(row1());
@@ -81,10 +81,10 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         params.addRule(Gravity.CENTER);
         table.setGravity(Gravity.CENTER);
-        test.addView(table, params);
-        test.setGravity(Gravity.CENTER);
+        test123.addView(table, params);
+        test123.setGravity(Gravity.CENTER);
         
-        view = test;
+        view = test123;
 
 
 
@@ -106,7 +106,7 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
     {
     final TableRow tablerow = new TableRow(getActivity());
         TextView text = new TextView(getActivity());
-        text.setText("#This is a test");
+        text.setText("#This is a test123");
         tablerow.addView(text);
         tablerow.setClickable(true);
         //getActivity().setContentView();

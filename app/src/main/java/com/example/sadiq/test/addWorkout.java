@@ -5,24 +5,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sadiq.test.CustomDataTypes.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Database;
 import com.woxthebox.draglistview.BoardView;
-import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
 
@@ -64,10 +59,10 @@ public class addWorkout extends Fragment {
         mBoardView.setSnapToColumnWhenDragging(true);
         mBoardView.setSnapDragItemToTouch(true);
 
-        //mBoardView.setCustomDragItem(new MyDragItem(getActivity(), R.layout.column_item));
+        //mBoardView.setCustomDragItem(new MyDragItem(getActivity(), R.layout.addworkout_column_item));
 
-        allExersiceAdapter = new addWorkoutListAdapter(getActivity(),allExersice,R.layout.column_item,R.id.item_layout,true);
-        workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.column_item,R.id.item_layout,true);
+        allExersiceAdapter = new addWorkoutListAdapter(getActivity(),allExersice,R.layout.addworkout_column_item,R.id.item_layout,true);
+        workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.addworkout_column_item,R.id.item_layout,true);
         //mBoardView.
 
         View leftColumnHeader = View.inflate(getActivity(),R.layout.boardviewcolumnheader,null);

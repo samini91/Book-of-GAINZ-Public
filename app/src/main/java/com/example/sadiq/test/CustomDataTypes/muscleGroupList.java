@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.sadiq.test.R;
@@ -61,10 +59,10 @@ public class muscleGroupList extends ListView {
         for(boolean k : bodyPartsStateinList){k=false;}
 
 
-        //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
-        //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
-        //final muscleGroupListAdpater<String> bodyPartListAdapter= new muscleGroupListAdpater<String>(Activity,R.layout.row_layout,R.id.listText,bodyParts);
-        bodyPartListAdapter = new muscleGroupListAdpater<BodyPartHolder>(Activity,R.layout.row_layout,R.id.listText,bodyPartHolder);
+        //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.muscle_list_row_layout,R.id.listText,bodyParts);
+        //final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(Activity,R.layout.muscle_list_row_layout,R.id.listText,bodyParts);
+        //final muscleGroupListAdpater<String> bodyPartListAdapter= new muscleGroupListAdpater<String>(Activity,R.layout.muscle_list_row_layout,R.id.listText,bodyParts);
+        bodyPartListAdapter = new muscleGroupListAdpater<BodyPartHolder>(Activity,R.layout.muscle_list_row_layout,R.id.listText,bodyPartHolder);
 
 
         this.setAdapter(bodyPartListAdapter);

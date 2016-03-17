@@ -85,7 +85,7 @@
 
 
     <!--<fragment
-        android:name="com.example.sadiq.test.fragmentTest"
+        android:name="com.example.sadiq.test123.fragmentTest"
         android:id="@+id/lm_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

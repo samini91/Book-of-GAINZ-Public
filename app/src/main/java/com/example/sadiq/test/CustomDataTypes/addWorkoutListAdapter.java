@@ -2,22 +2,22 @@ package com.example.sadiq.test.CustomDataTypes;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
 import android.support.v4.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easyandroidanimations.library.ExplodeAnimation;
+import com.easyandroidanimations.library.FlipHorizontalAnimation;
+import com.easyandroidanimations.library.ScaleInAnimation;
+import com.easyandroidanimations.library.SlideInAnimation;
+import com.easyandroidanimations.library.UnfoldAnimation;
 import com.example.sadiq.test.Database.Database;
 import com.example.sadiq.test.PopUpWindow.PopUpListView;
 import com.example.sadiq.test.R;
@@ -25,7 +25,6 @@ import com.woxthebox.draglistview.DragItemAdapter;
 
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 /**
  * Created by Sadiq on 2/16/2016.
@@ -93,6 +92,7 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
                 popUpLayout = (LinearLayout) View.inflate(context, R.layout.popuplayout, root);
                 leftList = (muscleGroupList) popUpLayout.findViewById(R.id.leftListView);
                 rightList =(muscleGroupList) popUpLayout.findViewById(R.id.rightListView);
+                popUpLayout.setBackgroundColor(Color.rgb(115,147,158));
             }
             else{
                 popupWindow.dismiss();
@@ -134,9 +134,9 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
             bodyPartHolder1[1].name="Latsasdf";
 
 
-            muscleGroupListAdpater<BodyPartHolder> leftListAdapter=new muscleGroupListAdpater<>(context,R.layout.row_layout,R.id.listText,primaryBodyPartHolder);
+            muscleGroupListAdpater<BodyPartHolder> leftListAdapter=new muscleGroupListAdpater<>(context,R.layout.muscle_list_row_layout,R.id.listText,primaryBodyPartHolder);
 
-            muscleGroupListAdpater<BodyPartHolder> rightListAdapter=new muscleGroupListAdpater<>(context,R.layout.row_layout,R.id.listText,secondaryBodyPartHolder);
+            muscleGroupListAdpater<BodyPartHolder> rightListAdapter=new muscleGroupListAdpater<>(context,R.layout.muscle_list_row_layout,R.id.listText,secondaryBodyPartHolder);
 
             leftList.setAdapter(leftListAdapter);
             rightList.setAdapter(rightListAdapter);
@@ -166,8 +166,8 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
             });
 */
             //popupWindow.setHeight(1500);
-            popupWindow.setHeight(context.getResources().getDisplayMetrics().heightPixels);
-            popupWindow.setWidth(context.getResources().getDisplayMetrics().widthPixels);
+            popupWindow.setHeight(context.getResources().getDisplayMetrics().heightPixels*3/4);
+            popupWindow.setWidth(context.getResources().getDisplayMetrics().widthPixels*3/4);
             //layout.addView(listViewleft);
 
             //layout.addView(listViewright);
@@ -180,7 +180,9 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
             popupWindow.setFocusable(true);
 
             popupWindow.update();
+            new ScaleInAnimation(popUpLayout).animate();
 
+            //new UnfoldAnimation(leftList).animate();
         }
 
         @Override

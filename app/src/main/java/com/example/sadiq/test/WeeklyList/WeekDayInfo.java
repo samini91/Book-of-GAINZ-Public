@@ -10,13 +10,9 @@ public class WeekDayInfo {
         protected String name;
         protected long Id;
         protected int dayOfTheWeek;
-        protected String surname;
-        protected String email;
-        protected static final String NAME_PREFIX = "Name_";
-        protected static final String SURNAME_PREFIX = "Surname_";
-        protected static final String EMAIL_PREFIX = "email_";
 
-        //for testing
+
+
         public WeekDayInfo(){}
 
         private WeekDayInfo(int dayOfTheWeek){

@@ -1,4 +1,7 @@
 package com.example.sadiq.test.Database;
+//  /data/data/com.example.sadiq.test123/databases/GAINZDB
+//
+// GAINZDB-journal
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

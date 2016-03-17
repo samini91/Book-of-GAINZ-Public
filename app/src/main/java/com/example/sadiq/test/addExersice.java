@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
 import com.example.sadiq.test.CustomDataTypes.muscleGroupList;
 import com.example.sadiq.test.Database.Database;
+import com.example.sadiq.test.Database.RealmDB;
 
 import java.util.ArrayList;
 
@@ -93,6 +94,10 @@ public class addExersice extends Fragment {
                     BodyPartHolder[] primaryMovers = primaryMuscleList.getBodyPartsState();
                     BodyPartHolder[] secondaryMovers = secondaryMuscleList.getBodyPartsState();
                     Database.getDatabaseInstance(getActivity()).addExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+
+                    RealmDB.getRealmInstance(getActivity()).addorUpdateExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+
+
                     primaryMuscleList.clear();
                     secondaryMuscleList.clear();
                 }
@@ -156,7 +161,7 @@ public class addExersice extends Fragment {
 
 
 
-        final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(getActivity(),R.layout.row_layout,R.id.listText,bodyPartList);
+        final ArrayAdapter<String> bodyPartListAdapter= new ArrayAdapter<String>(getActivity(),R.layout.muscle_list_row_layout,R.id.listText,bodyPartList);
         //leftList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         leftList.setAdapter(bodyPartListAdapter);
         leftList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);

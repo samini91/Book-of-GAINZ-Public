@@ -1,5 +1,6 @@
 package com.example.sadiq.test.WeeklyList;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.sadiq.test.Database.Database;
 import com.example.sadiq.test.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -54,6 +57,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
         weekDayInfoViewHolder.vDayOfTheWeek.setText(WeekDayVariables.WeekDayIntToString(ci.dayOfTheWeek));
         weekDayInfoViewHolder.setId(ci.Id);
 
+        //weekDayInfoViewHolder.WorkOutName.setText();
+
         weekDayInfoViewHolder.layoutList.populateLayoutWithExersices();
 
 
@@ -69,7 +74,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
         //would insert values here
         //ArrayList<String> e = new ArrayList<>();
         //e.add("qwer");e.add("qwer");e.add("qwer");e.add("qwer");e.add("qwer");e.add("qwer");e.add("qwer");e.add("qwer");
-        //ArrayAdapter<String> f= new ArrayAdapter<String>(context,R.layout.row_layout,R.id.listText,e);
+        //ArrayAdapter<String> f= new ArrayAdapter<String>(context,R.layout.muscle_list_row_layout,R.id.listText,e);
 
         //weekDayInfoViewHolder.list.setAdapter(f);
 
@@ -84,6 +89,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
 
 
         WorkOutExercisesWeeklyView listtest = new WorkOutExercisesWeeklyView(context);
+
+
 
         //listtest.setBackgroundColor(Color.BLUE);
         //Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/font name.ttf");
@@ -111,7 +118,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
         protected TextView vDayOfTheWeek;
         protected WorkOutExercisesWeeklyView layoutList;
         protected ImageView changeWorkout;
-
+        protected TextView WorkOutName;
 
 
 
@@ -124,6 +131,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
 
             changeWorkout = (ImageView)itemView.findViewById(R.id.changeworkoutforweek);
 
+            WorkOutName = (TextView) itemView.findViewById(R.id.WorkOutNameWeeklyCardView);
 
             changeWorkout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,12 +145,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
 
                         workOutList= (ListView) root.findViewById(R.id.popUpWorkoutList);
 
-                        workOutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Toast.makeText(context,view.toString(),Toast.LENGTH_SHORT).show();
-                            }
-                        });
+
                     }
                     else{
                         popupWindow.dismiss();
@@ -150,18 +153,35 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
 
 
                     if(popupWindow!=null){
+
+
+
                         workOutList.setAdapter(popUpListAdapter);
-                        popupWindow.setHeight(context.getResources().getDisplayMetrics().heightPixels * 2 / 3);
-                        popupWindow.setWidth(context.getResources().getDisplayMetrics().widthPixels * 2 / 3);
+                        popupWindow.setHeight(context.getResources().getDisplayMetrics().heightPixels * 3 / 4);
+                        popupWindow.setWidth(context.getResources().getDisplayMetrics().widthPixels * 3 / 4);
                         popupWindow.setContentView(popUpLinearlayout);
                         popupWindow.setAnimationStyle(R.anim.fadein);
                         popupWindow.showAtLocation(root, Gravity.BOTTOM, 10, 10);
                         popupWindow.setFocusable(true);
 
+
+                        workOutList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                //TODO should set up a dialog box to make sure the user wants to change the work out I can get both Ids right now
+
+                                Database.getDatabaseInstance(context).addWeeklyExersice(Id, popUpListAdapter.getItemId(position));
+                                popupWindow.dismiss();
+                                popUpListAdapter.notifyDataSetChanged();
+                                Toast.makeText(context, Long.toString(Id), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context,Long.toString(popUpListAdapter.getItemId(position)),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                     popupWindow.update();
 
-                    Toast.makeText(context, "Clicked plus button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Clicked plus button" + Long.toString(Id), Toast.LENGTH_SHORT).show();
                 }
             });
 

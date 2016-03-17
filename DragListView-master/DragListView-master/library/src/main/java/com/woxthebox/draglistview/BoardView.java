@@ -87,6 +87,7 @@ public class BoardView extends HorizontalScrollView implements AutoScroller.Auto
         boolean isPortrait = res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
         if (isPortrait) {
             mColumnWidth = (int) (res.getDisplayMetrics().widthPixels * 0.5);
+            //mColumnWidth = (int) (res.getDisplayMetrics().widthPixels);
         } else {
             mColumnWidth = (int) (res.getDisplayMetrics().density * 320);
         }

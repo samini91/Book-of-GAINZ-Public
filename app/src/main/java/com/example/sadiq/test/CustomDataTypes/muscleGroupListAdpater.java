@@ -4,17 +4,13 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.example.sadiq.test.R;
-
-import java.util.List;
 
 /**
  * Created by Sadiq on 2/13/2016.
@@ -39,7 +35,7 @@ public class muscleGroupListAdpater <T> extends ArrayAdapter {
         ViewHolder holder;
 
         if(convertView==null) {
-            convertView = mInflater.inflate(R.layout.row_layout, parent, false);
+            convertView = mInflater.inflate(R.layout.muscle_list_row_layout, parent, false);
             holder = new ViewHolder();
             holder.bodyPart=(TextView)convertView.findViewById(R.id.listText);
             convertView.setTag(holder);

@@ -289,7 +289,9 @@ public class Database {
                 "from " + WeeklyScheduleTable + "," + WorkOutExersicesTable +","+ExersiceTable+ " " +
                 "where " + WeeklyScheduleTable + "." + WeeklyScheduleTable_DayofTheWeek + "=" + Long.toString(dayOfTheWeek) +
                 " and " + WeeklyScheduleTable + "." + WeeklyScheduleTable_WorkOutId + "=" + WorkOutExersicesTable + "." + WorkOutExersicesTable_WorkOutId+
-                " and " + WorkOutExersicesTable+"."+WorkOutExersicesTable_WorkOutId +"="+ExersiceTable+"."+PrimaryKeyId
+                " and " + WorkOutExersicesTable+"."+WorkOutExersicesTable_ExersicesId +"="+ExersiceTable+"."+PrimaryKeyId +" "+
+                " order by "+WorkOutExersciesTable_ExersicesOrder
+
 
 
                 , null);

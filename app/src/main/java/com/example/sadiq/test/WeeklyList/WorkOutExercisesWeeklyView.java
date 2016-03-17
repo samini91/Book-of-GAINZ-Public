@@ -43,7 +43,7 @@ public class WorkOutExercisesWeeklyView extends LinearLayout {
         for(int i = 0;i<cursor.getCount();i++){
 
             TextView workoutid= new TextView(getContext());
-            workoutid.setText(cursor.getString(2));
+            workoutid.setText(cursor.getString(8));
             this.addView(workoutid);
             cursor.moveToNext();
 

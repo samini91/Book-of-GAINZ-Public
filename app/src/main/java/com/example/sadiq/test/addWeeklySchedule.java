@@ -1,7 +1,6 @@
 package com.example.sadiq.test;
 
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.example.sadiq.test.CustomDataTypes.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Database;
@@ -35,7 +33,7 @@ public class addWeeklySchedule extends Fragment {
 
         String daysOfTheWeek[] ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
-        ArrayAdapter<String> daysOfTheWeekAdapter = new ArrayAdapter<String>(getActivity(),R.layout.row_layout,R.id.listText,daysOfTheWeek);
+        ArrayAdapter<String> daysOfTheWeekAdapter = new ArrayAdapter<>(getActivity(),R.layout.muscle_list_row_layout,R.id.listText,daysOfTheWeek);
 
         //daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
 
@@ -59,8 +57,8 @@ public class addWeeklySchedule extends Fragment {
         mBoardView.setSnapToColumnWhenDragging(true);
         mBoardView.setSnapDragItemToTouch(true);
 
-        allExersiceAdapter = new addWorkoutListAdapter(getActivity(),allExersice,R.layout.column_item,R.id.item_layout,true);
-        workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.column_item,R.id.item_layout,true);
+        allExersiceAdapter = new addWorkoutListAdapter(getActivity(),allExersice,R.layout.addworkout_column_item,R.id.item_layout,true);
+        workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.addworkout_column_item,R.id.item_layout,true);
 
         mBoardView.addColumnList(allExersiceAdapter, null, true);
         mBoardView.addColumnList(workOutexersicesAdapter, null, true);
@@ -84,8 +82,8 @@ public class addWeeklySchedule extends Fragment {
         background.add(new Pair<Long, String>((long)i,daysOfTheWeek[i]));
         }
 
-        addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.column_item,R.id.item_layout,true);
-        addWorkoutListAdapter emptyAdapter = new addWorkoutListAdapter(getActivity(),empty,R.layout.column_item,R.id.item_layout,true);
+        addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.addworkout_column_item,R.id.item_layout,true);
+        addWorkoutListAdapter emptyAdapter = new addWorkoutListAdapter(getActivity(),empty,R.layout.addworkout_column_item,R.id.item_layout,true);
 
 
 

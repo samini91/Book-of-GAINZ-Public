@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
+
+    <EditText
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:id="@+id/nameofexersice"
+        android:gravity="center"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Enter Exercise Name"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+    <EditText
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/primary"
+        android:text="Primary"
+        android:editable="false"
+        android:layout_weight=".50"
+        />
+
+    <EditText
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondary"
+        android:text="Secondary"
+        android:editable="false"
+        android:layout_weight=".50"
+        />
+
+        </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1"
+        android:layout_weight="1"
+        >
+        <!--android:layout_height="400dp"-->
+        <com.example.sadiq.test.CustomDataTypes.muscleGroupList
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/leftListView"
+            android:descendantFocusability="blocksDescendants"
+            android:choiceMode="singleChoice"
+            android:layout_weight=".50"
+            />
+
+
+        <com.example.sadiq.test.CustomDataTypes.muscleGroupList
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rightListView"
+            android:descendantFocusability="blocksDescendants"
+            android:choiceMode="singleChoice"
+            android:layout_weight=".50"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1"
+
+        >
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Clear"
+            android:id="@+id/clear"
+            android:layout_weight=".50"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Submit"
+            android:id="@+id/submit"
+            android:layout_weight=".50"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
