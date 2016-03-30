@@ -54,12 +54,22 @@ public class Exercise extends RealmObject
     public String getName(){
         return name;
     }
-    public RealmList<BodyPartHolderDBObject> getPrimaryMover(){
+    public RealmList<BodyPartHolderDBObject> getPrimaryMoversDBObject(){
         return this.primaryMoversDBObject;
     }
 
-    public RealmList<BodyPartHolderDBObject> getSecondaryMover(){
+    public RealmList<BodyPartHolderDBObject> getSecondaryMoversDBObject(){
         return this.secondaryMoversDBObject;
     }
+
+    public void setPrimaryMoversDBObject(RealmList<BodyPartHolderDBObject> list){
+        primaryMoversDBObject=list;
+
+    }
+    public void setSecondaryMoversDBObject(RealmList<BodyPartHolderDBObject> list ){
+        secondaryMoversDBObject=list;
+
+    }
+
 }
 

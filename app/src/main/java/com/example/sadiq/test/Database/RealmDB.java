@@ -23,14 +23,29 @@ public class RealmDB{
         }
         return realmDB;
     }
+
+    public Realm getRealm(){
+        if(realm==null){
+            return null;
+        }
+        else
+        return realm;
+    }
+
     private RealmDB(Context context){
         realm = Realm.getInstance(new RealmConfiguration.Builder(context).name("GAINZ").build());
 
     }
 
     public void addorUpdateExersice(String exersiceName,BodyPartHolder[] primaryBodyPartHolders,BodyPartHolder[] secondaryBodyPartHolders){
-        long nextId = (long) (realm.where(Exercise.class).max("Id").longValue() + 1);
 
+        long nextId;
+        try {
+            nextId = (realm.where(Exercise.class).max("Id").longValue() + 1);
+        }
+        catch(NullPointerException e){
+            nextId=0;
+        }
         Exercise exercise = new Exercise(nextId,exersiceName,primaryBodyPartHolders,secondaryBodyPartHolders);
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(exercise);

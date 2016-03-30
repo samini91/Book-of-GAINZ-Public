@@ -18,6 +18,7 @@
         android:focusableInTouchMode="false"
         android:clickable="false"
         android:descendantFocusability="blocksDescendants"
+
         />
 
 </LinearLayout>

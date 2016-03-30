@@ -1,3 +1,3 @@
-include ':app', ':sample', ':library'
+include ':app', ':sample', ':library', 'realm-searchview', ':realm_searchview'
 project(':sample').projectDir = new File('DragListView-master/DragListView-master/sample')
 project(':library').projectDir = new File('DragListView-master/DragListView-master/library')

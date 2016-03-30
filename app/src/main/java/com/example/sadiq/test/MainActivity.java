@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+//import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.Fragment;
+import android.app.Fragment;
 
+//import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import java.util.LinkedList;
 
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
@@ -25,8 +30,8 @@ import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfigur
 import com.example.sadiq.test.WeeklyList.WeeklyList;
 import com.example.sadiq.test.addworkout_customizable.addworkout_customizable;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends Activity {
+/*
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+*/
     private myViewPager mPager;
 
     private LinkedList fragmentList;
@@ -64,10 +69,11 @@ public class MainActivity extends AppCompatActivity {
       //  fragmentList.add(new fragmentTest());
         //fragmentList.add(new test123());
 
-        fragmentList.add(new addworkout_customizable());
-        fragmentList.add(new DatabaseDisplayFragment());
+        //fragmentList.add(new addworkout_customizable());
+        //fragmentList.add(new DatabaseDisplayFragment());
         fragmentList.add(new addExersice());
-        fragmentList.add(new addWorkout());
+        fragmentList.add(new SelectExerciseConfiguration());
+        //fragmentList.add(new addWorkout());
         //fragmentList.add(new test123());
 
 /*
@@ -81,20 +87,8 @@ public class MainActivity extends AppCompatActivity {
         //fragmentList.add(new fragmentTest());
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
+        //FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
+        FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
 
 
         mPager.setAdapter(FragmentAdapter);
@@ -110,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
        // mPager.setCurrentItem(3);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         final Context context = this;
 

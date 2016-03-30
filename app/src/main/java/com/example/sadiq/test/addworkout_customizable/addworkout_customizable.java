@@ -4,15 +4,21 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+
+import android.app.Fragment;
+
 //import android.support.v4.app.Fragment;
 
+
 //import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
+
 //import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentTransaction;
+
 import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.transition.Explode;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -109,7 +115,9 @@ public class addworkout_customizable extends Fragment {
 
                 fragmentTransaction.setCustomAnimations(R.animator.card_flip_right_in, R.animator.card_flip_right_out, R.animator.card_flip_left_in, R.animator.card_flip_left_out);
 
-                fragmentTransaction.replace( R.id.addworkout_customizable_container, SelectExerciseConfiguration);
+                fragmentTransaction.replace(R.id.addworkout_customizable_container, SelectExerciseConfiguration);
+
+
                 fragmentTransaction.addToBackStack(SelectExerciseConfiguration.toString());
                 fragmentTransaction.commit();
 
@@ -156,8 +164,8 @@ public class addworkout_customizable extends Fragment {
 
                 }
 
-                popupWindowEnterData.setHeight(getContext().getResources().getDisplayMetrics().heightPixels * 9 / 10);
-                popupWindowEnterData.setWidth(getContext().getResources().getDisplayMetrics().widthPixels * 9 / 10);
+                popupWindowEnterData.setHeight(getActivity().getResources().getDisplayMetrics().heightPixels * 9 / 10);
+                popupWindowEnterData.setWidth(getActivity().getResources().getDisplayMetrics().widthPixels * 9 / 10);
 
                 popupWindowEnterData.setContentView(popUpRoot);
                 //popupWindowEnterData.setAnimationStyle(R.anim.fadein);

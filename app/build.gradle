@@ -4,12 +4,20 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor' // butterknife
+    }
+
     defaultConfig {
         applicationId "com.example.sadiq.test123"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
@@ -30,6 +38,7 @@ android {
             assets.srcDirs = ['/src/main/assets']
             res.srcDirs =
                     [
+                            'src/main/res/layout/RepSetWeightConfiguration',
                             'src/main/res/layout/SelectExerciseConfiguration',
                             'src/main/res/layout/addworkout_customizable',
                             'src/main/res/layout/popup',
@@ -48,17 +57,17 @@ android {
 buildscript {
     repositories {
         jcenter()
+
     }
     dependencies {
         classpath "io.realm:realm-gradle-plugin:0.88.2"
-        classpath 'com.nineoldandroids:library:2.4.0'
+
+
     }
 
 }
 
-apply plugin: 'realm-android'
-
-
+//apply plugin: 'realm-android'
 
 
 
@@ -66,13 +75,24 @@ apply plugin: 'realm-android'
 dependencies {
     compile fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+
+
+    //compile 'com.github.thorbenprimke:realm-searchview:0.9.4'
     compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:support-v4:23.1.1'
+
     compile 'com.roomorama:caldroid:2.3.1'
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
+
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:support-v13:23.2.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+
+    compile project(':realm_searchview')
     compile project(':library')
+
     compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')
 
 }

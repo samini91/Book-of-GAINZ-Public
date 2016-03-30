@@ -26,7 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Primary"
+                android:background="@android:color/holo_blue_light"
 
+                android:typeface="normal"
+                android:textSize="17dp"
                 android:singleLine="true"
                 />
 
@@ -53,6 +56,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Secondary"
+
+                android:background="@android:color/holo_blue_light"
+
+                android:typeface="normal"
+                android:textSize="17dp"
 
                 android:singleLine="true"
                 />
