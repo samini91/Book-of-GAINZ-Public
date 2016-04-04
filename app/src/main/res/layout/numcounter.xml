@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-<!--
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
--->
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/button"
-        android:layout_gravity="left|top"
-        android:src="@android:drawable/btn_minus"
-        />
-
     <EditText
-        android:layout_width="126dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="3"
-        android:id="@+id/editText"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button" />
-
-    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/button2"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText"
-        android:src="@android:drawable/ic_input_add"
+        android:layout_marginTop="@dimen/valueSelector_margin_top"
+        android:textSize="@dimen/valueSelector_text"
+        android:text="0"
+        android:enabled="false"
+        android:background="@null"
+        android:textColor="#000000"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/valueTextView"
+
+
         />
+
+    <TextView
+        android:id="@+id/valueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/valueSelector_label_text"
+        android:text="SETS"
+        android:layout_below="@+id/valueTextView"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:src="@android:drawable/ic_input_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/minusButton"
+        android:clickable="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_alignParentLeft="true"
+         android:layout_toLeftOf="@+id/valueTextView"
+        />
+
+    <ImageButton
+        android:src="@android:drawable/ic_input_add"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/plusButton"
+        android:clickable="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/valueTextView"
+
+        />
+
 </merge>
 <!--</RelativeLayout>-->

@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
 import com.example.sadiq.test.Database.DatabaseDisplayFragment;
 import com.example.sadiq.test.MainMenu.mainMenu;
+import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
 import com.example.sadiq.test.addworkout_customizable.addworkout_customizable;
@@ -71,8 +72,11 @@ public class MainActivity extends Activity {
 
         //fragmentList.add(new addworkout_customizable());
         //fragmentList.add(new DatabaseDisplayFragment());
-        fragmentList.add(new addExersice());
-        fragmentList.add(new SelectExerciseConfiguration());
+        fragmentList.add(new fragmentTest());
+        //fragmentList.add(new SetRepWeightConfigurationView());
+
+        //fragmentList.add(new addExersice());
+        //fragmentList.add(new SelectExerciseConfiguration());
         //fragmentList.add(new addWorkout());
         //fragmentList.add(new test123());
 

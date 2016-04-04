@@ -7,16 +7,20 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -25,7 +29,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sadiq.test.CustomDataTypes.Counter;
+import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView;
+import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightListAdapter;
+
 import org.w3c.dom.Text;
+
+import java.util.Set;
 
 public class fragmentTest extends Fragment {
     @Override
@@ -36,10 +46,54 @@ public class fragmentTest extends Fragment {
       //  TableLayout a = new TableLayout(getContext());
 
 
+        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.test, container, false);
+        //ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fixit, container, false);
+
+
+
+
+        //TextView as= new TextView(getActivity());
+        //as.setText("asl;dfkj;asldfjk");
+
+        //view.addView(as);
+
+        //ViewGroup view = new LinearLayout(getActivity());
+
+
+
+
+
+        //RecyclerView a =(RecyclerView) view.findViewById(R.id.fiddle);
+
+        //SetRepWeightListAdapter e = new SetRepWeightListAdapter(getActivity());
+        //a.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //a.setAdapter(e);
+        //e.initNewSetRepWeightDBObject();
+
+
+
+       // RecyclerView SetRepWeightList = new RecyclerView(getActivity());
+
+        //SetRepWeightListAdapter adapter= new SetRepWeightListAdapter(getActivity());
+        //adapter.initNewSetRepWeigthDBObject();
+
+
+        //SetRepWeightList.setAdapter(adapter);
+        //adapter.initNewSetRepWeightDBObject();
+        //view.addView(SetRepWeightList);
+
+
 
   //asdf
         // Inflate the layout for this fragment
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.calandar,container,false);
+        //ViewGroup view = (ViewGroup)inflater.inflate(R.layout.calandar,container,false);
+        //TextView a = new TextView(getActivity());
+
+//        a.setText("a;sdkjf;alskdjf");
+
+//        Counter a = new Counter(getActivity());
+
+  //      view.addView(a);
 
                 //=  (ViewGroup)inflater.inflate(R.layout.fragment_blank, container, false);
 

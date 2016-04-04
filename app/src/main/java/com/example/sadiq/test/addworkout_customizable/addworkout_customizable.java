@@ -108,6 +108,9 @@ public class addworkout_customizable extends Fragment {
                 //getFragmentManager().beginTransaction().replace(((ViewGroup) getView().getParent()).getId(), SelectExerciseConfiguration, "SelectExerciseConfigurationFragmentTag")
                 //getFragmentManager().beginTransaction().replace(container.getId(), SelectExerciseConfiguration)
                   //      .commit();
+
+                //Bundle bundle = new Bundle();
+
                 FragmentManager fragmentManager = getFragmentManager();
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

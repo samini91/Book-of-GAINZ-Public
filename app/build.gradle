@@ -38,8 +38,9 @@ android {
             assets.srcDirs = ['/src/main/assets']
             res.srcDirs =
                     [
-                            'src/main/res/layout/RepSetWeightConfiguration',
-                            'src/main/res/layout/SelectExerciseConfiguration',
+                            'src/main/res/layout/test',
+                            'src/main/res/layout/repsetweightconfiguration',
+                            'src/main/res/layout/selectexerciseconfiguration',
                             'src/main/res/layout/addworkout_customizable',
                             'src/main/res/layout/popup',
                             'src/main/res/layout/addworkout',
@@ -70,30 +71,19 @@ buildscript {
 //apply plugin: 'realm-android'
 
 
-
-
 dependencies {
     compile fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
-
     //compile 'com.github.thorbenprimke:realm-searchview:0.9.4'
     compile 'com.android.support:design:23.1.1'
-
     compile 'com.roomorama:caldroid:2.3.1'
-
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
-
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:support-v13:23.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
-
-
-    compile project(':realm_searchview')
     compile project(':library')
-
+    compile project(':realm_searchview')
     compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')
-
 }
 
