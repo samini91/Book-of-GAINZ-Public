@@ -29,12 +29,13 @@ public class SetRepWeightListAdapter extends RecyclerView.Adapter<SetRepWeightLi
 
     }
 
+    public int getCurrentSet(){
+        return currentSet;
+    }
 
 
     public void initNewSetRepWeightDBObject(){
         SetRepWeightDBObjectList.add(new SetRepWeightDBObject(currentSet));
-
-
 
         notifyDataSetChanged();
         currentSet++;

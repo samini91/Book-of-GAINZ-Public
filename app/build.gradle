@@ -38,6 +38,7 @@ android {
             assets.srcDirs = ['/src/main/assets']
             res.srcDirs =
                     [
+                            'src/main/res/layout/custom_views',
                             'src/main/res/layout/test',
                             'src/main/res/layout/repsetweightconfiguration',
                             'src/main/res/layout/selectexerciseconfiguration',
@@ -82,6 +83,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:support-v13:23.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'me.grantland:autofittextview:0.2.+'
     compile project(':library')
     compile project(':realm_searchview')
     compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')

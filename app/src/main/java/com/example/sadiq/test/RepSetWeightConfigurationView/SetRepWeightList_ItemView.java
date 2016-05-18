@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.sadiq.test.CustomDataTypes.Counter;
 import com.example.sadiq.test.CustomDataTypes.RepCounter;
+import com.example.sadiq.test.CustomDataTypes.WeightCounter;
 import com.example.sadiq.test.Database.SetRepWeightDBObject;
 import com.example.sadiq.test.R;
 
@@ -28,6 +29,8 @@ public class SetRepWeightList_ItemView extends RelativeLayout {
     @Bind(R.id.setrepweightlist_cardview_repCounter)
     RepCounter repCounter;
 
+    @Bind(R.id.setrepweightlist_cardview_weightCounter)
+    WeightCounter weightCounter;
 
     public SetRepWeightList_ItemView(Context context) {
         super(context);
@@ -45,11 +48,20 @@ public class SetRepWeightList_ItemView extends RelativeLayout {
     }
 
     private void init(Context context){
-        inflate(context, R.layout.setrepweightlist_cardview,this);
+        inflate(context, R.layout.setrepweightlist_cardview, this);
 
         ButterKnife.bind(this);
+        repCounter.setLabel("REPS");
+        repCounter.addNewValueChanger(0, "Failure");
+        repCounter.setMax(999);
+
+
+        weightCounter.setLabel("Weight");
+        //weightCounter.setMax(999);
 
     }
+
+    //TODO Fix
     public void bind(final SetRepWeightDBObject setRepWeightDBObject){
 
         hasBinded=true;
@@ -57,6 +69,12 @@ public class SetRepWeightList_ItemView extends RelativeLayout {
 
         repCounter.setValue(setRepWeightDBObject.getRep());
         repCounter.updateSetRepWeightDBObject(setRepWeightDBObject);
+
+
+
+        weightCounter.setValue((int)setRepWeightDBObject.getWeight());
+        weightCounter.updateSetRepWeightDBObject(setRepWeightDBObject);
+
 
         hasBinded=false;
 /*

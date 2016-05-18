@@ -71,11 +71,15 @@ public class SelectExerciseConfiguration extends Fragment {
         return root;
 
     }
+
+
+
     @Override
     public String toString(){
 
         return "swagerdagerdo";
     }
+
 
 
 

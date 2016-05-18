@@ -8,6 +8,8 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 /**
@@ -58,6 +60,24 @@ public class RealmDB{
     //user should pass name and exercises list is probably going to be a RealmList
     public void addorUpdateWorkout(String ExerciseName, List<Exercise> exercises){
 
+
+    }
+
+//TODO can add more
+public void addorUpdateOptions(String weightMetric){
+
+    //Make sure that this is a valid string... would love to use enums but not supported
+    //can probably map a value to true or false in the object but will look at later
+    OptionDB optionDB= new OptionDB(weightMetric);
+    realm.beginTransaction();
+    realm.copyToRealmOrUpdate(optionDB);
+    realm.commitTransaction();
+}
+
+
+    public OptionDB getOptions(){
+
+        return realm.where(OptionDB.class).findFirst();
 
     }
 }

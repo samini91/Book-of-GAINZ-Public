@@ -11,10 +11,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sadiq.test.R;
+
+import java.util.HashMap;
 
 
 /**
@@ -28,16 +31,28 @@ public class Counter extends RelativeLayout {
 
     private boolean plusButtonIsPressed = false;
     private boolean minusButtonIsPressed = false;
-    private final long REPEAT_INTERVAL_MS = 1001;
+    private final long REPEAT_INTERVAL_MS = 150;
+    protected int counterValue=0;
+    private HashMap<Integer,String> valueChanger;
+    private int crementValue=1;
+
+
+
 
     View rootView;
-    TextView valueTextView;
+   // TextView valueTextView;
+   EditText valueTextView;
     View minusButton;
     View plusButton;
+    TextView valueLabel;
 
     Handler handler = new Handler();
 
+
+
     public Context context;
+
+
 
 
     public Counter(Context context) {
@@ -48,6 +63,8 @@ public class Counter extends RelativeLayout {
     public Counter(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+
+
     }
 
     public Counter(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -55,23 +72,68 @@ public class Counter extends RelativeLayout {
         init(context);
     }
 
+
+
+    public void setCrementValue(int value){
+        crementValue=value;
+    }
+
+    public void setMin(int min){
+        this.minValue = min;
+
+        for(int i = 0 ;i <min;i++){
+            incrementValue();
+        }
+
+    }
     public int getMinValue() {
         return minValue;
     }
+    public int getMaxValue(){
+        return maxValue;
+    }
+    public void setMax(int max){
+        this.maxValue=max;
+        update();
+    }
 
     public int getValue() {
-        return Integer.valueOf(valueTextView.getText().toString());
+        //return Integer.valueOf(valueTextView.getText().toString());
+        return counterValue;
     }
 
     public void setValue(int val){
-        valueTextView.setText(Integer.toString(val));
+        counterValue=val;
+        update();
+
+        if(valueChanger.containsValue(val)){
+
+
+        }
+        //valueTextView.setText(Integer.toString(val));
 
     }
 
+
+    public void addNewValueChanger(int val, String changeTo){
+        valueChanger.put(val, changeTo);
+    }
+
+    public void setLabel(String label){valueLabel.setText(label);}
+    public String getLabel(){return valueLabel.getText().toString();}
+
     private void init(Context context) {
+
         rootView = inflate(context, R.layout.numcounter, this);
-        valueTextView = (TextView) rootView.findViewById(R.id.valueTextView);
+        //rootView = inflate(context, R.layout.numcounter_revamp, this);
+        //valueTextView = (TextView) rootView.findViewById(R.id.valueTextView);
+        valueTextView = (EditText) rootView.findViewById(R.id.valueTextView);
+        valueLabel = (TextView) rootView.findViewById(R.id.valueLabel);
+
+        valueChanger=new HashMap<>();
+
         valueTextView.setInputType(InputType.TYPE_NULL);
+
 
         minusButton = rootView.findViewById(R.id.minusButton);
         plusButton = rootView.findViewById(R.id.plusButton);
@@ -141,7 +203,61 @@ public class Counter extends RelativeLayout {
 
     }
 
-    private void incrementValue() {
+    private void incrementValue(){
+        if(counterValue < maxValue){
+            //counterValue++;
+            counterValue += crementValue;
+            update();
+        }
+
+    }
+
+    private void decrementValue(){
+        if(counterValue > minValue){
+            counterValue = counterValue-crementValue >=minValue ? counterValue-crementValue : counterValue*0;
+
+            update();
+        }
+    }
+
+    //probably faster in a try catch block but O(1) *2 so no problem
+
+    //it can either be a float or a integer
+    public void update(){
+        //System.out.println(counterValue+"  as;dfjl;asdkfj  " + valueChanger.containsKey(counterValue)+"   "+getMaxValue());
+        if(valueChanger.containsKey(counterValue)){
+            valueTextView.setText(valueChanger.get(counterValue));
+
+        }
+        else {
+            if (counterValue % 1 != 0) {
+                valueTextView.setText(Float.toString(counterValue));
+            } else {
+                valueTextView.setText( Integer.toString((int) counterValue));
+            }
+        }
+        /*
+        else {
+
+            if (Integer.class.isInstance(counterValue)) {
+                // Use if statement for
+                valueTextView.setText(Integer.toString(counterValue));
+            }
+            //it is a float
+            else {
+                //this means that it is not a whole number
+               if(counterValue%1!=0){
+                   valueTextView.setText(Float.toString(counterValue));
+               }
+                else{
+                   valueTextView.setText(Float.toString((int)counterValue));
+               }
+            }
+        }
+        */
+    }
+    //make it gud
+    /*private void incrementValue() {
         int currentVal = Integer.valueOf(valueTextView.getText().toString());
         if(currentVal < maxValue) {
             valueTextView.setText(String.valueOf(currentVal + 1));
@@ -154,7 +270,7 @@ public class Counter extends RelativeLayout {
             valueTextView.setText(String.valueOf(currentVal - 1));
         }
     }
-
+*/
 
 
 
@@ -180,7 +296,7 @@ public class Counter extends RelativeLayout {
     }
 
 
-    //probably need runnables
+
     public void onMinusPressOverload(){}
 
     public void onPlusPressOverload(){}

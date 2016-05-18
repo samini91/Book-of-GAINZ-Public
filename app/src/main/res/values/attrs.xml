@@ -25,4 +25,8 @@
         <!-- Text to use for the label -->
         <attr name="labelText" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="startingCount">
+        <attr name="startingCountVal" format="string" />
+    </declare-styleable>
 </resources>

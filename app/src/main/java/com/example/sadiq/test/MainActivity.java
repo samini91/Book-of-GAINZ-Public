@@ -72,11 +72,14 @@ public class MainActivity extends Activity {
 
         //fragmentList.add(new addworkout_customizable());
         //fragmentList.add(new DatabaseDisplayFragment());
-        fragmentList.add(new fragmentTest());
+
+        fragmentList.add(new addExersice());
+        fragmentList.add(new SelectExerciseConfiguration());
+        //fragmentList.add(new fragmentTest());
         //fragmentList.add(new SetRepWeightConfigurationView());
 
-        //fragmentList.add(new addExersice());
-        //fragmentList.add(new SelectExerciseConfiguration());
+
+
         //fragmentList.add(new addWorkout());
         //fragmentList.add(new test123());
 

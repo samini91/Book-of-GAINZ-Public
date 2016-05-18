@@ -18,7 +18,7 @@ public class Exercise extends RealmObject
     private String name;
     private RealmList<BodyPartHolderDBObject> primaryMoversDBObject;
     private RealmList<BodyPartHolderDBObject> secondaryMoversDBObject;
-
+    private int TheoreticalMax;
 
     public Exercise(){}
 
@@ -70,6 +70,17 @@ public class Exercise extends RealmObject
         secondaryMoversDBObject=list;
 
     }
+
+    public int getTheoreticalMax() {
+        return TheoreticalMax;
+    }
+
+    public void setTheoreticalMax(int theoreticalMax) {
+        this.TheoreticalMax = theoreticalMax;
+    }
+
+
+
 
 }
 

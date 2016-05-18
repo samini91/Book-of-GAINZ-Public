@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto">
+
+<me.grantland.widget.AutofitLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:textSize="@dimen/valueSelector_text"
+    autofit:minTextSize="30sp"
+    android:singleLine="true"
+    android:gravity="center"
+    android:maxLines="4"
+    >
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/valueSelector_margin_top"
-        android:textSize="@dimen/valueSelector_text"
+
         android:text="0"
+
         android:enabled="false"
         android:background="@null"
-        android:textColor="#000000"
-        android:layout_centerHorizontal="true"
+        android:textColor="#000056"
+
         android:id="@+id/valueTextView"
-
-
         />
+
+</me.grantland.widget.AutofitLayout>
 
     <TextView
         android:id="@+id/valueLabel"
