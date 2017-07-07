@@ -32,9 +32,9 @@ public class Counter extends RelativeLayout {
     private boolean plusButtonIsPressed = false;
     private boolean minusButtonIsPressed = false;
     private final long REPEAT_INTERVAL_MS = 150;
-    protected int counterValue=0;
-    private HashMap<Integer,String> valueChanger;
-    private int crementValue=1;
+    protected float counterValue=0;
+    private HashMap<Float,String> valueChanger;
+    private float crementValue=1;
 
 
 
@@ -74,7 +74,7 @@ public class Counter extends RelativeLayout {
 
 
 
-    public void setCrementValue(int value){
+    public void setCrementValue(float value){
         crementValue=value;
     }
 
@@ -97,7 +97,7 @@ public class Counter extends RelativeLayout {
         update();
     }
 
-    public int getValue() {
+    public float getValue() {
         //return Integer.valueOf(valueTextView.getText().toString());
         return counterValue;
     }
@@ -115,7 +115,7 @@ public class Counter extends RelativeLayout {
     }
 
 
-    public void addNewValueChanger(int val, String changeTo){
+    public void addNewValueChanger(float val, String changeTo){
         valueChanger.put(val, changeTo);
     }
 
@@ -214,7 +214,7 @@ public class Counter extends RelativeLayout {
 
     private void decrementValue(){
         if(counterValue > minValue){
-            counterValue = counterValue-crementValue >=minValue ? counterValue-crementValue : counterValue*0;
+            counterValue = counterValue-crementValue >=minValue ? counterValue-crementValue : minValue;
 
             update();
         }
@@ -229,12 +229,10 @@ public class Counter extends RelativeLayout {
             valueTextView.setText(valueChanger.get(counterValue));
 
         }
-        else {
-            if (counterValue % 1 != 0) {
-                valueTextView.setText(Float.toString(counterValue));
-            } else {
-                valueTextView.setText( Integer.toString((int) counterValue));
-            }
+        else {//valueTextView.setText(Float.toString(counterValue));
+
+                valueTextView.setText( counterValue%1>0?Float.toString((float)(Math.round(counterValue*100.0)/100.0)) :Integer.toString((int)counterValue));
+
         }
         /*
         else {

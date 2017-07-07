@@ -57,8 +57,9 @@ public class SetRepWeightList_ItemView extends RelativeLayout {
 
 
         weightCounter.setLabel("Weight");
-        //weightCounter.setMax(999);
-
+        weightCounter.setMax(1500);
+        weightCounter.setMin(0);
+        weightCounter.setCrementValue(21.3f);
     }
 
     //TODO Fix

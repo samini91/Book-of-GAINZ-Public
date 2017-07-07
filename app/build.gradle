@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '25.0.0'
 
 
     packagingOptions {
@@ -14,9 +14,10 @@ android {
     defaultConfig {
         applicationId "com.example.sadiq.test123"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        //multiDexEnabled true
 
     }
     buildTypes {
@@ -58,11 +59,15 @@ android {
 
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://jitpack.io"}
+        maven{url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'}
 
+        jcenter()
     }
     dependencies {
-        classpath "io.realm:realm-gradle-plugin:0.88.2"
+        //classpath "io.realm:realm-gradle-plugin:1.1.1"
+
+        //        classpath "io.realm:realm-gradle-plugin:0.88.2"
 
 
     }
@@ -75,7 +80,12 @@ buildscript {
 dependencies {
     compile fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+
+
+    compile 'com.facebook.stetho:stetho:1.4.1'
+    compile 'com.uphyca:stetho_realm:2.0.0'
     //compile 'com.github.thorbenprimke:realm-searchview:0.9.4'
+
     compile 'com.android.support:design:23.1.1'
     compile 'com.roomorama:caldroid:2.3.1'
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -86,6 +96,8 @@ dependencies {
     compile 'me.grantland:autofittextview:0.2.+'
     compile project(':library')
     compile project(':realm_searchview')
-    compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')
+    //compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')
+    compile project(':easyandroidanimationslibrary-v0.5')
+
 }
 

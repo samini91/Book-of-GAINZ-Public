@@ -30,6 +30,7 @@ import com.example.sadiq.test.CustomDataTypes.muscleGroupList;
 import com.example.sadiq.test.Database.Database;
 import com.example.sadiq.test.Database.RealmDB;
 
+
 import java.util.ArrayList;
 
 /**
@@ -45,11 +46,10 @@ import java.util.ArrayList;
 
 
 public class addExersice extends Fragment {
+    RealmDB realm = new RealmDB();
     boolean[] primaryBodyPartsforNewExersice;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
-
         final ViewGroup root = (ViewGroup) inflater.inflate(R.layout.addexersice, container, false);
 
         final muscleGroupList primaryMuscleList = (muscleGroupList) root.findViewById(R.id.leftListView);
@@ -59,8 +59,6 @@ public class addExersice extends Fragment {
         secondaryMuscleList.create(getActivity());
 
         final EditText nameOfExersice = (EditText)root.findViewById(R.id.nameofexersice);
-
-
 
         nameOfExersice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -91,25 +89,26 @@ public class addExersice extends Fragment {
             @Override
             public void onClick(View v) {
                 //go thorugh the muscleGroupLists and send a set of movers to the db
-                if(!(nameOfExersice.getText().length() ==0)) {
+                if((nameOfExersice.getText().length() !=0)) {
                     BodyPartHolder[] primaryMovers = primaryMuscleList.getBodyPartsState();
                     BodyPartHolder[] secondaryMovers = secondaryMuscleList.getBodyPartsState();
-                    Database.getDatabaseInstance(getActivity()).addExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+                    //Database.getDatabaseInstance(getActivity()).addExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
 
-                    RealmDB.getRealmInstance(getActivity()).addorUpdateExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+                    realm.addorUpdateExersice(nameOfExersice.getText().toString(), primaryMovers,secondaryMovers);
+                 //   Database.getDatabaseInstance(getActivity()).addExersice(nameOfExersice.getText().toString(),primaryMovers,secondaryMovers);
 
 
                     primaryMuscleList.clear();
                     secondaryMuscleList.clear();
                 }
                 else {
-                    Toast.makeText(getActivity(),"Enter the name of the Exersice",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Enter the name of the Exercise",Toast.LENGTH_SHORT).show();
 
               }
             }
         });
 
-
+        //RealmInspectorModulesProvider.builder(getActivity()).build();
 
         //nameOfExersice.setText()
         return root;

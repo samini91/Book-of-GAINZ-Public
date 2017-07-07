@@ -1,5 +1,6 @@
 package com.example.sadiq.test;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,17 +22,25 @@ import android.app.Fragment;
 
 //import android.support.v4.app.FragmentManager;
 import android.app.FragmentManager;
+import android.widget.Toast;
+
 import java.util.LinkedList;
 
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
 import com.example.sadiq.test.Database.DatabaseDisplayFragment;
+import com.example.sadiq.test.ExerciseSet.ExerciseSet;
+import com.example.sadiq.test.Initilization.Initilization;
 import com.example.sadiq.test.MainMenu.mainMenu;
+import com.example.sadiq.test.Options.Options;
 import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
 import com.example.sadiq.test.addworkout_customizable.addworkout_customizable;
 
 public class MainActivity extends Activity {
+
+    Context thisContext = this;
+    Activity thisActivity = this;
 /*
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -55,26 +64,45 @@ public class MainActivity extends Activity {
     private LinkedList fragmentList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
+
+
+        //Check if Db exists and if not load default values.
         //setContentView(R.layout.);
+      //  Initilization.Init(getApplicationContext());
+
+        //setContentView(R.layout.exersiceset_main);
         setContentView(R.layout.activity_main);
         mPager = (myViewPager) findViewById(R.id.pager);
 
         fragmentList = new LinkedList<Fragment>();
 
+        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
+        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
+        //fragmentList.add(new Options());
+        //fragmentList.add(new OptionList());
 
-        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
-        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
+        //good
+        //fragmentList.add(new ExerciseSet());
+    //    fragmentList.add(new Options());
+        fragmentList.add(new SelectExerciseConfiguration());
+
+        FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
+        mPager.setAdapter(FragmentAdapter);
+
         //fragmentList.add(new fragmentTest());
-      //  fragmentList.add(new fragmentTest());
-        //fragmentList.add(new test123());
+      //  fragmentList.add(new test123());
 
         //fragmentList.add(new addworkout_customizable());
         //fragmentList.add(new DatabaseDisplayFragment());
+        //fragmentList.add(new addExersice());
 
-        fragmentList.add(new addExersice());
-        fragmentList.add(new SelectExerciseConfiguration());
+
+
+
         //fragmentList.add(new fragmentTest());
         //fragmentList.add(new SetRepWeightConfigurationView());
 
@@ -95,12 +123,6 @@ public class MainActivity extends Activity {
 
 
         //FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
-        FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
-
-
-        mPager.setAdapter(FragmentAdapter);
-
-
 
        // mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         //mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -109,7 +131,7 @@ public class MainActivity extends Activity {
 
 
        // mPager.setCurrentItem(3);
-
+/*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -140,7 +162,7 @@ public class MainActivity extends Activity {
                 LayoutAnimationController controller =
                         new LayoutAnimationController(set, 0.25f);
 
-*/
+
 
                 Intent intent = new Intent(context, addWorkoutActivity.class);
                 startActivity(intent);
@@ -176,7 +198,7 @@ public class MainActivity extends Activity {
                 return handled;
             }
         });
-*/
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +234,7 @@ public class MainActivity extends Activity {
 
 
 
-
+*/
 
     }
     @Override
@@ -232,6 +254,27 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(thisContext,"asdf",Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Fragment test = new Options();
+                //Fragment test =
+                //fragmentTransaction.add(R.id., test);
+                //fragmentTransaction.replace(thisActivity.vie,test);
+
+                //fragmentTransaction.add(test,"option");
+
+                //fragmentTransaction.add(test,"opiton");
+
+                fragmentTransaction.commit();
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -243,9 +286,9 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+//            return true;
+  //      }
 
         return super.onOptionsItemSelected(item);
     }

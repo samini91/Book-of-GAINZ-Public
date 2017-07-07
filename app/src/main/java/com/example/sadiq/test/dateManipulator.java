@@ -23,7 +23,7 @@ public class dateManipulator {
                         break;
             case 3 : dayValue="Tuesday";
                         break;
-            case 4 : dayValue="Wendesday";
+            case 4 : dayValue="Wednesday";
                 break;
             case 5 : dayValue="Thursday";
                 break;

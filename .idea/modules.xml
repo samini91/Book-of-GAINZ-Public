@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/book-of-gainz.iml" filepath="$PROJECT_DIR$/book-of-gainz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easyandroidanimationslibrary-v0.5/easyandroidanimationslibrary-v0.5.iml" filepath="$PROJECT_DIR$/easyandroidanimationslibrary-v0.5/easyandroidanimationslibrary-v0.5.iml" />
       <module fileurl="file://$PROJECT_DIR$/DragListView-master/DragListView-master/library/library.iml" filepath="$PROJECT_DIR$/DragListView-master/DragListView-master/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/realm-searchview/realm-searchview.iml" filepath="$PROJECT_DIR$/realm-searchview/realm-searchview.iml" />
       <module fileurl="file://$PROJECT_DIR$/realm_searchview/realm_searchview.iml" filepath="$PROJECT_DIR$/realm_searchview/realm_searchview.iml" />

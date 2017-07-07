@@ -22,11 +22,7 @@ import io.realm.RealmResults;
  */
 public class DatabaseDisplayFragment extends Fragment {
 
-
     ViewGroup root;
-
-
-
 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle
@@ -40,20 +36,19 @@ public class DatabaseDisplayFragment extends Fragment {
         //RealmDatabasetest();
 
 
-        Realm realm = Realm.getInstance(new RealmConfiguration.Builder(getActivity()).build());
+        //Realm realm = Realm.getInstance(new RealmConfiguration.Builder(getActivity()).build());
 
 
         getDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String data = "";
-                RealmDB realm = RealmDB.getRealmInstance(getActivity());
+                RealmDB realm = new RealmDB();
                 RealmResults<Exercise> swag = realm.getAllExercise();
                 //RealmResults<Exercise> swag = realm.where(Exercise.class).findAll();
                 System.out.println(swag.size());
                 for(Exercise exercise:swag){
                     data += exercise.getName();
-
                 }
                 DatabaseData.setText(data);
             }
@@ -87,16 +82,16 @@ public class DatabaseDisplayFragment extends Fragment {
         //int nextID = (int) (realm.where(dbObj.class).maximumInt("id") + 1);
         //Exercise instance = new Exercise("jinens",null,null);
         //instance.setId(1);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder(getActivity()).build();
+      //  RealmConfiguration realmConfig = new RealmConfiguration.Builder(getActivity()).build();
 
 
-        Realm.setDefaultConfiguration(realmConfig);
+        //Realm.setDefaultConfiguration(realmConfig);
 
-        Realm realm = Realm.getInstance(realmConfig);
+        //Realm realm = Realm.getInstance(realmConfig);
 
-        realm.beginTransaction();
+        //realm.beginTransaction();
         //realm.copyToRealmOrUpdate(instance);
-        realm.commitTransaction();
+        //realm.commitTransaction();
 
 
     }

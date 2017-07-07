@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:weightSum="1"
-    >
 
 <RelativeLayout
     android:orientation="vertical"
@@ -14,7 +8,7 @@
     android:id="@+id/selectexercsieconfigurationId"
     android:clickable="true"
     android:layout_weight=".5"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,11 +28,3 @@
         android:layout_below="@+id/FilterSelector" />
 
 </RelativeLayout>
-
-    <com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_weight=".5"
-        />
-
-</LinearLayout>

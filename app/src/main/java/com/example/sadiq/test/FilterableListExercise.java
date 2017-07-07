@@ -1,55 +1,61 @@
-package com.example.sadiq.test.SelectExerciseConfiguration;
+package com.example.sadiq.test;
 
-import android.graphics.Color;
-import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-import android.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-
-import com.example.sadiq.test.Database.RealmDB;
-import com.example.sadiq.test.R;
-
-import java.util.ArrayList;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
-import butterknife.OnItemSelected;
+import com.example.sadiq.test.Database.RealmDB;
+import com.example.sadiq.test.SelectExerciseConfiguration.FilterableListExerciseAdapter;
+
+import java.util.ArrayList;
+
 import co.moonmonkeylabs.realmsearchview.RealmSearchView;
 import io.realm.Case;
 
 /**
- * Created by Sadiq on 3/16/2016.
+ * Created by Mugen on 6/6/2016.
  */
-public class SelectExerciseConfiguration extends Fragment {
-
+public class FilterableListExercise extends RelativeLayout {
+    //TODO need to create getters and setters for values associated with this
     RealmSearchView filterableList;
     Spinner filterSelector;
     FilterableListExerciseAdapter filterableListExerciseAdapter;
     ViewGroup root;
     RealmDB realmDB = new RealmDB();
 
-    @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState){
-        //Inflate the View
+    Context context;
+    public FilterableListExercise(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
 
-        root = (ViewGroup)inflater.inflate(R.layout.selectexerciseconfigurationmain, container, false);
+    public FilterableListExercise(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public FilterableListExercise(Context context) {
+        super(context);
+        init(context);
+    }
+
+    private void init(final Context context){
+
+        this.context=context;
+
+        root = (ViewGroup) inflate(context, R.layout.filterablelist_exersice, this);
 
         filterableList = (RealmSearchView) root.findViewById(R.id.FilterableList);
 
-
-
-
-        filterableListExerciseAdapter = new FilterableListExerciseAdapter(getActivity(), realmDB.getRealm(),"name");
+        filterableListExerciseAdapter = new FilterableListExerciseAdapter(context, realmDB.getRealm(),"name");
         //filterableListExerciseAdapter = new FilterableListExerciseAdapter(getActivity(), RealmDB.getRealmInstance(getActivity()).getRealm(),
-          //      "primaryMoversDBObject.name");
+        //      "primaryMoversDBObject.name");
         filterableListExerciseAdapter.setCasing(Case.INSENSITIVE);
         filterableListExerciseAdapter.setUseContains(true);
         filterableList.setAdapter(filterableListExerciseAdapter);
@@ -60,29 +66,14 @@ public class SelectExerciseConfiguration extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"asl;dkfjasl;dfjk",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"asl;dkfjasl;dfjk",Toast.LENGTH_SHORT).show();
             }
         });
 
 
         initFilterSelector();
 
-//        root.setBackgroundColor(Color.CYAN);
-
-        return root;
-
     }
-
-
-
-    @Override
-    public String toString(){
-
-        return "swagerdagerdo";
-    }
-
-
-
 
 
     public void initFilterSelector(){
@@ -94,13 +85,13 @@ public class SelectExerciseConfiguration extends Fragment {
         filterValues.add("PrimaryMovers");
         filterValues.add("SecondaryMovers");
 
-        final ArrayAdapter<String> filterValuesAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item,filterValues);
+        final ArrayAdapter<String> filterValuesAdapter = new ArrayAdapter<>(context,android.R.layout.simple_spinner_item,filterValues);
 
         filterValuesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         filterSelector.setAdapter(filterValuesAdapter);
 
-        filterSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+        filterSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch((int)id){
@@ -127,9 +118,6 @@ public class SelectExerciseConfiguration extends Fragment {
 
 
     }
-
-
-
 
 
 }

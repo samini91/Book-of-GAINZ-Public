@@ -43,7 +43,7 @@ public class WeightCounter extends Counter {
         this.valueTextView.setClickable(true);
         this.valueTextView.setEnabled(true);
         this.valueTextView.setSelectAllOnFocus(true);
-        this.valueTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        this.valueTextView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 //        RealmDB.getRealmInstance(context).addorUpdateOptions("Ib");
   //      final OptionDB a  = RealmDB.getRealmInstance(context).getOptions();
@@ -52,7 +52,7 @@ public class WeightCounter extends Counter {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
-                    counterValue = Integer.parseInt(valueTextView.getText().toString());
+                    counterValue = Float.parseFloat(valueTextView.getText().toString());
                     update();
 
                     return true;
@@ -72,12 +72,13 @@ public class WeightCounter extends Counter {
     @Override
     public void onMinusPressOverload(){
 
-        setRepWeightDBObject.setWeight(getValue());
+        setRepWeightDBObject.setWeight((float) (Math.round(getValue()*100.0)/100.0));
     }
 
     @Override
     public void onPlusPressOverload(){
-        setRepWeightDBObject.setWeight(getValue());
+        setRepWeightDBObject.setWeight((float) (Math.round(getValue()*100.0)/100.0));
+
     }
 
 
