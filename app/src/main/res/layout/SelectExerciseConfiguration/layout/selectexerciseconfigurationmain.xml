@@ -35,7 +35,7 @@
 
 </RelativeLayout>
 
-    <com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView
+    <com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_weight=".5"

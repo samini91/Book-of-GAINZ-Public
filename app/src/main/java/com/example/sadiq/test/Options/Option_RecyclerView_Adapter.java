@@ -2,29 +2,19 @@ package com.example.sadiq.test.Options;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Debug;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.sadiq.test.Database.OptionDB;
 import com.example.sadiq.test.Database.RealmDB;
-import com.example.sadiq.test.Database.RealmString;
 import com.example.sadiq.test.Database.UserOption;
-import com.example.sadiq.test.R;
-import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightList_ItemView;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**

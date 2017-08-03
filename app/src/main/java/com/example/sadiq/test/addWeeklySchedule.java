@@ -1,8 +1,9 @@
 package com.example.sadiq.test;
 
+import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +39,9 @@ public class addWeeklySchedule extends Fragment {
         //daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
 
 
-        ArrayList<Pair<Long, String>> allExersice = new ArrayList<>();
+        ArrayList<String> allExersice = new ArrayList<>();
 
-        ArrayList<Pair<Long, String>>  workOutExersices = new ArrayList<>();
+        ArrayList<String>  workOutExersices = new ArrayList<>();
 
 
         addWorkoutListAdapter allExersiceAdapter;
@@ -48,7 +49,7 @@ public class addWeeklySchedule extends Fragment {
 
         Cursor cursor= Database.getDatabaseInstance(getActivity()).getAllWorkouts();
         for (int i =0; i<cursor.getCount();i++){
-            allExersice.add(new Pair<>(Long.parseLong(cursor.getString(0)), cursor.getString(1)));
+            //allExersice.add(new Pair<>(Long.parseLong(cursor.getString(0)), cursor.getString(1)));
             cursor.moveToNext();
         }
 
@@ -74,12 +75,12 @@ public class addWeeklySchedule extends Fragment {
 
         BoardView testBackground = (BoardView) root.findViewById(R.id.weekdaysbackground);
 
-        ArrayList<Pair<Long, String>> empty = new ArrayList<>();
-        ArrayList<Pair<Long, String>> background = new ArrayList<>();
+        ArrayList<String> empty = new ArrayList<>();
+        ArrayList<String> background = new ArrayList<>();
 
 
         for(int i =0;i<daysOfTheWeek.length;i++){
-        background.add(new Pair<Long, String>((long)i,daysOfTheWeek[i]));
+        //background.add(new Pair<Long, String>((long)i,daysOfTheWeek[i]));
         }
 
         addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.addworkout_column_item,R.id.item_layout,true);

@@ -1,13 +1,16 @@
 package com.example.sadiq.test.CustomDataTypes;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -21,19 +24,34 @@ import com.easyandroidanimations.library.ScaleInAnimation;
 import com.easyandroidanimations.library.SlideInAnimation;
 import com.easyandroidanimations.library.UnfoldAnimation;
 import com.example.sadiq.test.Database.Database;
+import com.example.sadiq.test.Database.Exercise;
+import com.example.sadiq.test.Database.RealmDB;
 import com.example.sadiq.test.PopUpWindow.PopUpListView;
 import com.example.sadiq.test.R;
+import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+
 /**
  * Created by Sadiq on 2/16/2016.
  */
-public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,addWorkoutListAdapter.ViewHolder> {
 
 
+public class addWorkoutListAdapter extends DragItemAdapter<String,addWorkoutListAdapter.ViewHolder> {
+
+    public interface CustomListener
+    {
+        public void onCustomListenerEvent(String Exercise);
+
+    }
+
+    //todo create a custom on adapter update so we can filter the other list as well do remvoe dups
     private int mLayoutId;
     private int mGrabHandleId;
     private Context context;
@@ -43,10 +61,13 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
     private LinearLayout popUpLayout;
     private muscleGroupList leftList;
     private muscleGroupList rightList;
+    CustomListener customListener;
 
+    public void setCustomListener(CustomListener customListener) {
+        this.customListener = customListener;
+    }
 
-
-    public addWorkoutListAdapter(Context context,ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+    public addWorkoutListAdapter(Context context,ArrayList<String> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
@@ -54,34 +75,64 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
         setItemList(list);
         this.context=context;
         popUpListView=new PopUpListView(context);
-
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        viewHolder.setCustomListener(new CustomListener() {
+            @Override
+            public void onCustomListenerEvent(String Exercise) {
+                //need to fire off another event that the main class picks up since viewholder is hidden at the fragment level
+                if(customListener != null)
+                    customListener.onCustomListenerEvent(Exercise);
+                //Toast.makeText(context, "adapter on button press", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        String text = mItemList.get(position).second;
+        String text = mItemList.get(position);
         holder.mText.setText(text);
         holder.itemView.setTag(text);
     }
 
     @Override
     public long getItemId(int position) {
-        return mItemList.get(position).first;
+        return (long) mItemList.get(position).hashCode();
     }
 
-    public class ViewHolder extends DragItemAdapter<Pair<Long, String>, addWorkoutListAdapter.ViewHolder>.ViewHolder {
+    public class ViewHolder extends DragItemAdapter<String, addWorkoutListAdapter.ViewHolder>.ViewHolder {
         public TextView mText;
+        private CustomListener customListener;
+
+        public void setCustomListener(CustomListener customListener) {
+            this.customListener = customListener;
+        }
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);
             mText = (TextView) itemView.findViewById(R.id.text);
+            this.customListener = null;
+
+
+            Button testButton = (Button) itemView.findViewById(R.id.addworkout_column_item_button);
+            testButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(customListener != null)
+                        customListener.onCustomListenerEvent(mText.getText().toString());
+                    //FragmentTransaction fragmentTransaction = getSupportTransaction
+                }
+            });
+
+
         }
 
         @Override
@@ -99,42 +150,26 @@ public class addWorkoutListAdapter extends DragItemAdapter<Pair<Long,String>,add
             else{
                 popupWindow.dismiss();
             }
-            //listView=(ListView)listView.findViewById(R.id.leftListView);
 
-            Cursor cursor=Database.getDatabaseInstance(context).getPrimaryMoverForExersice((int) getItemId());
-            String data ="";
-            BodyPartHolder primaryBodyPartHolder[] = new BodyPartHolder[cursor.getCount()];
+            RealmDB realmDB = new RealmDB();
 
-            for (int i=0;i<cursor.getCount();i++){
+            RealmQuery<Exercise> exerciseRealmQuery = RealmQuery.createQuery(realmDB.getRealm(),Exercise.class);
+            exerciseRealmQuery.equalTo("name",mText.getText().toString());
+            RealmResults<Exercise> exerciseRealmResults = realmDB.getWhereAllExercises(exerciseRealmQuery);
+
+            BodyPartHolder primaryBodyPartHolder[] = new BodyPartHolder[exerciseRealmResults.get(0).getPrimaryMoversDBObject().size()];
+
+            for (int i=0;i<exerciseRealmResults.get(0).getPrimaryMoversDBObject().size();i++){
                 primaryBodyPartHolder[i]=new BodyPartHolder();
-                primaryBodyPartHolder[i].name=cursor.getString(2);
-                cursor.moveToNext();
+                primaryBodyPartHolder[i].name = exerciseRealmResults.get(0).getPrimaryMoversDBObject().get(i).getName();
             }
 
-            System.out.println(data);
-            cursor=Database.getDatabaseInstance(context).getSecondaryMoverForExersice((int) getItemId());
+            BodyPartHolder secondaryBodyPartHolder [] = new BodyPartHolder[exerciseRealmResults.get(0).getSecondaryMoversDBObject().size()];
 
-            BodyPartHolder secondaryBodyPartHolder [] = new BodyPartHolder[cursor.getCount()];
-
-            for (int i=0;i<cursor.getCount();i++){
+            for (int i=0;i<exerciseRealmResults.get(0).getSecondaryMoversDBObject().size();i++){
                 secondaryBodyPartHolder[i]=new BodyPartHolder();
-                secondaryBodyPartHolder[i].name=cursor.getString(2);
-                cursor.moveToNext();
+                secondaryBodyPartHolder[i].name = exerciseRealmResults.get(0).getSecondaryMoversDBObject().get(i).getName();
             }
-
-/*
-            BodyPartHolder bodyPartHolder[] = new BodyPartHolder[2];
-            bodyPartHolder[0]=new BodyPartHolder();
-            bodyPartHolder[0].name="Quads";
-            bodyPartHolder[1]=new BodyPartHolder();
-            bodyPartHolder[1].name="Lats";
-*/
-            BodyPartHolder bodyPartHolder1[] = new BodyPartHolder[2];
-            bodyPartHolder1[0]=new BodyPartHolder();
-            bodyPartHolder1[0].name="Quadasdfs";
-            bodyPartHolder1[1]=new BodyPartHolder();
-            bodyPartHolder1[1].name="Latsasdf";
-
 
             muscleGroupListAdpater<BodyPartHolder> leftListAdapter=new muscleGroupListAdpater<>(context,R.layout.muscle_list_row_layout,R.id.listText,primaryBodyPartHolder);
 

@@ -16,7 +16,9 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:descendantFocusability="afterDescendants"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="4dp"
+        android:background="@color/caldroid_black"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +30,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="top"
-                android:layout_weight=".4" />
+                android:layout_weight=".4"
+                android:textColor="@color/caldroid_holo_blue_dark"
+                />
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -36,6 +40,7 @@
                 android:id="@+id/SetRepWeightLinearLayoutList"
                 android:orientation="horizontal"
                 android:padding="12dp"
+                android:textColor="@color/caldroid_holo_blue_dark"
                 />
 
         </LinearLayout>

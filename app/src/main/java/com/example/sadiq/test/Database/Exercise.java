@@ -13,8 +13,8 @@ import io.realm.annotations.PrimaryKey;
  */
 public class Exercise extends RealmObject
 {
-    @PrimaryKey private long Id;
 
+    @PrimaryKey
     private String name;
     private RealmList<BodyPartHolderDBObject> primaryMoversDBObject;
     private RealmList<BodyPartHolderDBObject> secondaryMoversDBObject;
@@ -22,10 +22,8 @@ public class Exercise extends RealmObject
 
     public Exercise(){}
 
-    public Exercise(long Id, String name,BodyPartHolder[] PrimaryMovers, BodyPartHolder[] SecondaryMovers){
+    public Exercise(String name,BodyPartHolder[] PrimaryMovers, BodyPartHolder[] SecondaryMovers){
 
-        setId(Id);
-        
         primaryMoversDBObject = new RealmList<>();
         secondaryMoversDBObject = new RealmList<>();
         this.name=name;
@@ -37,14 +35,6 @@ public class Exercise extends RealmObject
                 secondaryMoversDBObject.add(new BodyPartHolderDBObject(SecondaryMovers[i].name));
             }
         }
-    }
-
-
-    public void setId(long Id){
-        this.Id=Id;
-}
-    public long getId(){
-        return Id;
     }
 
     public void setName(String name){

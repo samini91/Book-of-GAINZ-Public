@@ -11,7 +11,9 @@
     card_view:cardUseCompatPadding="true"
     card_view:cardElevation="1dp"
     card_view:cardCornerRadius="0dp"
-    card_view:cardBackgroundColor="#ffffff">
+    android:background="@color/caldroid_black"
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="20sp"
-            android:text="Test"/>
+            android:text="Test"
+            android:textColor="@color/caldroid_holo_blue_dark"
+
+            />
 
 
 

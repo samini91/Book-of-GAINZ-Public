@@ -15,5 +15,6 @@ public interface IMerge <T,F> {
 
        //void MergeEqualTo(T a, List<F> AddList, List<F>DeleteList);
        //void MergeEqualTo(T a, RealmList<F> AddList, RealmList<F> DeleteList);
+
        void MergeEqualTo(T a, RealmList AddList, RealmList DeleteList);
 }

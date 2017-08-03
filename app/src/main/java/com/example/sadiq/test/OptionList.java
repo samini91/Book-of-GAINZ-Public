@@ -1,42 +1,11 @@
 package com.example.sadiq.test;
 
-import android.app.ActionBar;
-import android.app.ListActivity;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+        import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.sadiq.test.CustomDataTypes.Counter;
-import com.example.sadiq.test.Options.Option_dynamic_values;
-import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView;
-import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightListAdapter;
-
-import org.w3c.dom.Text;
-
-import java.util.Set;
 
 public class OptionList extends Fragment {
 

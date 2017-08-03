@@ -4,15 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/addworkout_customizable_container"
-    >
 
-<FrameLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     >
-
 
 <!--    <com.woxthebox.draglistview.DragListView
         android:layout_height="match_parent"
@@ -35,11 +28,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="bottom|right"
-        app:fabSize="normal"
+
         android:src="@android:drawable/ic_input_add"
         android:clickable="true"
         android:id="@+id/showPopUpButton"
         />
 
-</FrameLayout>
 </FrameLayout>

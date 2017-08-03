@@ -15,6 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -50,16 +51,16 @@ public class RealmDB {
     public void addorUpdateExersice(String exersiceName,BodyPartHolder[] primaryBodyPartHolders,BodyPartHolder[] secondaryBodyPartHolders){
 
         realm = Realm.getDefaultInstance();
-        long nextId;
-        try {
-            nextId = (realm.where(Exercise.class).max("Id").longValue() + 1);
-        }
-        catch(NullPointerException e){
-            nextId=0;
-        }
+        //long nextId;
+        //try {
+//            nextId = (realm.where(Exercise.class).max("Id").longValue() + 1);
+//        }
+//        catch(NullPointerException e){
+//            nextId=0;
+//        }
 
 
-        Exercise exercise = new Exercise(nextId,exersiceName,primaryBodyPartHolders,secondaryBodyPartHolders);
+        Exercise exercise = new Exercise(exersiceName,primaryBodyPartHolders,secondaryBodyPartHolders);
         // todo remove all begin and commits let the methjods handle it
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(exercise);
@@ -69,6 +70,15 @@ public class RealmDB {
     {
         realm = Realm.getDefaultInstance();
         return realm.where(Exercise.class).findAll();
+    }
+    public RealmResults<Exercise> getWhereAllExercises(RealmQuery<Exercise> exerciseRealmQuery)
+    {
+
+        realm = Realm.getDefaultInstance();
+
+        return exerciseRealmQuery.findAll();
+        //realm.where(Exercise.class).
+
     }
 
     //user should pass name and exercises listx is probably going to be a RealmList

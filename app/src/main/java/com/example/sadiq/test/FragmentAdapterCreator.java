@@ -11,16 +11,18 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Sadiq on 1/12/2016.
  */
 public class FragmentAdapterCreator extends FragmentPagerAdapter {
 
-    private LinkedList<Fragment> fragmentList;
+    private List<Fragment> fragmentList;
     ListFragment a;
-    public FragmentAdapterCreator(FragmentManager fm,LinkedList fragmentList){
+    public FragmentAdapterCreator(FragmentManager fm,List fragmentList){
         super(fm);
+
         this.fragmentList=fragmentList;
 
     }
@@ -33,5 +35,6 @@ public class FragmentAdapterCreator extends FragmentPagerAdapter {
         return this.fragmentList.size();
     }
 
+    public List<Fragment> getFragmentList (){return fragmentList;}
 
 }

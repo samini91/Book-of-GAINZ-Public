@@ -1,17 +1,28 @@
 package com.example.sadiq.test.Database;
 
+import com.example.sadiq.test.ExerciseSet;
+
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
+import io.realm.SetRepWeightDBObjectRealmProxy;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Sadiq on 3/30/2016.
  */
+
+@Parcel(implementations = { SetRepWeightDBObjectRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { SetRepWeightDBObject.class })
 public class SetRepWeightDBObject extends RealmObject {
+    @PrimaryKey
+    public String ExerciseInstance;
 
+    public int Set;
+    public int Rep;
 
-    private Exercise ExerciseInstance;
-    private int Rep;
-    private int Set;
-    private float Weight;
+    public float Weight;
 
     public SetRepWeightDBObject(){}
 
@@ -37,8 +48,8 @@ public class SetRepWeightDBObject extends RealmObject {
     public float getWeight(){return this.Weight;}
 
 
-    public void setExerciseInstance(Exercise ExerciseInstance){this.ExerciseInstance=ExerciseInstance;}
-    public Exercise getExerciseInstance(){return this.ExerciseInstance;}
+    public void setExerciseInstance(String ExerciseInstance){this.ExerciseInstance=ExerciseInstance;}
+    public String getExerciseInstance(){return this.ExerciseInstance;}
 
 
 

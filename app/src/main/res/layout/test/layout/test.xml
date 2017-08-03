@@ -8,12 +8,9 @@
 
     android:weightSum="1">
 
-    <com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/configuviewlist"
-        />
-
+<com.example.sadiq.test.CustomDataTypes.TextViewTimer
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"/>
 
 
 

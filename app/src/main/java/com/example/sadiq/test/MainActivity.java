@@ -2,294 +2,431 @@ package com.example.sadiq.test;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.os.Handler;
 
 //import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.Button;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
 
 //import android.support.v4.app.FragmentManager;
 import android.app.FragmentManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
 
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
-import com.example.sadiq.test.Database.DatabaseDisplayFragment;
-import com.example.sadiq.test.ExerciseSet.ExerciseSet;
-import com.example.sadiq.test.Initilization.Initilization;
-import com.example.sadiq.test.MainMenu.mainMenu;
 import com.example.sadiq.test.Options.Options;
-import com.example.sadiq.test.RepSetWeightConfigurationView.SetRepWeightConfigurationView;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
+import com.example.sadiq.test.ActualWorkout.*;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
-import com.example.sadiq.test.addworkout_customizable.addworkout_customizable;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements addWorkoutSetRepWeightListFragment.setSetRepWeight {
 
-    Context thisContext = this;
-    Activity thisActivity = this;
-/*
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+        Context thisContext = this;
+        Activity thisActivity = this;
+        ViewGroup root;
+        Bundle savedBundle;
+
+        int currentInflatedViewLevel;
+
+        int timer;
+
+        myViewPager mPager;
+
+        LinkedList<Fragment> fragmentList;
+        LinkedList<Fragment> fragmentListButton3;
+        FragmentAdapterCreator FragmentAdapter;
+
+        TextView textView;
+
+
+        ViewPagerFragment test, WorkoutConfig, test3;
+        long startTime = 0;
+
+        //runs without a timer by reposting this handler at the end of the runnable
+        Handler timerHandler = new Handler();
+        Runnable timerRunnable = new Runnable() {
+
+                @Override
+                public void run() {
+                        long millis = System.currentTimeMillis() - startTime;
+                        int seconds = (int) (millis / 1000);
+                        int minutes = seconds / 60;
+                        seconds = seconds % 60;
+
+                        textView.setText(String.format("%d:%02d", minutes, seconds));
+
+                        timerHandler.postDelayed(this, 500);
+                }
+        };
 
         @Override
-        public android.support.v4.app.Fragment getItem(int position) {
-            return new fragmentTest();
+        protected void onCreate(Bundle savedInstanceState) {
+
+                super.onCreate(savedInstanceState);
+                savedBundle = savedInstanceState;
+
+                //root = new FrameLayout(this);
+                //setContentView(root);
+                init(savedInstanceState);
         }
 
-        @Override
-        public int getCount() {
-            return 1;
-        }
 
-    }
-*/
-    private myViewPager mPager;
+        public void init(final Bundle savedBundle) {
+                currentInflatedViewLevel = 0;
+                setContentView(R.layout.mainmenutest);
 
-    private LinkedList fragmentList;
+                root = (ViewGroup) thisActivity.findViewById(R.id.mainlayout_test);
+                //create empty framelayout and then do this
+                //RelativeLayout item = (RelativeLayout)findViewById(R.id.item);
+                //View child = getLayoutInflater().inflate(R.layout.child, null);
+                //item.addView(child);
+                // to swap out the view we want to display
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+                //   root.removeAllViewsInLayout();
+//         View view = thisActivity.getLayoutInflater().inflate(R.layout.mainmenutest,null);
 
-        super.onCreate(savedInstanceState);
+                //      root.addView(view);
 
+                //setContentView(R.layout.mainmenutest);
+                //root = (ViewGroup) this.findViewById(R.id.mainlayout_test);
+                //root.removeAllViewsInLayout();
+                //  root.removeAllViewsInLayout();
 
-        //Check if Db exists and if not load default values.
-        //setContentView(R.layout.);
-      //  Initilization.Init(getApplicationContext());
+                Button button1 = (Button) findViewById(R.id.mainmenutest_button1);
+                Button button2 = (Button) findViewById(R.id.mainmenutest_button2);
+                Button button3 = (Button) findViewById(R.id.mainmenutest_button3);
 
-        //setContentView(R.layout.exersiceset_main);
-        setContentView(R.layout.activity_main);
-        mPager = (myViewPager) findViewById(R.id.pager);
+                //if(currentInflatedView != )
 
-        fragmentList = new LinkedList<Fragment>();
-
-        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
-        //fragmentList.add(Fragment.instantiate(this, fragmentTest.class.getName()));
-        //fragmentList.add(new Options());
-        //fragmentList.add(new OptionList());
-
-        //good
-        //fragmentList.add(new ExerciseSet());
-    //    fragmentList.add(new Options());
-        fragmentList.add(new SelectExerciseConfiguration());
-
-        FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
-        mPager.setAdapter(FragmentAdapter);
-
-        //fragmentList.add(new fragmentTest());
-      //  fragmentList.add(new test123());
-
-        //fragmentList.add(new addworkout_customizable());
-        //fragmentList.add(new DatabaseDisplayFragment());
-        //fragmentList.add(new addExersice());
-
-
-
-
-        //fragmentList.add(new fragmentTest());
-        //fragmentList.add(new SetRepWeightConfigurationView());
-
-
-
-        //fragmentList.add(new addWorkout());
-        //fragmentList.add(new test123());
-
-/*
-
-
-        fragmentList.add(new addWeeklySchedule());
-        fragmentList.add(new WeeklyList());
-        fragmentList.add(new mainMenu());
-        fragmentList.add(new workOutList());
-        */
-        //fragmentList.add(new fragmentTest());
-
-
-        //FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getSupportFragmentManager(),fragmentList);
-
-       // mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        //mPageAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-
-        //mPager.setAdapter(mPageAdapter);
-
-
-       // mPager.setCurrentItem(3);
-/*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        final Context context = this;
-
-        //Fragment agf = new Fragment();
-
-        Button moveToAddWorkout = (Button) findViewById(R.id.moveToAddWorkout);
-
-        moveToAddWorkout.setOnClickListener(new View.OnClickListener() {
-
+        /*
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*  AnimationSet set = new AnimationSet(true);
-
-                Animation animation = new AlphaAnimation(2.0f, 1.0f);
-                animation.setDuration(100);
-                set.addAnimation(animation);
-
-                animation = new TranslateAnimation(
-                        Animation.RELATIVE_TO_SELF, 1.0f, Animation.RELATIVE_TO_SELF, 0.0f,
-                        Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f
-                );
-                animation.setDuration(500);
-                set.addAnimation(animation);
-
-                LayoutAnimationController controller =
-                        new LayoutAnimationController(set, 0.25f);
+                //replace the main layout with the view pager layout ... you may even pass the position if neccesarry
+                Toast.makeText(thisActivity, "worksstill", Toast.LENGTH_SHORT).show();
+                //root.removeAllViewsInLayout();
+                root.removeAllViewsInLayout();
+                currentInflatedView = R.layout.activity_main;
 
 
+                View myViewPager =  thisActivity.getLayoutInflater().inflate(R.layout.activity_main, null);
 
-                Intent intent = new Intent(context, addWorkoutActivity.class);
-                startActivity(intent);
+                //myViewPager myViewPager = new myViewPager(thisActivity);
+                //View view = thisActivity.getLayoutInflater().inflate(R.layout.addexersice,null);
+                root.addView(myViewPager);
+
+
+            if (fragmentList == null)
+            {
+                mPager = (myViewPager) findViewById(R.id.pager);
+                fragmentList = new LinkedList<Fragment>();
+                addExersice a = new addExersice();
+                fragmentList.add(a);
+                fragmentList.add(new addExersice());
+    //            FragmentAdapter = new FragmentAdapterCreator(, fragmentList);
+
+                mPager.setAdapter(FragmentAdapter);
+
+                FragmentAdapter.getFragmentList().remove(0);
+                FragmentAdapter.notifyDataSetChanged();
+
+
+            }
+
 
             }
         });
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        FloatingActionButton a= (FloatingActionButton) findViewById(R.id.fab1);
-      /*
-        final EditText editText = (EditText) findViewById(R.id.editText);
-        editText.showContextMenu();
-
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        int dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-
-        System.out.println(dayOfWeek);
-
-       /editText.setText(dateManipulator.getCurrentDayOfWeek());
-
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    // sendMessage();
-                    handled = true;
-
-                }
-                return handled;
-            }
-        });
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // setContentView(R.layout.fragment_blank);
-                fragmentTest ae = new fragmentTest();
-
-                Snackbar.make(view, "Replace with your own actiofdsa,l,,,,.,,..,,.,.asdfn", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Replace with your own fasdfasdfffffffffffffrqerfqerfwerfwerfwerfwerfwerfwerfwerfw" +
-                        "werfwerfwerfwerfwerf" +
-                        "werfwerfwerfwerfwerfwerfwerfwerfwerfactiofdsa,l,,,,.,,..,,.,.asdfn", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-
-  //              android.app.FragmentManager fragmentManager = getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                //fragmentTest test123 = new fragmentTest();
-                //fragmentTransaction.replace(android.R.id.content, test123);
-
-                //fragmentTransaction.commit();
-
-            }
-        });
-
-
-
-
 */
 
-    }
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
+                button1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
-    }
+                                currentInflatedViewLevel++;
+                                //root.removeAllViewsInLayout();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                if (savedBundle != null) {
+                                        WorkoutConfig = (ViewPagerFragment) getFragmentManager().findFragmentByTag("WorkoutConfig");
+                                } else {
+
+                                        WorkoutConfig = new ViewPagerFragment();
+
+                                        fragmentList = new LinkedList<Fragment>();
+                                        fragmentList.add(new fragmentTest());
+                                        fragmentList.add(new addWorkout());
+                                        fragmentList.add(new addExersice());
+
+                                }
+                                //Fragment test =
+                                //fragmentTransaction.add(R.id., test);
+                                fragmentTransaction.replace(R.id.mainlayout_test, WorkoutConfig, "WorkoutConfig");
+                                //fragmentTransaction.add(R.id.mainlayout_test,test,"testtag");
+                                //fragmentTransaction.add(test,"testtag");
+                                ///fragmentTransaction.add(R.id.mainlayout_test,test);
+                                fragmentTransaction.addToBackStack("ViewPager1");
+                                //fragmentTransaction.add(test,"option");
+
+                                //fragmentTransaction.add(test,"opiton");
+
+                                fragmentTransaction.commit();
+
+                                fragmentManager.executePendingTransactions();
+
+                                WorkoutConfig.setFragmentList(fragmentList);
+                                WorkoutConfig.setMyViewPagerCurrentItem(1);
+
+                        }
+                });
+                button2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Toast.makeText(thisActivity, "worksstill", Toast.LENGTH_SHORT).show();
+
+                                currentInflatedViewLevel++;
+                                root.removeAllViewsInLayout();
+
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                ViewPagerFragment test = new ViewPagerFragment();
+
+                                //Fragment test =
+                                //fragmentTransaction.add(R.id., test);
+                                //fragmentTransaction.replace(R.id.mainlayout_test,test);
+                                fragmentTransaction.add(R.id.mainlayout_test, test);
+
+                                ///fragmentTransaction.add(R.id.mainlayout_test,test);
+                                fragmentTransaction.addToBackStack("ViewPager2");
+                                //fragmentTransaction.add(test,"option");
+
+                                //fragmentTransaction.add(test,"opiton");
+
+                                fragmentTransaction.commit();
+
+                                fragmentManager.executePendingTransactions();
+                                LinkedList fragmentList = new LinkedList<Fragment>();
+
+
+                                fragmentList.add(new SelectExerciseConfiguration());
+
+
+                                test.setFragmentList(fragmentList);
+                        }
+                });
+
+                button3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                currentInflatedViewLevel++;
+                                //root.removeAllViewsInLayout();
+
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                if (savedBundle != null) {
+                                        test3 = (ViewPagerFragment) getFragmentManager().findFragmentByTag("WorkoutConfig3");
+                                } else {
+
+                                        test3 = new ViewPagerFragment();
+
+                                        fragmentListButton3 = new LinkedList<Fragment>();
+                                        fragmentListButton3.add(new ActualWorkoutFragment());
+
+                                }
+                                //Fragment test =
+                                //fragmentTransaction.add(R.id., test);
+                                fragmentTransaction.replace(R.id.mainlayout_test, test3, "WorkoutConfig3");
+                                //fragmentTransaction.add(R.id.mainlayout_test,test,"testtag");
+                                //fragmentTransaction.add(test,"testtag");
+                                ///fragmentTransaction.add(R.id.mainlayout_test,test);
+                                fragmentTransaction.addToBackStack("ViewPager3");
+                                //fragmentTransaction.add(test,"option");
+
+                                //fragmentTransaction.add(test,"opiton");
+
+                                fragmentTransaction.commit();
+
+                                fragmentManager.executePendingTransactions();
+
+                                test3.setFragmentList(fragmentListButton3);
+
+                                fragmentListButton3.add(new WeeklyList());
+
+                                test3.getChildFragmentAdapter().notifyDataSetChanged();
+                        }
+                });
+                //fragmentList = new LinkedList<Fragment>();
+
+//        fragmentList.add(new SelectExerciseConfiguration());
+
+                //      FragmentAdapterCreator FragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
+
+                textView = (TextView) findViewById(R.id.textView);
+                timer = 0;
+                final long max = 1000000000;
+        /*
+        new Thread() {
+            public void run() {
+                while (timer++ < max ) {
+                    try {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                textView.setText("#" + timer);
+                            }
+                        });
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
+
+
+        HandlerThread handlerThread = new HandlerThread("timer");
+        handlerThread.start();
+        Looper looper = handlerThread.getLooper();
+
+        Handler handler = new Handler(looper);
+
+        handler.post(new Runnable() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(thisContext,"asdf",Toast.LENGTH_SHORT).show();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            public void run() {
+                textView.setText("#" + timer);
+                timer++;
 
-                Fragment test = new Options();
-                //Fragment test =
-                //fragmentTransaction.add(R.id., test);
-                //fragmentTransaction.replace(thisActivity.vie,test);
+            }
+        });
 
-                //fragmentTransaction.add(test,"option");
 
-                //fragmentTransaction.add(test,"opiton");
+        final long starttime = System.currentTimeMillis();
+        final Handler h = new Handler(new Handler.Callback() {
 
-                fragmentTransaction.commit();
+            @Override
+            public boolean handleMessage(Message msg) {
+                long millis = System.currentTimeMillis() - starttime;
+                int seconds = (int) (millis / 1000);
+                int minutes = seconds / 60;
+                seconds     = seconds % 60;
+
+                //textView.setText(String.format("%d:%02d", minutes, seconds));
+                textView.setText(Long.toString(millis));
                 return false;
             }
         });
+*/
+                startTime = System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, 0);
 
-        return true;
-    }
+        }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        @Override
+        public void onBackPressed() {
 
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_settings) {
+                //if (mPager.getCurrentItem() == 0) {
+                // If the user is currently looking at the first step, allow the system to handle the
+                // Back button. This calls finish() on this activity and pops the back stack.
+
+                if (WorkoutConfig != null && WorkoutConfig.getViewPagerFragmentTransaction().getBackStackEntryCount() != 0)
+                        WorkoutConfig.getViewPagerFragmentTransaction().popBackStack();
+                        //good
+                        //int stackCount = getFragmentManager().getBackStackEntryCount();
+                        //if(currentInflatedViewLevel == 0)
+                        //if(stackCount != 0)
+//            getFragmentManager().popBackStack();
+                else if (this.getFragmentManager().getBackStackEntryCount() != 0) {
+                        this.getFragmentManager().popBackStack();
+                        init(savedBundle);
+                } else
+                        super.onBackPressed();
+                //
+                //super.onBackPressed();
+
+// {
+                //if (getFragmentManager().getBackStackEntryCount() > 0) {
+//                FragmentManager.BackStackEntry first = getFragmentManager().getBackStackEntryAt(0);
+                //              getFragmentManager().popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                //}
+
+
+                //}
+                //super.onBackPressed();
+
+//        else
+                //          init();
+
+                //} else {
+                // Otherwise, select the previous step.
+                //  mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+                //}
+        }
+
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+                // Inflate the menu; this adds items to the action bar if it is present.
+                getMenuInflater().inflate(R.menu.menu_main, menu);
+                menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                                Toast.makeText(thisContext, "asdf", Toast.LENGTH_SHORT).show();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                Fragment test = new Options();
+                                //Fragment test =
+                                //fragmentTransaction.add(R.id., test);
+                                //fragmentTransaction.replace(thisActivity.vie,test);
+
+                                //fragmentTransaction.add(test,"option");
+
+                                //fragmentTransaction.add(test,"opiton");
+
+                                fragmentTransaction.commit();
+                                return false;
+                        }
+                });
+
+                return true;
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+                // Handle action bar item clicks here. The action bar will
+                // automatically handle clicks on the Home/Up button, so long
+                // as you specify a parent activity in AndroidManifest.xml.
+                int id = item.getItemId();
+
+                //noinspection SimplifiableIfStatement
+                //if (id == R.id.action_settings) {
 //            return true;
-  //      }
+                //      }
 
-        return super.onOptionsItemSelected(item);
-    }
+                return super.onOptionsItemSelected(item);
+        }
+
+        @Override
+        public void setSetRepWeight(WorkoutTemplate workoutTemplate) {
+
+                //if(WorkoutConfig.getViewPagerFragmentTransaction().findFragmentById(""))
+                Log.i("bubbled up ", "bubbled up");
+                Bundle args = new Bundle();
+
+                //if(WorkoutConfig.getChildFragmentManager().findFragmentByTag("") == null )
+                //WorkoutConfig.
+        }
 }

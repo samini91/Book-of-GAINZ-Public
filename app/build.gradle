@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.sadiq.test123"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -55,6 +55,7 @@ android {
     }
 
 
+
 }
 
 buildscript {
@@ -94,6 +95,8 @@ dependencies {
     compile 'com.android.support:support-v13:23.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'me.grantland:autofittextview:0.2.+'
+    compile 'org.parceler:parceler-api:1.1.9'
+    annotationProcessor 'org.parceler:parceler:1.1.9'
     compile project(':library')
     compile project(':realm_searchview')
     //compile files('C:/Users/Sadiq/AndroidStudioProjects/Test/Libs/easyandroidanimationslibrary-v0.5.jar')

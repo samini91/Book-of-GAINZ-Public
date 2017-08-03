@@ -21,8 +21,6 @@ public class myViewPager extends ViewPager {
         super(context, attrs);
     }
 
-
-
     //type in fragment class to go to the last instance of the fragment
 
 

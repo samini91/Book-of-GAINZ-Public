@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 import android.app.Fragment;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +17,20 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.sadiq.test.Database.RealmDB;
+import com.example.sadiq.test.Database.RealmString;
 import com.example.sadiq.test.R;
+import com.example.sadiq.test.WorkoutTemplate;
 
 import java.util.ArrayList;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
+import org.parceler.Parcels;
+
 import butterknife.OnItemSelected;
 import co.moonmonkeylabs.realmsearchview.RealmSearchView;
 import io.realm.Case;
+import io.realm.RealmList;
 
 /**
  * Created by Sadiq on 3/16/2016.
@@ -39,6 +46,31 @@ public class SelectExerciseConfiguration extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState){
         //Inflate the View
+
+        ArrayList<String> test;
+
+        RealmList<RealmString> strings = new RealmList<>();
+
+        //WorkoutTemplate workoutTemplate = new WorkoutTemplate("parceltest",strings);
+
+        strings.add(new RealmString("index0 of list parceable"));
+
+        //Parcelable wrapped = Parcels.wrap(workoutTemplate);
+
+        //workoutTemplate.Name = "parcable didnt work";
+
+        //WorkoutTemplate workoutTemplate1 = Parcels.unwrap(wrapped);
+        //Log.i(workoutTemplate1.Name,workoutTemplate1.Name);
+        //Log.i(workoutTemplate1.Name,workoutTemplate1.strings.get(0).getValue());
+
+
+        //if(savedInstanceState != null && !savedInstanceState.isEmpty())
+        if(getArguments() != null)
+        {
+            test = (ArrayList<String>) getArguments().getSerializable("list");
+            Log.i("test", test.get(0));
+            Log.i("test", test.get(1));
+        }
 
         root = (ViewGroup)inflater.inflate(R.layout.selectexerciseconfigurationmain, container, false);
 

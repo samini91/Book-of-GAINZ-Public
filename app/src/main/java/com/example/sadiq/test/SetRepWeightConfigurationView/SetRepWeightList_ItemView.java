@@ -1,19 +1,14 @@
-package com.example.sadiq.test.RepSetWeightConfigurationView;
+package com.example.sadiq.test.SetRepWeightConfigurationView;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.sadiq.test.CustomDataTypes.Counter;
 import com.example.sadiq.test.CustomDataTypes.RepCounter;
 import com.example.sadiq.test.CustomDataTypes.WeightCounter;
 import com.example.sadiq.test.Database.SetRepWeightDBObject;
 import com.example.sadiq.test.R;
-
-import org.w3c.dom.Text;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;

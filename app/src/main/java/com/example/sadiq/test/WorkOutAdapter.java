@@ -58,6 +58,7 @@ public class WorkOutAdapter extends ArrayAdapter<WorkoutTemplate> {
 
             LinearLayout linearLayout= (LinearLayout)row.findViewById(R.id.workoutlistview);
 
+            /*
             for (String exer:t.Exersice){
                 TextView a = new TextView(this.getContext());
                 a.setText(exer);
@@ -70,7 +71,7 @@ public class WorkOutAdapter extends ArrayAdapter<WorkoutTemplate> {
                 System.out.println("fasdf");
             }
 
-
+*/
 
             row.setTag(handler);
         }

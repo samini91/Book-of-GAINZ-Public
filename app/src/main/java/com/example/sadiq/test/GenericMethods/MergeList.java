@@ -11,13 +11,14 @@ import io.realm.RealmModel;
  * Created by Mugen on 5/22/2017.
  */
 
-public class MergeList {
+public class MergeList{
 
         public static <T extends Comparable<T> & RealmModel & IMerge> void MergeLists(List<T> ActualList, List<T> DatabaseList, RealmList<T> AddList , RealmList<T> DeleteList)
         //public static <T extends RealmObject,Comparable<T>> void MergeLists(List<T> ActualList, List<T> DatabaseList, RealmList<T> AddList , RealmList<T> DeleteList)
         {
                 int ActualListIndex = 0;
                 int DatabaseListIndex = 0;
+
 
 
                 //while(ActualListIndex >= DatabaseListIndex)
