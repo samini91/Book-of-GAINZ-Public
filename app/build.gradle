@@ -47,6 +47,7 @@ android {
                             'src/main/res/layout/popup',
                             'src/main/res/layout/addworkout',
                             'src/main/res/layout/addexersice',
+                            'src/main/res/layout/exercisesetrepview',
                             'src/main/res/layout',
                             'src/main/res'
 
@@ -62,7 +63,7 @@ buildscript {
     repositories {
         maven { url "https://jitpack.io"}
         maven{url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'}
-
+        mavenCentral()
         jcenter()
     }
     dependencies {

@@ -4,6 +4,7 @@ import android.app.VoiceInteractor;
 import android.content.Context;
 
 import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
+import com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView;
 import com.example.sadiq.test.Initilization.Initilization;
 
 
@@ -153,7 +154,19 @@ public class RealmDB {
     }
 
 
+    public void addOrUpdateExerciseSetRep( ExerciseSetRep exerciseSetRep)
+    {
+        realm = Realm.getDefaultInstance();
 
+        realm.copyToRealmOrUpdate(exerciseSetRep);
+
+    }
+
+    public RealmResults<ExerciseSetRep> getExerciseSetRep(RealmQuery<ExerciseSetRep> exerciseSetRepRealmQuery)
+    {
+        realm = Realm.getDefaultInstance();
+        return exerciseSetRepRealmQuery.findAll();
+    }
 
 
 

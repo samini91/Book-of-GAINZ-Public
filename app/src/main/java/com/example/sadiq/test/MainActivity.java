@@ -7,6 +7,7 @@ import android.os.Handler;
 
 //import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -23,7 +24,9 @@ import android.widget.Toast;
 
 import java.util.LinkedList;
 
+import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
+import com.example.sadiq.test.Database.Exercise;
 import com.example.sadiq.test.Options.Options;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.ActualWorkout.*;
@@ -164,9 +167,24 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
                                         WorkoutConfig = new ViewPagerFragment();
 
+                                        addWorkout addWorkout = new addWorkout();
+                                        final addWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = new addWorkoutSetRepWeightListFragment();
+                                        addWorkout.setAddWorkoutListAdapterCustomListerner(new addWorkoutListAdapter.CustomListener()
+                                        {
+                                                @Override
+                                                public void onCustomListenerEvent(String Exercise) {
+
+                                                        FragmentTransaction fragmentTransactionAddWorkout  = WorkoutConfig.getChildFragmentManager().beginTransaction();
+                                                        fragmentTransactionAddWorkout.replace(R.id.viewpagerroot, addWorkoutSetRepWeightListFragment);
+                                                        fragmentTransactionAddWorkout.addToBackStack(null);
+                                                        fragmentTransactionAddWorkout.commit();
+                                                }
+                                        });
+
+
                                         fragmentList = new LinkedList<Fragment>();
                                         fragmentList.add(new fragmentTest());
-                                        fragmentList.add(new addWorkout());
+                                        fragmentList.add(addWorkout);
                                         fragmentList.add(new addExersice());
 
                                 }
@@ -243,7 +261,8 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
                                         test3 = new ViewPagerFragment();
 
                                         fragmentListButton3 = new LinkedList<Fragment>();
-                                        fragmentListButton3.add(new ActualWorkoutFragment());
+                                        //fragmentListButton3.add(new ActualWorkoutFragment());
+                                        fragmentListButton3.add(new fragmentTest());
 
                                 }
                                 //Fragment test =
@@ -268,6 +287,8 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
                                 test3.getChildFragmentAdapter().notifyDataSetChanged();
                         }
                 });
+
+                //button3.setOnClickListener(i-> System.out.print(i.toString()));
                 //fragmentList = new LinkedList<Fragment>();
 
 //        fragmentList.add(new SelectExerciseConfiguration());
@@ -427,6 +448,6 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
                 Bundle args = new Bundle();
 
                 //if(WorkoutConfig.getChildFragmentManager().findFragmentByTag("") == null )
-                //WorkoutConfig.
+                //need to tape down the other stuff so nobody trips over it
         }
 }

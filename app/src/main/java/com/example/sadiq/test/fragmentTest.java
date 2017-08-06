@@ -12,6 +12,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sadiq.test.Database.ExerciseSetRep;
+import com.example.sadiq.test.Database.RealmDB;
+import com.example.sadiq.test.Database.SetRepWeightDBObject;
+import com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView;
+
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
+
 public class fragmentTest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -21,8 +31,51 @@ public class fragmentTest extends Fragment {
       //  TableLayout a = new TableLayout(getContext());
 
 
-        ViewGroup view = (ViewGroup)inflater.inflate(R.layout.test, container, false);
+        ViewGroup root = (ViewGroup)inflater.inflate(R.layout.exercisesetrepviewtest, container, false);
+
+
+        ExerciseSetRepView exerciseSetRepView = (ExerciseSetRepView) root.findViewById(R.id.exercisesetrepviewx);
+
         //ViewGroup view = (ViewGroup)inflater.inflate(R.layout.fixit, container, false);
+
+        final RealmDB realmDB = new RealmDB();
+        final RealmResults<ExerciseSetRep> realmResults;
+        try {
+            realmDB.realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    ExerciseSetRep exerciseSetReptest = new ExerciseSetRep();
+
+                    RealmList<SetRepWeightDBObject> realmList = new RealmList<SetRepWeightDBObject>();
+                    for(int i =0; i < 10; i ++) {
+                        SetRepWeightDBObject setRepWeightDBObject = new SetRepWeightDBObject();
+
+                        setRepWeightDBObject.setSet(i);
+                        setRepWeightDBObject.setExerciseInstance("Squats");
+
+                        setRepWeightDBObject.setCompositePrimaryKey();
+                        setRepWeightDBObject.setRep(10+i);
+                        setRepWeightDBObject.setWeight(495+i);
+                        realmList.add(setRepWeightDBObject);
+                    }
+
+                        exerciseSetReptest.setExerciseName("Squats");
+                        exerciseSetReptest.setSetRepWeightDBObjectRealmList(realmList);
+
+                    realmDB.addOrUpdateExerciseSetRep(exerciseSetReptest);
+                }
+            });
+        }
+        finally {
+
+            RealmQuery<ExerciseSetRep> realmQuery = RealmQuery.createQuery(realmDB.getRealm(),ExerciseSetRep.class);
+            realmResults= realmDB.getExerciseSetRep(realmQuery.equalTo("ExerciseName","Squats"));
+            realmDB.realm.close();
+
+        }
+
+        exerciseSetRepView.Bindexercisesetrep(realmResults.get(0));
+//       Regenerate(context);
 
 
 
@@ -127,7 +180,7 @@ RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLay
             }
         });*/
 
-        return view;
+        return root;
     }
 
 

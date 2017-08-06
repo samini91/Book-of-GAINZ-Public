@@ -1,23 +1,15 @@
 package com.example.sadiq.test;
 
-import android.os.Parcelable;
-
-import com.example.sadiq.test.Database.Exercise;
-import com.example.sadiq.test.Database.RealmString;
+import com.example.sadiq.test.Database.ExerciseSetRep;
 
 import org.parceler.Parcel;
 import org.parceler.ParcelPropertyConverter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 
-import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.WorkoutTemplateRealmProxy;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Sadiq on 2/10/2016.
@@ -31,9 +23,9 @@ public class WorkoutTemplate extends RealmObject {
     //@PrimaryKey
     public String Name;
 
-    public RealmList<ExerciseSet> ExerciseSet;
+    public RealmList<ExerciseSetRep> ExerciseSetRep;
     //@Ignore
-    //HashMap<ExerciseSet,  >
+    //HashMap<ExerciseSetRep,  >
 
     //public RealmList<Exercise> workoutExercises;
     //ArrayList<String >Exersice;
@@ -42,9 +34,9 @@ public class WorkoutTemplate extends RealmObject {
     public  WorkoutTemplate(String Name){
         this.Name = Name;
     }
-    public WorkoutTemplate(String Name, RealmList<ExerciseSet> ExerciseSet){
+    public WorkoutTemplate(String Name, RealmList<com.example.sadiq.test.Database.ExerciseSetRep> ExerciseSetRep){
         this.Name = Name;
-        this.ExerciseSet = ExerciseSet;
+        this.ExerciseSetRep = ExerciseSetRep;
     }
 
     public WorkoutTemplate(String Name,ArrayList<String> Exersice){
@@ -60,12 +52,12 @@ public class WorkoutTemplate extends RealmObject {
         return Name;
     }
 
-    public void setExerciseSet(RealmList<ExerciseSet> exerciseSet) {
-        ExerciseSet = exerciseSet;
+    public void setExerciseSetRep(RealmList<ExerciseSetRep> exerciseSetRep) {
+        ExerciseSetRep = exerciseSetRep;
     }
 
     @ParcelPropertyConverter(ListParcel.class)
-    public RealmList<ExerciseSet> getExerciseSet() {
-        return ExerciseSet;
+    public RealmList<ExerciseSetRep> getExerciseSetRep() {
+        return ExerciseSetRep;
     }
 }

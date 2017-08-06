@@ -1,14 +1,12 @@
 package com.example.sadiq.test;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.database.Cursor;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import android.support.v4.util.Pair;
-import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -24,19 +22,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sadiq.test.CustomDataTypes.addWorkoutListAdapter;
-import com.example.sadiq.test.Database.Database;
+import com.example.sadiq.test.AddWorkout.WorkOutExercisesSingleton;
+import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Exercise;
+import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.Database.RealmDB;
-import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.woxthebox.draglistview.BoardView;
 
 import org.parceler.Parcels;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import io.realm.RealmQuery;
@@ -45,27 +40,36 @@ import io.realm.RealmResults;
 /**
  * Created by Sadiq on 2/16/2016.
  */
-public class addWorkout extends Fragment   {
+public class addWorkout extends Fragment    {
 
     private BoardView mBoardView;
 
     private addWorkoutListAdapter allExersiceAdapter;
     private addWorkoutListAdapter workOutexersicesAdapter;
 
-    private ArrayList<String> allExersice;
-    private ArrayList<String> workOutExersices;
+    private ArrayList<ExerciseSetRep> allExersice;
+    private ArrayList<ExerciseSetRep> workOutExersices;
 
     String exerciseFilterType;
     private ViewGroup root;
     private EditText addWorkoutFilterEditText;
     private Spinner addWorkoutFilterSpinner;
     IViewPagerReplaceFragment iViewPagerReplaceFragment;
+    addWorkoutListAdapter.CustomListener addWorkoutListAdapterCustomListener;
+
+    final static int a=0;
 
 
     public void setIViewPagerReplaceFragment(IViewPagerReplaceFragment iViewPagerReplaceFragment)
     {
         this.iViewPagerReplaceFragment = iViewPagerReplaceFragment;
     }
+
+    public void setAddWorkoutListAdapterCustomListerner(addWorkoutListAdapter.CustomListener customListener)
+    {
+        addWorkoutListAdapterCustomListener = customListener;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -81,13 +85,23 @@ public class addWorkout extends Fragment   {
 
         setUpExerciseFilter();
 
+        //reset();
         RealmDB realmDB = new RealmDB();
         RealmResults<Exercise> realmResults = realmDB.getAllExercise();
-        for (int i = 0; i < realmResults.size(); i++)
-            allExersice.add(realmResults.get(i).getName());
 
-        //new AsyncFilter().execute(allExersice,workOutExersices);
+        for (int i = 0; i < realmResults.size(); i++) {
+            ExerciseSetRep exerciseSetRep = new ExerciseSetRep();
+            exerciseSetRep.setExerciseName(realmResults.get(i).getName());
+            allExersice.add(exerciseSetRep);
+        }
 
+        if(WorkOutExercisesSingleton.getWorkOutExercisesSingleton()!= null)
+        {
+            //workOutExersices = savedInstanceState.getParcelable("workOutExercises");
+            //workOutExersices = (ArrayList<Pair<String,List<SetRepWeightDBObject>>>) WorkOutExercisesSingleton.getWorkOutExerciesSingleton();
+            workOutExersices = (ArrayList<ExerciseSetRep>) WorkOutExercisesSingleton.getWorkOutExercisesSingleton();
+          //  new AsyncFilter().execute(allExersice,workOutExersices);
+        }
 
         mBoardView = (BoardView) root.findViewById(R.id.addWorkoutBoardView);
         mBoardView.setSnapToColumnsWhenScrolling(true);
@@ -98,6 +112,10 @@ public class addWorkout extends Fragment   {
         workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.addworkout_column_item,R.id.item_layout,true);
 
 
+
+        workOutexersicesAdapter.setCustomListener(addWorkoutListAdapterCustomListener);
+
+/*
         workOutexersicesAdapter.setCustomListener(new addWorkoutListAdapter.CustomListener() {
             @Override
             public void onCustomListenerEvent(String Exercise) {
@@ -133,6 +151,8 @@ public class addWorkout extends Fragment   {
                 fragmentTransaction.commit();
             }
         });
+*/
+
 
         View leftColumnHeader = View.inflate(getActivity(),R.layout.boardviewcolumnheader,null);
         TextView leftColumnHeaderTextView  = ((TextView) leftColumnHeader.findViewById(R.id.columnTextHeader));
@@ -165,13 +185,28 @@ public class addWorkout extends Fragment   {
 
         final EditText workOutNameView= (EditText)root.findViewById(R.id.workoutname);
 
+        final AlertDialog.Builder clearAlertDialog = new AlertDialog.Builder(getActivity());
+        clearAlertDialog.setMessage("Are you sure you want to clear?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                reset();
+
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
         Button clear = (Button)root.findViewById(R.id.clear);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reset();
+                clearAlertDialog.show();
             }
         });
+
 
         Button submit = (Button) root.findViewById(R.id.submit);
 
@@ -193,19 +228,20 @@ public class addWorkout extends Fragment   {
         });
 
 
-
-
-
         return root;
     }
 
     public void reset(){
         allExersice.clear();
-        //Cursor cursor= Database.getDatabaseInstance(getActivity()).getAllExersice();
-        //for (int i =0; i<cursor.getCount();i++){
-//            allExersice.add();
-//            cursor.moveToNext();
-  //      }
+        RealmDB realmDB = new RealmDB();
+        RealmResults<Exercise> realmResults = realmDB.getAllExercise();
+
+        for (int i = 0; i < realmResults.size(); i++) {
+            ExerciseSetRep exerciseSetRep = new ExerciseSetRep();
+            exerciseSetRep.setExerciseName(realmResults.get(i).getName());
+            allExersice.add(exerciseSetRep);
+        }
+
         workOutExersices.clear();
         allExersiceAdapter.notifyDataSetChanged();
         workOutexersicesAdapter.notifyDataSetChanged();
@@ -277,12 +313,17 @@ public class addWorkout extends Fragment   {
 
                 RealmResults<Exercise> realmResults = realmDB.getWhereAllExercises(whereExercise);
 
-                allExersice = new ArrayList< String>();
+                allExersice = new ArrayList< ExerciseSetRep>();
 
-                for (int i = 0; i < realmResults.size(); i++)
-                    allExersice.add(realmResults.get(i).getName());
+                for (int i = 0; i < realmResults.size(); i++) {
 
-                new AsyncFilter().execute(allExersice,workOutExersices);
+                    ExerciseSetRep exerciseSetRep = new ExerciseSetRep();
+                    exerciseSetRep.setExerciseName(realmResults.get(i).getName());
+                    allExersice.add(exerciseSetRep);
+
+                }
+                //todo fix this
+        //       new AsyncFilter().execute(allExersice,workOutExersices);
 
                 allExersiceAdapter.setItemList(allExersice);
                 allExersiceAdapter.notifyDataSetChanged();
@@ -296,18 +337,34 @@ public class addWorkout extends Fragment   {
             }
         });
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable("workOutExercises", Parcels.wrap(workOutExersices));
 
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        WorkOutExercisesSingleton.setWorkOutExercisesSingleton(workOutExersices);
+    }
+
     // right now this will take both lists and filter them to have unique values
-    private class AsyncFilter extends AsyncTask<List<String>, Void, Void>
+    private class AsyncFilter extends AsyncTask<List<Object>, Void, Void>
     {
 
         @Override
-        protected Void doInBackground(List<String>... params) {
+        //protected Void doInBackground(List<String>... params) {
+        //May need to change both of the list too list<ExerciseSetRep for simplicity
+        protected Void doInBackground(List<Object>... params) {
             // Params 0 will be the exercise list
             // Params 1 will be the workout list
+            //ArrayList<String> a =  (ArrayList<String>) params[0];
             params[0].removeAll(params[1]);
 
             return null;

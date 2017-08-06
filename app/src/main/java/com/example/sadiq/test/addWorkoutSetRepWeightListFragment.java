@@ -19,7 +19,7 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
         setSetRepWeight callback;
 
         public interface setSetRepWeight{
-                public void setSetRepWeight(WorkoutTemplate workoutTemplate);
+               void setSetRepWeight(WorkoutTemplate workoutTemplate);
         }
 
         WorkoutTemplate workoutTemplate;
@@ -30,8 +30,8 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
         @Override
         public void onAttach(Context context){
                 super.onAttach(context);
-
-                try{
+                try
+                {
                         callback = (setSetRepWeight) context;
                 }
                 catch(ClassCastException e)
@@ -39,9 +39,6 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
                         throw new ClassCastException(context.toString()
                                 + " must implement setSetRepWeightListener");
                 }
-
-
-
         }
 
         @Override

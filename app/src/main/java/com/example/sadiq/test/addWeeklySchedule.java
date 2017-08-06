@@ -4,14 +4,14 @@ import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 
-import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.sadiq.test.CustomDataTypes.addWorkoutListAdapter;
+import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Database;
+import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItemRecyclerView;
 
@@ -39,9 +39,9 @@ public class addWeeklySchedule extends Fragment {
         //daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
 
 
-        ArrayList<String> allExersice = new ArrayList<>();
+        ArrayList<ExerciseSetRep> allExersice = new ArrayList<>();
 
-        ArrayList<String>  workOutExersices = new ArrayList<>();
+        ArrayList<ExerciseSetRep>  workOutExersices = new ArrayList<>();
 
 
         addWorkoutListAdapter allExersiceAdapter;
@@ -83,15 +83,15 @@ public class addWeeklySchedule extends Fragment {
         //background.add(new Pair<Long, String>((long)i,daysOfTheWeek[i]));
         }
 
-        addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.addworkout_column_item,R.id.item_layout,true);
-        addWorkoutListAdapter emptyAdapter = new addWorkoutListAdapter(getActivity(),empty,R.layout.addworkout_column_item,R.id.item_layout,true);
+        //addWorkoutListAdapter backgroundAdapter = new addWorkoutListAdapter(getActivity(),background,R.layout.addworkout_column_item,R.id.item_layout,true);
+        //addWorkoutListAdapter emptyAdapter = new addWorkoutListAdapter(getActivity(),empty,R.layout.addworkout_column_item,R.id.item_layout,true);
 
 
 
-        v.setAdapter(backgroundAdapter);
+        //v.setAdapter(backgroundAdapter);
 
-        testBackground.addColumnList(emptyAdapter,null,true);
-        testBackground.addColumnList(backgroundAdapter,null,true);
+        //testBackground.addColumnList(emptyAdapter,null,true);
+        //testBackground.addColumnList(backgroundAdapter,null,true);
 
         v.clearFocus();
        // root.addView(v);

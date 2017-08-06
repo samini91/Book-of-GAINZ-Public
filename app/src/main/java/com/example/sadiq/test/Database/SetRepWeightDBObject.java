@@ -1,7 +1,5 @@
 package com.example.sadiq.test.Database;
 
-import com.example.sadiq.test.ExerciseSet;
-
 import org.parceler.Parcel;
 
 import io.realm.RealmObject;
@@ -16,10 +14,14 @@ import io.realm.annotations.PrimaryKey;
         value = Parcel.Serialization.BEAN,
         analyze = { SetRepWeightDBObject.class })
 public class SetRepWeightDBObject extends RealmObject {
+    //This is a workaround until realm allows composite keys
     @PrimaryKey
-    public String ExerciseInstance;
+    public String PrimaryKey;
 
     public int Set;
+    public String ExerciseInstance;
+
+
     public int Rep;
 
     public float Weight;
@@ -51,6 +53,17 @@ public class SetRepWeightDBObject extends RealmObject {
     public void setExerciseInstance(String ExerciseInstance){this.ExerciseInstance=ExerciseInstance;}
     public String getExerciseInstance(){return this.ExerciseInstance;}
 
+    public void setCompositePrimaryKey()
+    {
+        setPrimaryKey(getExerciseInstance() +"|"+ getSet());
+    }
 
 
+    public void setPrimaryKey(String primaryKey) {
+        PrimaryKey=primaryKey;
+    }
+
+    public String getPrimaryKey() {
+        return PrimaryKey;
+    }
 }
