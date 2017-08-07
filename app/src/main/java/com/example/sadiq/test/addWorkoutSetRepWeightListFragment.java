@@ -8,7 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.sadiq.test.Database.ExerciseSetRep;
+import com.example.sadiq.test.Database.SetRepWeightDBObject;
 import com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView;
+
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
+import java.util.List;
+
+import io.realm.RealmList;
 
 /**
  * Created by Mugen on 7/13/2017.
@@ -16,23 +25,26 @@ import com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigur
 
 public class addWorkoutSetRepWeightListFragment extends Fragment {
 
-        setSetRepWeight callback;
+        IActivityDataFactory callback;
 
         public interface setSetRepWeight{
                void setSetRepWeight(WorkoutTemplate workoutTemplate);
         }
 
         WorkoutTemplate workoutTemplate;
+
+        ExerciseSetRep exerciseSetRep;
         ViewGroup root;
         Button submitButton;
         SetRepWeightConfigurationView setRepWeightConfigurationView;
+        ExerciseSetRep  exerciseSetRepFromAddWorkout;
 
         @Override
         public void onAttach(Context context){
                 super.onAttach(context);
                 try
                 {
-                        callback = (setSetRepWeight) context;
+                        callback = (IActivityDataFactory) context;
                 }
                 catch(ClassCastException e)
                 {
@@ -50,22 +62,64 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
 
                 setRepWeightConfigurationView = (SetRepWeightConfigurationView) root.findViewById(R.id.setrepweightconfigurationview);
 
+                setRepWeightConfigurationView.getAdapterList();
+
 
                 submitButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
-                                callback.setSetRepWeight(workoutTemplate);
+                                exerciseSetRepFromAddWorkout = Parcels.unwrap(getArguments().getParcelable("ExerciseSetRep"));
+
+                                Bundle bundle = new Bundle();
+
+                                //bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(packageExerciseSetRepWeight(setRepWeightConfigurationView.getAdapterList())));
+                                ExerciseSetRep exerciseSetRep = packageExerciseSetRepWeight(setRepWeightConfigurationView.getAdapterList());
+
+                                exerciseSetRep.setExerciseName(exerciseSetRepFromAddWorkout.getExerciseName());
+
+                                bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(exerciseSetRep));
+
+                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment.class.toString(),"addWorkout",bundle);
+                                //callback.setSetRepWeight(workoutTempl1ate);
                                 
-                                setRepWeightConfigurationView.getAdapterList();
+                                //setRepWeightConfigurationView.getAdapterList();
 
                         }
                 });
 
-
                 return root;
         }
 
+        @Override
+        public void onResume() {
+                super.onResume();
+                //Bind the Exercisesetrep
 
+        }
+
+        public void setExerciseSetRepArgs(ExerciseSetRep exerciseSetRepArgs)
+        {
+                this.exerciseSetRep = exerciseSetRepArgs;
+        }
+
+        public ExerciseSetRep packageExerciseSetRepWeight(List<SetRepWeightDBObject> SetRepWeightDBObjectList)
+        {
+                ExerciseSetRep exerciseSetRep = new ExerciseSetRep();
+                RealmList<SetRepWeightDBObject>  setRepWeightDBObjectRealmList = new RealmList<>();
+
+                for (SetRepWeightDBObject s: SetRepWeightDBObjectList) {
+                        SetRepWeightDBObject setRepWeightDBObject = new SetRepWeightDBObject();
+                        setRepWeightDBObjectRealmList.add(setRepWeightDBObject);
+
+                        setRepWeightDBObject.setSet(s.getSet());
+                        setRepWeightDBObject.setRep(s.getRep());
+                        setRepWeightDBObject.setWeight(s.getWeight());
+                }
+                exerciseSetRep.setSetRepWeightDBObjectRealmList(setRepWeightDBObjectRealmList);
+
+                return exerciseSetRep;
+
+        }
 
 }

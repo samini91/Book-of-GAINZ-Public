@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 public class ViewPagerFragment extends Fragment {
-        List<Fragment> fragmentList;
+        List<Class> fragmentList;
         ViewGroup root;
         myViewPager myViewPager;
         FragmentAdapterCreator childFragmentAdapter;
@@ -32,7 +32,7 @@ public class ViewPagerFragment extends Fragment {
                 return root;
         }
 
-        public void setFragmentList(List<Fragment> fragmentList) {
+        public void setFragmentList(List<Class> fragmentList) {
                 if (childFragmentAdapter == null) {
                         myViewPager = (myViewPager) root.findViewById(R.id.pager);
                         this.fragmentList = fragmentList;
@@ -56,7 +56,7 @@ public class ViewPagerFragment extends Fragment {
 
         }
 
-        public List<Fragment> getFragmentList() {
+        public List<Class> getFragmentList() {
                 return fragmentList;
         }
 

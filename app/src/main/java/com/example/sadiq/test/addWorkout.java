@@ -100,8 +100,10 @@ public class addWorkout extends Fragment    {
             //workOutExersices = savedInstanceState.getParcelable("workOutExercises");
             //workOutExersices = (ArrayList<Pair<String,List<SetRepWeightDBObject>>>) WorkOutExercisesSingleton.getWorkOutExerciesSingleton();
             workOutExersices = (ArrayList<ExerciseSetRep>) WorkOutExercisesSingleton.getWorkOutExercisesSingleton();
-          //  new AsyncFilter().execute(allExersice,workOutExersices);
+            new AsyncFilter().execute(allExersice,workOutExersices);
         }
+
+
 
         mBoardView = (BoardView) root.findViewById(R.id.addWorkoutBoardView);
         mBoardView.setSnapToColumnsWhenScrolling(true);
@@ -111,9 +113,23 @@ public class addWorkout extends Fragment    {
         allExersiceAdapter = new addWorkoutListAdapter(getActivity(),allExersice,R.layout.addworkout_column_item,R.id.item_layout,true);
         workOutexersicesAdapter = new addWorkoutListAdapter(getActivity(),workOutExersices,R.layout.addworkout_column_item,R.id.item_layout,true);
 
+        if(getArguments() != null)
+        {
+            setWorkoutListExerciseSetRep((ExerciseSetRep) Parcels.unwrap(getArguments().getParcelable("ExerciseSetRepConfig")));
+
+        }
 
 
-        workOutexersicesAdapter.setCustomListener(addWorkoutListAdapterCustomListener);
+        //workOutexersicesAdapter.setCustomListener(addWorkoutListAdapterCustomListener);
+        workOutexersicesAdapter.setCustomListener(new addWorkoutListAdapter.CustomListener() {
+            @Override
+            public void onCustomListenerEvent(String Exercise, int index) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("ExerciseSetRep", Parcels.wrap(workOutexersicesAdapter.getItemList().get(index)));
+                ((IActivityDataFactory)getActivity()).ActivityDataFactory(addWorkout.class.toString(),"addWorkoutSetRepWeightListFragment",bundle);
+            }
+        });
+
 
 /*
         workOutexersicesAdapter.setCustomListener(new addWorkoutListAdapter.CustomListener() {
@@ -183,7 +199,7 @@ public class addWorkout extends Fragment    {
 
         //vp.clearFocus();
 
-        final EditText workOutNameView= (EditText)root.findViewById(R.id.workoutname);
+        final EditText workOutNameView = (EditText)root.findViewById(R.id.workoutname);
 
         final AlertDialog.Builder clearAlertDialog = new AlertDialog.Builder(getActivity());
         clearAlertDialog.setMessage("Are you sure you want to clear?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -227,7 +243,7 @@ public class addWorkout extends Fragment    {
             }
         });
 
-
+        workOutexersicesAdapter.notifyDataSetChanged();
         return root;
     }
 
@@ -243,6 +259,7 @@ public class addWorkout extends Fragment    {
         }
 
         workOutExersices.clear();
+        WorkOutExercisesSingleton.clear();
         allExersiceAdapter.notifyDataSetChanged();
         workOutexersicesAdapter.notifyDataSetChanged();
 
@@ -323,7 +340,7 @@ public class addWorkout extends Fragment    {
 
                 }
                 //todo fix this
-        //       new AsyncFilter().execute(allExersice,workOutExersices);
+               new AsyncFilter().execute(allExersice,workOutExersices);
 
                 allExersiceAdapter.setItemList(allExersice);
                 allExersiceAdapter.notifyDataSetChanged();
@@ -355,13 +372,13 @@ public class addWorkout extends Fragment    {
     }
 
     // right now this will take both lists and filter them to have unique values
-    private class AsyncFilter extends AsyncTask<List<Object>, Void, Void>
+    private class AsyncFilter extends AsyncTask<List<ExerciseSetRep>, Void, Void>
     {
 
         @Override
         //protected Void doInBackground(List<String>... params) {
         //May need to change both of the list too list<ExerciseSetRep for simplicity
-        protected Void doInBackground(List<Object>... params) {
+        protected Void doInBackground(List<ExerciseSetRep>... params) {
             // Params 0 will be the exercise list
             // Params 1 will be the workout list
             //ArrayList<String> a =  (ArrayList<String>) params[0];
@@ -369,6 +386,19 @@ public class addWorkout extends Fragment    {
 
             return null;
         }
+    }
+
+
+    public void setWorkoutListExerciseSetRep(ExerciseSetRep exerciseSetRep)
+    {
+        for(int i =0 ;i < workOutexersicesAdapter.getItemList().size() ;i++)
+        {
+            if(exerciseSetRep.equals(workOutexersicesAdapter.getItemList().get(i)))
+            {
+                workOutexersicesAdapter.getItemList().set(i,exerciseSetRep);
+            }
+        }
+
     }
 
 

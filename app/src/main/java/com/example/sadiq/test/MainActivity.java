@@ -8,6 +8,7 @@ import android.os.Handler;
 //import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -27,12 +28,17 @@ import java.util.LinkedList;
 import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
 import com.example.sadiq.test.Database.Exercise;
+import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.Options.Options;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.ActualWorkout.*;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
 
-public class MainActivity extends Activity implements addWorkoutSetRepWeightListFragment.setSetRepWeight {
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
+
+public class MainActivity extends Activity implements IActivityDataFactory {
 
         Context thisContext = this;
         Activity thisActivity = this;
@@ -45,7 +51,7 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
         myViewPager mPager;
 
-        LinkedList<Fragment> fragmentList;
+        LinkedList<Class> fragmentList;
         LinkedList<Fragment> fragmentListButton3;
         FragmentAdapterCreator FragmentAdapter;
 
@@ -167,8 +173,9 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
                                         WorkoutConfig = new ViewPagerFragment();
 
-                                        addWorkout addWorkout = new addWorkout();
+                                        //addWorkout addWorkout = new addWorkout();
                                         final addWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = new addWorkoutSetRepWeightListFragment();
+                                        /*
                                         addWorkout.setAddWorkoutListAdapterCustomListerner(new addWorkoutListAdapter.CustomListener()
                                         {
                                                 @Override
@@ -180,12 +187,12 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
                                                         fragmentTransactionAddWorkout.commit();
                                                 }
                                         });
+*/
 
-
-                                        fragmentList = new LinkedList<Fragment>();
-                                        fragmentList.add(new fragmentTest());
-                                        fragmentList.add(addWorkout);
-                                        fragmentList.add(new addExersice());
+                                        fragmentList = new LinkedList<Class>();
+                                        fragmentList.add(fragmentTest.class);
+                                        fragmentList.add(addWorkout.class);
+                                        fragmentList.add(addExersice.class);
 
                                 }
                                 //Fragment test =
@@ -205,6 +212,8 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
                                 WorkoutConfig.setFragmentList(fragmentList);
                                 WorkoutConfig.setMyViewPagerCurrentItem(1);
+
+
 
                         }
                 });
@@ -280,7 +289,7 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
                                 fragmentManager.executePendingTransactions();
 
-                                test3.setFragmentList(fragmentListButton3);
+                                //test3.setFragmentList(fragmentListButton3);
 
                                 fragmentListButton3.add(new WeeklyList());
 
@@ -440,7 +449,7 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
                 return super.onOptionsItemSelected(item);
         }
 
-        @Override
+        /*
         public void setSetRepWeight(WorkoutTemplate workoutTemplate) {
 
                 //if(WorkoutConfig.getViewPagerFragmentTransaction().findFragmentById(""))
@@ -449,5 +458,78 @@ public class MainActivity extends Activity implements addWorkoutSetRepWeightList
 
                 //if(WorkoutConfig.getChildFragmentManager().findFragmentByTag("") == null )
                 //need to tape down the other stuff so nobody trips over it
+        }
+
+*/
+        @Override
+        public void ActivityDataFactory(String from, String to, Bundle bundle) {
+
+                switch(to) {
+                        case "addWorkoutSetRepWeightListFragment":
+
+                                addWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = (addWorkoutSetRepWeightListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag("addWorkoutSetRepWeightListFragment");
+                                FragmentTransaction fragmentTransactionAddWorkout = WorkoutConfig.getChildFragmentManager().beginTransaction();
+
+                                if (addWorkoutSetRepWeightListFragment == null) {
+                                        addWorkoutSetRepWeightListFragment = new addWorkoutSetRepWeightListFragment();
+
+                                        ExerciseSetRep etest = Parcels.unwrap(bundle.getParcelable("ExerciseSetRep"));
+
+                                        Toast.makeText(this, etest.getExerciseName(), Toast.LENGTH_SHORT).show();
+
+                                        addWorkoutSetRepWeightListFragment.setArguments(bundle);
+                                }
+                                else
+                                {
+                                        // call a method here to adhoc update the fragment
+
+                                }
+
+                                fragmentTransactionAddWorkout.replace(R.id.viewpagerroot, addWorkoutSetRepWeightListFragment, "addWorkoutSetRepWeightListFragment");
+                                fragmentTransactionAddWorkout.addToBackStack(null);
+                                fragmentTransactionAddWorkout.commit();
+
+                                break;
+                        case "addWorkout":
+
+                                addWorkout addWorkout = (addWorkout) WorkoutConfig.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(com.example.sadiq.test.addWorkout.class.toString()));
+
+                                FragmentTransaction fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
+                                //fragmentTransaction.remove(addWorkout);
+                                //fragmentTransaction.commit();
+
+
+
+                                fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
+
+
+                                if (addWorkout == null)
+                                {
+                                        addWorkout = new addWorkout();
+                                        addWorkout.setArguments(bundle);
+                                        fragmentTransaction.replace(R.id.viewpagerroot, addWorkout);
+                                }
+                                else
+                                {
+
+                                        //Use method here to pass in a bundle
+                                        WorkoutConfig.getChildFragmentManager().popBackStack();
+
+                                }
+
+                                if(from.equals(addWorkoutSetRepWeightListFragment.class.toString()))
+                                {
+                                        WorkoutConfig.getChildFragmentManager().popBackStack();
+                                }
+
+
+                                //fragmentTransaction.replace(R.id.viewpagerroot, addWorkout,FragmentIdMappingSingleton.FindFragmentId(com.example.sadiq.test.addWorkout.class.toString()));
+
+                                //fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                break;
+
+                }
+
         }
 }

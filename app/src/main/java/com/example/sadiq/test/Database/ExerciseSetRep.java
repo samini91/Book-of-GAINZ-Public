@@ -49,4 +49,9 @@ public class ExerciseSetRep extends RealmObject {
         public RealmList<SetRepWeightDBObject> getSetRepWeightDBObjectRealmList() {
                 return setRepWeightDBObjectRealmList;
         }
+
+        @Override
+        public boolean equals(Object o) {
+                return this.getExerciseName().equals(((ExerciseSetRep)o).getExerciseName());
+        }
 }

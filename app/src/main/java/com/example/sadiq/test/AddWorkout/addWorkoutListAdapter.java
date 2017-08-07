@@ -41,7 +41,7 @@ public class addWorkoutListAdapter extends DragItemAdapter<ExerciseSetRep,addWor
 
     public interface CustomListener
     {
-        public void onCustomListenerEvent(String Exercise);
+        public void onCustomListenerEvent(String Exercise, int location);
 
     }
 
@@ -78,10 +78,10 @@ public class addWorkoutListAdapter extends DragItemAdapter<ExerciseSetRep,addWor
 
         viewHolder.setCustomListener(new CustomListener() {
             @Override
-            public void onCustomListenerEvent(String Exercise) {
+            public void onCustomListenerEvent(String Exercise, int location) {
                 //need to fire off another event that the main class picks up since viewholder is hidden at the fragment level
                 if(customListener != null)
-                    customListener.onCustomListenerEvent(Exercise);
+                    customListener.onCustomListenerEvent(Exercise, location);
                 //Toast.makeText(context, "adapter on button press", Toast.LENGTH_SHORT).show();
             }
         });
@@ -127,7 +127,7 @@ public class addWorkoutListAdapter extends DragItemAdapter<ExerciseSetRep,addWor
                 @Override
                 public void onClick(View v) {
                     if(customListener != null)
-                        customListener.onCustomListenerEvent(exerciseSetRepView.getExercisename());
+                        customListener.onCustomListenerEvent(exerciseSetRepView.getExercisename(), getAdapterPosition());
                     //FragmentTransaction fragmentTransaction = getSupportTransaction
                 }
             });

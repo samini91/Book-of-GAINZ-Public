@@ -34,6 +34,10 @@ public class WorkOutExercisesSingleton {
                 }
                 return workOutExercisesSingleton.getList();
         }
+        public static void clear()
+        {
+                workOutExercisesSingleton = null;
+        }
 
         private void setList(List<ExerciseSetRep> list){listSingleton = list;}
         private List<ExerciseSetRep> getList() {return listSingleton;}
