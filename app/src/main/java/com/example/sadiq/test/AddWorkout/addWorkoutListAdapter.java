@@ -29,6 +29,7 @@ import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -61,7 +62,7 @@ public class addWorkoutListAdapter extends DragItemAdapter<ExerciseSetRep,addWor
         this.customListener = customListener;
     }
 
-    public addWorkoutListAdapter(Context context, ArrayList<ExerciseSetRep> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+    public addWorkoutListAdapter(Context context, RealmList<ExerciseSetRep> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;

@@ -9,13 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
+import com.example.sadiq.test.AddWorkout.*;
+//import com.example.sadiq.test.AddWorkout.AddWorkoutFragment.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.Database;
 import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItemRecyclerView;
 
 import java.util.ArrayList;
+
+import io.realm.RealmList;
 
 /**
  * Created by Sadiq on 2/20/2016.
@@ -39,9 +42,9 @@ public class addWeeklySchedule extends Fragment {
         //daysOfTheWeekView.setAdapter(daysOfTheWeekAdapter);
 
 
-        ArrayList<ExerciseSetRep> allExersice = new ArrayList<>();
+        RealmList<ExerciseSetRep> allExersice = new RealmList<>();
 
-        ArrayList<ExerciseSetRep>  workOutExersices = new ArrayList<>();
+        RealmList<ExerciseSetRep>  workOutExersices = new RealmList<>();
 
 
         addWorkoutListAdapter allExersiceAdapter;

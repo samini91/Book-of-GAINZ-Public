@@ -20,6 +20,7 @@ import io.realm.annotations.PrimaryKey;
 public class ExerciseSetRep extends RealmObject {
 
         @PrimaryKey
+        public String PrimaryKey;
         public int ExerciseOrder;
         public String ExerciseName;
 
@@ -48,6 +49,19 @@ public class ExerciseSetRep extends RealmObject {
 
         public RealmList<SetRepWeightDBObject> getSetRepWeightDBObjectRealmList() {
                 return setRepWeightDBObjectRealmList;
+        }
+
+        public void setCompositePrimaryKey(String workout)
+        {
+                setPrimaryKey(workout+"|"+getExerciseName());
+        }
+
+        public String getPrimaryKey() {
+                return PrimaryKey;
+        }
+
+        public void setPrimaryKey(String primaryKey) {
+                PrimaryKey = primaryKey;
         }
 
         @Override

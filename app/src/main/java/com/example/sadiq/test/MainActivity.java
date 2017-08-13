@@ -7,9 +7,6 @@ import android.os.Handler;
 
 //import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,16 +22,16 @@ import android.widget.Toast;
 
 import java.util.LinkedList;
 
-import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
+import com.easyandroidanimations.library.ScaleInAnimation;
+import com.example.sadiq.test.AddWorkout.AddWorkoutFragment;
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
-import com.example.sadiq.test.Database.Exercise;
 import com.example.sadiq.test.Database.ExerciseSetRep;
+import com.example.sadiq.test.FilterableList.FilterableListFragment;
 import com.example.sadiq.test.Options.Options;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
-import com.example.sadiq.test.ActualWorkout.*;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
+import com.example.sadiq.test.WeeklyorRecurringList.WeeklyorRecurringListFragment;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 
@@ -173,10 +170,10 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                         WorkoutConfig = new ViewPagerFragment();
 
-                                        //addWorkout addWorkout = new addWorkout();
+                                        //AddWorkoutFragment AddWorkoutFragment = new AddWorkoutFragment();
                                         final addWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = new addWorkoutSetRepWeightListFragment();
                                         /*
-                                        addWorkout.setAddWorkoutListAdapterCustomListerner(new addWorkoutListAdapter.CustomListener()
+                                        AddWorkoutFragment.setAddWorkoutListAdapterCustomListerner(new addWorkoutListAdapter.CustomListener()
                                         {
                                                 @Override
                                                 public void onCustomListenerEvent(String Exercise) {
@@ -190,8 +187,9 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 */
 
                                         fragmentList = new LinkedList<Class>();
-                                        fragmentList.add(fragmentTest.class);
-                                        fragmentList.add(addWorkout.class);
+                                        fragmentList.add(WeeklyorRecurringListFragment.class);
+                                        fragmentList.add(FilterableListFragment.class);
+                                        fragmentList.add(AddWorkoutFragment.class);
                                         fragmentList.add(addExersice.class);
 
                                 }
@@ -211,7 +209,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 fragmentManager.executePendingTransactions();
 
                                 WorkoutConfig.setFragmentList(fragmentList);
-                                WorkoutConfig.setMyViewPagerCurrentItem(1);
+                                WorkoutConfig.setMyViewPagerCurrentItem(0);
 
 
 
@@ -247,7 +245,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 LinkedList fragmentList = new LinkedList<Fragment>();
 
 
-                                fragmentList.add(new SelectExerciseConfiguration());
+                                fragmentList.add(SelectExerciseConfiguration.class);
 
 
                                 test.setFragmentList(fragmentList);
@@ -293,7 +291,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                 fragmentListButton3.add(new WeeklyList());
 
-                                test3.getChildFragmentAdapter().notifyDataSetChanged();
+//                                test3.getChildFragmentAdapter().notifyDataSetChanged();
                         }
                 });
 
@@ -484,37 +482,41 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                         // call a method here to adhoc update the fragment
 
                                 }
+                                //fragmentTransactionAddWorkout.setCustomAnimations(R.animator.card_flip_left_in,R.animator.card_flip_left_out,R.animator.card_flip_left_in,R.animator.card_flip_left_out);
 
                                 fragmentTransactionAddWorkout.replace(R.id.viewpagerroot, addWorkoutSetRepWeightListFragment, "addWorkoutSetRepWeightListFragment");
                                 fragmentTransactionAddWorkout.addToBackStack(null);
+
+
+
                                 fragmentTransactionAddWorkout.commit();
 
-                                break;
-                        case "addWorkout":
 
-                                addWorkout addWorkout = (addWorkout) WorkoutConfig.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(com.example.sadiq.test.addWorkout.class.toString()));
+                                //new ScaleInAnimation().animate();
+
+                                break;
+                        case "AddWorkoutFragment":
+
+                                AddWorkoutFragment AddWorkoutFragment = (AddWorkoutFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(AddWorkoutFragment.class.toString()));
 
                                 FragmentTransaction fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
-                                //fragmentTransaction.remove(addWorkout);
+                                //fragmentTransaction.remove(AddWorkoutFragment);
                                 //fragmentTransaction.commit();
-
-
 
                                 fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
 
-
-                                if (addWorkout == null)
+                                if (AddWorkoutFragment == null)
                                 {
-                                        addWorkout = new addWorkout();
-                                        addWorkout.setArguments(bundle);
-                                        fragmentTransaction.replace(R.id.viewpagerroot, addWorkout);
+                                        AddWorkoutFragment = new AddWorkoutFragment();
+                                        AddWorkoutFragment.setArguments(bundle);
+
+                                        fragmentTransaction.replace(R.id.viewpagerroot, AddWorkoutFragment);
                                 }
                                 else
                                 {
-
                                         //Use method here to pass in a bundle
+                                        AddWorkoutFragment.setWorkoutListExerciseSetRep(bundle,"ExerciseSetRepConfig");
                                         WorkoutConfig.getChildFragmentManager().popBackStack();
-
                                 }
 
                                 if(from.equals(addWorkoutSetRepWeightListFragment.class.toString()))
@@ -523,7 +525,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 }
 
 
-                                //fragmentTransaction.replace(R.id.viewpagerroot, addWorkout,FragmentIdMappingSingleton.FindFragmentId(com.example.sadiq.test.addWorkout.class.toString()));
+                                //fragmentTransaction.replace(R.id.viewpagerroot, AddWorkoutFragment,FragmentIdMappingSingleton.FindFragmentId(com.example.sadiq.test.AddWorkoutFragment.AddWorkoutFragment.class.toString()));
 
                                 //fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();

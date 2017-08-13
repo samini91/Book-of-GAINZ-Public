@@ -7,7 +7,6 @@ import io.realm.RealmObject;
  * Created by Sadiq on 3/30/2016.
  */
 
-//// TODO: 3/30/2016 should make this sometype of singleton class so i can move the data around fragments... The data is being modified alot so it is probably the best bet in terms of speed so implementing parcable is obsolete.  
 public class TheoreticalWorkout extends RealmObject {
 
     private String name;

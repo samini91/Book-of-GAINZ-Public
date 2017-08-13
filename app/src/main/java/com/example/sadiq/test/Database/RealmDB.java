@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
 import com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView;
 import com.example.sadiq.test.Initilization.Initilization;
+import com.example.sadiq.test.WorkoutTemplate;
 
 
 import java.io.File;
@@ -82,9 +83,27 @@ public class RealmDB {
 
     }
 
-    //user should pass name and exercises listx is probably going to be a RealmList
-    public void addorUpdateWorkout(String ExerciseName, List<Exercise> exercises){
+    public void addOrUpdateWorkout(String workoutName, WorkoutTemplate workoutTemplate)
+    {
+        workoutTemplate.setName(workoutName);
+        addOrUpdateWorkout(workoutTemplate);
+    }
 
+    public void addOrUpdateWorkout(WorkoutTemplate workoutTemplate) {
+        int i = 0;
+        for (ExerciseSetRep exerciseSetRep : workoutTemplate.getExerciseSetRep())
+        {
+            exerciseSetRep.setCompositePrimaryKey(workoutTemplate.getName());
+            exerciseSetRep.setExerciseOrder(i);
+            i++;
+            for(SetRepWeightDBObject setRepWeightDBObject : exerciseSetRep.getSetRepWeightDBObjectRealmList())
+            {
+                setRepWeightDBObject.setCompositePrimaryKey(workoutTemplate.getName(),exerciseSetRep.getExerciseName());
+            }
+        }
+
+
+        realm.copyToRealmOrUpdate(workoutTemplate);
 
     }
 
@@ -158,7 +177,9 @@ public class RealmDB {
     {
         realm = Realm.getDefaultInstance();
 
+        //realm.copyToRealmOrUpdate(exerciseSetRep);
         realm.copyToRealmOrUpdate(exerciseSetRep);
+
 
     }
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.WorkoutTemplateRealmProxy;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Sadiq on 2/10/2016.
@@ -20,7 +21,7 @@ import io.realm.WorkoutTemplateRealmProxy;
         value = Parcel.Serialization.BEAN,
         analyze = { WorkoutTemplate.class })
 public class WorkoutTemplate extends RealmObject {
-    //@PrimaryKey
+    @PrimaryKey
     public String Name;
 
     public RealmList<ExerciseSetRep> ExerciseSetRep;

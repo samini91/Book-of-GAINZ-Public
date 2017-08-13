@@ -65,6 +65,12 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
                 setRepWeightConfigurationView.getAdapterList();
 
 
+                if(getArguments()!=null)
+                {
+                        unpackageExerciseSetRepWeight(getArguments(),"ExerciseSetRep");
+
+                }
+
                 submitButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -80,7 +86,7 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
 
                                 bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(exerciseSetRep));
 
-                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment.class.toString(),"addWorkout",bundle);
+                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment.class.toString(),"AddWorkoutFragment",bundle);
                                 //callback.setSetRepWeight(workoutTempl1ate);
                                 
                                 //setRepWeightConfigurationView.getAdapterList();
@@ -120,6 +126,17 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
 
                 return exerciseSetRep;
 
+        }
+
+        public void unpackageExerciseSetRepWeight(Bundle bundle, String key)
+        {
+                unpackageExerciseSetRepWeight((ExerciseSetRep) Parcels.unwrap(bundle.getParcelable(key)));
+        }
+
+        public void unpackageExerciseSetRepWeight(ExerciseSetRep exerciseSetRep)
+        {
+                if(exerciseSetRep.getSetRepWeightDBObjectRealmList() != null)
+                        setRepWeightConfigurationView.getAdapter().setAdapterList(exerciseSetRep.getSetRepWeightDBObjectRealmList());
         }
 
 }

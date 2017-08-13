@@ -27,6 +27,12 @@ public class SetRepWeightListAdapter extends RecyclerView.Adapter<SetRepWeightLi
 
         }
 
+        public void setAdapterList(RealmList<SetRepWeightDBObject>setRepWeightDBObjectList)
+        {
+            this.SetRepWeightDBObjectList = setRepWeightDBObjectList;
+            notifyDataSetChanged();
+
+        }
         public int getCurrentSet(){
             return currentSet;
         }

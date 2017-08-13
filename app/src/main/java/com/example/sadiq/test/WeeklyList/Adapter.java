@@ -90,16 +90,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.WeekDayInfoViewHolder>
 
         WorkOutExercisesWeeklyView listtest = new WorkOutExercisesWeeklyView(context);
 
-
-
         //listtest.setBackgroundColor(Color.BLUE);
         //Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/font name.ttf");
         //listtest.setTypeface(custom_font);
-
-
-
-
-
 
         /*itemView.setOnClickListener(new View.OnClickListener() {
             @Override

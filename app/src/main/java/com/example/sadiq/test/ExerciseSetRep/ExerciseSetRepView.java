@@ -65,7 +65,7 @@ public class ExerciseSetRepView extends LinearLayout {
                 if(exerciseSetRep == null)
                         return;
                 exerciseName.setText(exerciseSetRep.getExerciseName());
-
+                setRepLayout.removeAllViews();
                 for(int i = 0 ; exerciseSetRep.getSetRepWeightDBObjectRealmList() != null&& i < exerciseSetRep.getSetRepWeightDBObjectRealmList().size() ; i++)
                 {
                         setRepLayout.addView(CreateRow(getContext(),Integer.toString(exerciseSetRep.getSetRepWeightDBObjectRealmList().get(i).getRep()) + " X " + Float.toString(exerciseSetRep.getSetRepWeightDBObjectRealmList().get(i).getWeight()) ));

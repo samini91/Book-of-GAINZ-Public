@@ -36,9 +36,6 @@ public class Counter extends RelativeLayout {
     private HashMap<Float,String> valueChanger;
     private float crementValue=1;
 
-
-
-
     View rootView;
    // TextView valueTextView;
    EditText valueTextView;
@@ -48,12 +45,7 @@ public class Counter extends RelativeLayout {
 
     Handler handler = new Handler();
 
-
-
     public Context context;
-
-
-
 
     public Counter(Context context) {
         super(context);

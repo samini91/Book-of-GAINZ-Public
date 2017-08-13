@@ -53,11 +53,16 @@ public class SetRepWeightDBObject extends RealmObject {
     public void setExerciseInstance(String ExerciseInstance){this.ExerciseInstance=ExerciseInstance;}
     public String getExerciseInstance(){return this.ExerciseInstance;}
 
-    public void setCompositePrimaryKey()
+
+    public void setCompositePrimaryKey(String workout, String Exercise)
     {
-        setPrimaryKey(getExerciseInstance() +"|"+ getSet());
+        setPrimaryKey(workout + "|"+Exercise + "|"+ getSet());
     }
 
+    public void setCompositePrimaryKey(String workout)
+    {
+        setPrimaryKey(workout + "|"+getExerciseInstance() + "|"+ getSet());
+    }
 
     public void setPrimaryKey(String primaryKey) {
         PrimaryKey=primaryKey;
