@@ -75,7 +75,6 @@ buildscript {
 
 //apply plugin: 'realm-android'
 
-
 dependencies {
     compile fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testCompile 'junit:junit:4.12'

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
 
 
         <item name="windowActionBar">true</item>
@@ -42,16 +42,6 @@
         <item name="android:background">@android:color/white</item>
 
     </style>
-
-
-
-    <style name="Widget.AppCompat.PopupMenu" parent="@android:style/Widget.PopupWindow">
-        <item name="android:popupBackground">@android:color/white</item>
-        <item name="android:background">@android:color/white</item>
-
-    </style>
-
-
 
 
 

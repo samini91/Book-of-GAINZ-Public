@@ -13,7 +13,7 @@
     card_view:cardUseCompatPadding="true">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -23,7 +23,28 @@
               android:layout_width="match_parent"
               android:id="@+id/textview"
               android:textColor="@color/Black"
+              android:layout_toLeftOf="@+id/addWorkoutPlusButton"
         />
+        <ImageButton
+            android:src="@android:drawable/ic_input_add"
 
-</LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/addWorkoutPlusButton"
+            android:clickable="true"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+
+
+            />
+
+
+        <com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/workoutexercisesetreptableview"
+            />
+</RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -17,16 +17,16 @@ import android.app.Fragment;
 
 //import android.support.v4.app.FragmentManager;
 import android.app.FragmentManager;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
 
-import com.easyandroidanimations.library.ScaleInAnimation;
 import com.example.sadiq.test.AddWorkout.AddWorkoutFragment;
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
 import com.example.sadiq.test.Database.ExerciseSetRep;
-import com.example.sadiq.test.FilterableList.FilterableListFragment;
+import com.example.sadiq.test.FilterableList.FilterableWorkoutListFragment;
 import com.example.sadiq.test.Options.Options;
 import com.example.sadiq.test.SelectExerciseConfiguration.SelectExerciseConfiguration;
 import com.example.sadiq.test.WeeklyList.WeeklyList;
@@ -188,7 +188,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                         fragmentList = new LinkedList<Class>();
                                         fragmentList.add(WeeklyorRecurringListFragment.class);
-                                        fragmentList.add(FilterableListFragment.class);
+                                        fragmentList.add(FilterableWorkoutListFragment.class);
                                         fragmentList.add(AddWorkoutFragment.class);
                                         fragmentList.add(addExersice.class);
 
@@ -529,6 +529,28 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                 //fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
+                                break;
+
+
+                        case "FilterableWorkoutListFragment":
+                                FilterableWorkoutListFragment filterableWorkoutListFragment = (FilterableWorkoutListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag("FilterableListWorkoutListFragment");
+                                FragmentTransaction fragmentTransactionFilterableListWorkout = WorkoutConfig.getChildFragmentManager().beginTransaction();
+
+                                if (filterableWorkoutListFragment == null) {
+                                        filterableWorkoutListFragment  = new FilterableWorkoutListFragment();
+                                        filterableWorkoutListFragment.setArguments(bundle);
+                                }
+                                else
+                                {
+                                        // call a method here to adhoc update the fragment
+
+                                }
+
+                                fragmentTransactionFilterableListWorkout.replace(R.id.viewpagerroot, filterableWorkoutListFragment, "FilterableListWorkoutListFragment");
+                                fragmentTransactionFilterableListWorkout.addToBackStack(null);
+
+                                fragmentTransactionFilterableListWorkout.commit();
+
                                 break;
 
                 }

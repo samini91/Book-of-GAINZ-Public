@@ -27,7 +27,7 @@ import io.realm.RealmList;
  * Created by Mugen on 8/9/2017.
  */
 
-public class FilterableListFragment extends Fragment {
+public class FilterableWorkoutListFragment extends Fragment {
 
 
         ViewGroup root ;

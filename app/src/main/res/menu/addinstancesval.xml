@@ -2,7 +2,9 @@
 
     <item
         android:id="@+id/one"
-        android:title="1"/>
+        android:title="1"
+
+        />
 
     <item
         android:id="@+id/seven"

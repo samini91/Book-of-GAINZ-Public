@@ -1,6 +1,7 @@
 package com.example.sadiq.test.Database;
 
 import com.example.sadiq.test.ListParcel;
+import com.example.sadiq.test.WorkoutTemplate;
 
 import org.parceler.Parcel;
 import org.parceler.ParcelPropertyConverter;
@@ -10,12 +11,6 @@ import io.realm.RealmObject;
 import io.realm.WeeklyorRecurringDayDBRealmProxy;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Mugen on 8/12/2017.
- */
-
-
-
 @Parcel(implementations = {WeeklyorRecurringDayDBRealmProxy.class },
         value = Parcel.Serialization.BEAN,
         analyze = { SetRepWeightDBObject.class })
@@ -24,13 +19,19 @@ public class WeeklyorRecurringDayDB extends RealmObject {
         @PrimaryKey
         String primaryKey;
 
-        RealmList<TheoreticalWorkout> theoreticalWorkouts = new RealmList<>();
+        RealmList<WorkoutTemplate> workoutTemplates = new RealmList<>();
 
         int order;
 
         public static void generatePrimaryKeyWeeklyorRecurringDayDb(String weeklyorRecurringListDBName,WeeklyorRecurringDayDB weeklyorRecurringDayDB)
         {
                 weeklyorRecurringDayDB.setPrimaryKey(weeklyorRecurringListDBName+"|"+weeklyorRecurringDayDB.getOrder());
+        }
+
+        public WeeklyorRecurringDayDB(){}
+
+        public WeeklyorRecurringDayDB(int order){
+                this.setOrder(order);
         }
 
         public void setPrimaryKey(String primaryKey) {
@@ -41,7 +42,6 @@ public class WeeklyorRecurringDayDB extends RealmObject {
                 return primaryKey;
         }
 
-
         public int getOrder() {
                 return order;
         }
@@ -51,11 +51,10 @@ public class WeeklyorRecurringDayDB extends RealmObject {
         }
 
         @ParcelPropertyConverter(ListParcel.class)
-        public void setTheoreticalWorkouts(RealmList<TheoreticalWorkout> theoreticalWorkouts) {
-                this.theoreticalWorkouts = theoreticalWorkouts;
+        public void setWorkoutTemplates(RealmList<WorkoutTemplate> workoutTemplates) {
+                this.workoutTemplates = workoutTemplates;
         }
-
-        public RealmList<TheoreticalWorkout> getTheoreticalWorkouts() {
-                return theoreticalWorkouts;
+        public RealmList<WorkoutTemplate> getWorkoutTemplates() {
+                return workoutTemplates;
         }
 }

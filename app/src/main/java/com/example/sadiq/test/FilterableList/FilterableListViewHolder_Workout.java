@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView;
 import com.example.sadiq.test.Database.Exercise;
 import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView;
@@ -34,7 +35,7 @@ public class FilterableListViewHolder_Workout extends FilterableListViewHolder{
         TextView textView;
 
         @Bind(R.id.ExerciseSetRepTable)
-        LinearLayout exerciseSetRepTable;
+        WorkoutExerciseSetRepTableView exerciseSetRepTable;
 
         Context context;
 
@@ -49,6 +50,9 @@ public class FilterableListViewHolder_Workout extends FilterableListViewHolder{
                 RealmResults<WorkoutTemplate> realmResultsWorkoutTemplate = realmResults;
                 RealmList<ExerciseSetRep> setRepRealmList = realmResultsWorkoutTemplate.get(position).getExerciseSetRep();
 
+
+                exerciseSetRepTable.bind(realmResultsWorkoutTemplate.get(position));
+                /*
                 exerciseSetRepTable.removeAllViews();
                 for(ExerciseSetRep exerciseSetRep : setRepRealmList) {
 
@@ -63,6 +67,8 @@ public class FilterableListViewHolder_Workout extends FilterableListViewHolder{
 
                         //break;
                 }
+
+                */
                 textView.setText(realmResultsWorkoutTemplate.get(position).getName().toString());
         }
 
