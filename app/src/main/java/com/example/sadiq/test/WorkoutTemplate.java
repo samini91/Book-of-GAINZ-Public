@@ -16,7 +16,6 @@ import io.realm.annotations.PrimaryKey;
  * Created by Sadiq on 2/10/2016.
  */
 
-
 @Parcel(implementations = { WorkoutTemplateRealmProxy.class },
         value = Parcel.Serialization.BEAN,
         analyze = { WorkoutTemplate.class })

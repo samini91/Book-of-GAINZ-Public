@@ -35,8 +35,7 @@
         />
 <!--
 
-TODO need to make another implementation of this. Have to add on touch functionality
-so they can put percentages and add weights from a prompt instead of the counter.
+TODO need to make another implementation of this. Have to add on touch functionality so they can put percentages and add weights from a prompt instead of the counter.
 -->
     <com.example.sadiq.test.CustomDataTypes.WeightCounter
         android:layout_height="wrap_content"

@@ -32,7 +32,6 @@ public class RealmDB {
     {
         realm = Realm.getDefaultInstance();
 
-
     }
 
     public Realm getRealm(){
@@ -190,6 +189,36 @@ public class RealmDB {
     }
 
 
+
+    public void addOrUpdateWeeklyorReccuringList(String weeklyScheduleName,RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDB) {
+
+
+        WeeklyorRecurringListDB weeklyorRecurringListDB = new WeeklyorRecurringListDB();
+
+        weeklyorRecurringListDB.setName(weeklyScheduleName);
+
+        weeklyorRecurringListDB.setWeeklyorRecurringDayDB(weeklyorRecurringDayDB);
+        addOrUpdateWeeklyorReccuringList(weeklyorRecurringListDB);
+    }
+
+    public void addOrUpdateWeeklyorReccuringList(WeeklyorRecurringListDB weeklyorRecurringListDB) {
+
+        for (WeeklyorRecurringDayDB weeklyorRecurringDayDB : weeklyorRecurringListDB.getWeeklyorRecurringDayDB())
+        {
+            weeklyorRecurringDayDB.setCompositePrimaryKey(weeklyorRecurringListDB.getName());
+
+        }
+        realm.copyToRealmOrUpdate(weeklyorRecurringListDB);
+
+    }
+
+
+    public WeeklyorRecurringListDB getWeeklyorRecurringListDB(String name)
+    {
+
+        WeeklyorRecurringListDB weeklyorRecurringListDB = realm.where(WeeklyorRecurringListDB.class).equalTo("name",name).findFirst();
+        return realm.copyFromRealm(weeklyorRecurringListDB);
+    }
 
 
 

@@ -23,9 +23,9 @@ public class WeeklyorRecurringDayDB extends RealmObject {
 
         int order;
 
-        public static void generatePrimaryKeyWeeklyorRecurringDayDb(String weeklyorRecurringListDBName,WeeklyorRecurringDayDB weeklyorRecurringDayDB)
+        public void setCompositePrimaryKey(String weeklyorRecurringListDBName)
         {
-                weeklyorRecurringDayDB.setPrimaryKey(weeklyorRecurringListDBName+"|"+weeklyorRecurringDayDB.getOrder());
+                this.setPrimaryKey(weeklyorRecurringListDBName+"|"+this.getOrder());
         }
 
         public WeeklyorRecurringDayDB(){}

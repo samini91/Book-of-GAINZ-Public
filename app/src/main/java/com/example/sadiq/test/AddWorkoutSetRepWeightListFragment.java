@@ -12,7 +12,6 @@ import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.Database.SetRepWeightDBObject;
 import com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.List;
@@ -23,7 +22,7 @@ import io.realm.RealmList;
  * Created by Mugen on 7/13/2017.
  */
 
-public class addWorkoutSetRepWeightListFragment extends Fragment {
+public class AddWorkoutSetRepWeightListFragment extends Fragment {
 
         IActivityDataFactory callback;
 
@@ -38,6 +37,8 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
         Button submitButton;
         SetRepWeightConfigurationView setRepWeightConfigurationView;
         ExerciseSetRep  exerciseSetRepFromAddWorkout;
+
+        AddWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = this;
 
         @Override
         public void onAttach(Context context){
@@ -86,7 +87,7 @@ public class addWorkoutSetRepWeightListFragment extends Fragment {
 
                                 bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(exerciseSetRep));
 
-                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment.class.toString(),"AddWorkoutFragment",bundle);
+                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment,"AddWorkoutFragment",0,bundle);
                                 //callback.setSetRepWeight(workoutTempl1ate);
                                 
                                 //setRepWeightConfigurationView.getAdapterList();

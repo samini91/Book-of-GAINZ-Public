@@ -12,6 +12,7 @@ import com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView;
 import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.WeeklyorRecurringDayDB;
 import com.example.sadiq.test.R;
+import com.example.sadiq.test.WeeklyList.WeekDayVariables;
 
 import org.w3c.dom.Text;
 
@@ -28,19 +29,17 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
 
         public interface CustomListener{
 
-                void onWorkoutDayPlusButton(int order, int location);
+                void onWorkoutDayPlusButton(int index);
 
         }
 
         CustomListener customListener;
 
 
-        public void setCustomListner(CustomListener customListener){
+        public void setCustomListener(CustomListener customListener){
                 this.customListener = customListener;
 
         }
-
-
 
         RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList;
 
@@ -63,8 +62,11 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
         }
 
         @Override
-        public void onBindViewHolder(WeeklyorRecurringListViewHolder holder, int position) {
-                holder.bind(weeklyorRecurringDayDBRealmList,position);
+        public void onBindViewHolder(WeeklyorRecurringListViewHolder holder, int index) {
+                //holder.setIsRecyclable(false);
+                holder.bind(weeklyorRecurringDayDBRealmList,index);
+                holder.itemView.setTag(weeklyorRecurringDayDBRealmList.get(index));
+
                 //holder.textView.setText(Integer.toString(weeklyorRecurringDayDBRealmList.get(position).getOrder()));
         }
 
@@ -133,11 +135,12 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
                         super(v);
                         ButterKnife.bind(this,v);
 
+
                         addWorkoutPlusButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         if(customListener != null)
-                                                customListener.onWorkoutDayPlusButton(Integer.parseInt(textView.getText().toString()),getAdapterPosition());
+                                                customListener.onWorkoutDayPlusButton(getAdapterPosition());
                                 }
                         });
                 }
@@ -145,8 +148,9 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
                 public void bind( RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList,int position){
                        WeeklyorRecurringDayDB weeklyorRecurringDayDB = weeklyorRecurringDayDBRealmList.get(position);
 
-                        textView.setText(Integer.toString(weeklyorRecurringDayDB.getOrder()));
+                        textView.setText(WeekDayVariables.WeekDayIntToString(weeklyorRecurringDayDB.getOrder() % 7) + " - Week - " + ((weeklyorRecurringDayDB.getOrder()/7) + 1 ));
 
+                        workoutExerciseSetRepTableView.removeAllViews();
                         if(weeklyorRecurringDayDB.getWorkoutTemplates().size() > 0)
                                 workoutExerciseSetRepTableView.bind(weeklyorRecurringDayDB.getWorkoutTemplates().first());
                 }

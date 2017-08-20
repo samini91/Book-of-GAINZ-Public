@@ -32,12 +32,21 @@ import io.realm.annotations.RealmClass;
 
 public class FilterableListAdapter <T extends FilterableListViewHolder, O extends RealmObject> extends RecyclerView.Adapter<T> {
 
+        public interface FilterableListAdapterOnViewClick{
+                void FilterableListAdapterOnViewClick(int position);
+        }
+
+        public void setFilterableListAdapterOnViewClick(FilterableListAdapterOnViewClick filterableListAdapterOnViewClick){
+                this.filterableListAdapterOnViewClick = filterableListAdapterOnViewClick;
+        }
+
         Class<T> cls;
         Class<O> clazz;
         RealmResults<O> realmResults;
         RealmQuery<O> where;
         int layout;
         RealmDB realmDB;
+        FilterableListAdapterOnViewClick filterableListAdapterOnViewClick;
         public FilterableListAdapter(Context context,Class<O> clazz, Class<T>cls, int layout)
         {
                 super();
@@ -55,13 +64,13 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
 
         @Override
         public T onCreateViewHolder(ViewGroup parent, int viewType) {
-                //layout =
-                //View vh = LayoutInflater.from(parent.getContext()).inflate(R.layout.filterablelist_viewholder_exercise,parent,false);
-                View vh = LayoutInflater.from(parent.getContext()).inflate(layout,parent,false);
 
+                View vh = LayoutInflater.from(parent.getContext()).inflate(layout,parent,false);
                 try
                 {
-                        return cls.getConstructor(View.class).newInstance(vh);
+                        T retVal = cls.getConstructor(View.class).newInstance(vh);
+                        retVal.setFilterableListAdapterOnViewClick(filterableListAdapterOnViewClick);
+                        return retVal;
                 }
                 catch (Exception e)
                 {
@@ -107,6 +116,8 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
 
                 this.notifyDataSetChanged();
         }
+
+        public RealmResults<O> getRealmResultList(){return realmResults;}
 
         /*public static class ViewHolder extends RecyclerView.ViewHolder
         {

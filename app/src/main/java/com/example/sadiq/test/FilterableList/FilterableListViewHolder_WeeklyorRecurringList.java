@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.sadiq.test.Database.Exercise;
-import com.example.sadiq.test.Exercise.PrimaryAndSecondaryMovers;
+import com.example.sadiq.test.Database.WeeklyorRecurringListDB;
 import com.example.sadiq.test.R;
 
 import butterknife.Bind;
@@ -12,18 +12,16 @@ import butterknife.ButterKnife;
 import io.realm.RealmResults;
 
 /**
- * Created by Mugen on 8/9/2017.
+ * Created by Mugen on 8/18/2017.
  */
 
-public class FilterableListViewHolder_Exercise extends FilterableListViewHolder  {
+public class FilterableListViewHolder_WeeklyorRecurringList extends FilterableListViewHolder{
+
 
         @Bind(R.id.filterablelist_viewholder_textview)
         TextView textView;
 
-        @Bind(R.id.PrimaryAndSecondaryMovers)
-        PrimaryAndSecondaryMovers primaryAndSecondaryMovers;
-
-        public FilterableListViewHolder_Exercise(View itemView) {
+        public FilterableListViewHolder_WeeklyorRecurringList(View itemView) {
                 super(itemView);
                 ButterKnife.bind(this, itemView);
 
@@ -38,12 +36,11 @@ public class FilterableListViewHolder_Exercise extends FilterableListViewHolder 
 
         @Override
         public void bind(RealmResults realmResults, int position) {
-                RealmResults<Exercise> realmResultsExercise = realmResults;
+                RealmResults<WeeklyorRecurringListDB> realmResultsExercise = realmResults;
 
                 textView.setText(realmResultsExercise.get(position).getName());
 
-                primaryAndSecondaryMovers.bind(realmResultsExercise.get(position).getName());
-
 
         }
+
 }

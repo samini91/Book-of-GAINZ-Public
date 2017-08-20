@@ -1,7 +1,6 @@
 package com.example.sadiq.test.Database;
 
 import com.example.sadiq.test.ListParcel;
-import com.example.sadiq.test.WeeklyorRecurringList.WeeklyorRecurringList;
 
 import org.parceler.Parcel;
 import org.parceler.ParcelPropertyConverter;

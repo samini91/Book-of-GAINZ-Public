@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView;
 import com.example.sadiq.test.Database.Exercise;
@@ -31,6 +32,9 @@ import io.realm.RealmResults;
 
 public class FilterableListViewHolder_Workout extends FilterableListViewHolder{
 
+
+        //FilterableListAdapter.FilterableListAdapterOnViewClick filterableListAdapterOnViewClick;
+
         @Bind(R.id.filterablelist_viewholder_textview)
         TextView textView;
 
@@ -39,10 +43,19 @@ public class FilterableListViewHolder_Workout extends FilterableListViewHolder{
 
         Context context;
 
-        public FilterableListViewHolder_Workout(View itemView) {
+        public FilterableListViewHolder_Workout(final View itemView) {
                 super(itemView);
                 ButterKnife.bind(this, itemView);
                 context = itemView.getContext();
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                if(filterableListAdapterOnViewClick != null)
+                                        filterableListAdapterOnViewClick.FilterableListAdapterOnViewClick(getAdapterPosition());
+                        }
+                });
+
         }
 
         @Override

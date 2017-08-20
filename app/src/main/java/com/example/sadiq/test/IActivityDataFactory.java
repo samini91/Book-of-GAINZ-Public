@@ -1,5 +1,6 @@
 package com.example.sadiq.test;
 
+import android.app.Fragment;
 import android.os.Bundle;
 
 /**
@@ -8,6 +9,6 @@ import android.os.Bundle;
 
 public interface IActivityDataFactory {
 
-        void ActivityDataFactory(String from, String to, Bundle bundle);
+        void ActivityDataFactory(Fragment from, String to, int requestCode,Bundle bundle);
 
 }

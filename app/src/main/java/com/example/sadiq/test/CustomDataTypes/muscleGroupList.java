@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.sadiq.test.Database.BodyPartHolderDBObject;
 import com.example.sadiq.test.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by Sadiq on 2/13/2016.
@@ -118,6 +121,28 @@ public class muscleGroupList extends ListView {
 
     public BodyPartHolder[] getBodyPartsState(){
         return this.bodyPartHolder;
+    }
+
+    public void initBodyPartsState(List<BodyPartHolderDBObject> bodyPartHolderDBObjectList) {
+
+        this.clear();
+        HashSet<String> exercisesMovers = new HashSet<>();
+
+        for(BodyPartHolderDBObject bodyPartHolderDBObject : bodyPartHolderDBObjectList)
+            exercisesMovers.add(bodyPartHolderDBObject.getName());
+
+        for(int i = 0 ; i< bodyPartHolder.length; i++){
+            if(exercisesMovers.contains(bodyPartHolder[i].name) ) {
+
+                bodyPartHolder[i].activate = true;
+                bodyPartHolder[i].backGroundColor = Color.GREEN;
+            }
+
+        }
+
+        //bodyPartHolder
+
+
     }
 
 }

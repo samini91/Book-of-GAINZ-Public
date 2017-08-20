@@ -2,24 +2,17 @@ package com.example.sadiq.test.FilterableList;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.sadiq.test.R;
 
-import java.nio.BufferUnderflowException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.Inflater;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -82,7 +75,7 @@ public class FilterableListView extends LinearLayout implements IUpdateFilter{
 //                filterRoot.addView(filterView);
 //        }
 
-        public void setFilterView(Filters filterView){
+        public void setFilterView(FiltersBase filterView){
                 //EditText textView = new EditText(getContext());
                 //ViewGroup.LayoutParams params = filterView.getLayoutParams();
                 //params.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -92,9 +85,8 @@ public class FilterableListView extends LinearLayout implements IUpdateFilter{
                 //filterRoot.addView(textView);
                 filterRoot.addView(filterView);
                 filterView.setUpdateFilter(this);
-
-
         }
+
 
         public void UpdateFilter(String key, String val){
 

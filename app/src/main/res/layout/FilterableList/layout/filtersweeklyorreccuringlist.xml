@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
 
-    <com.example.sadiq.test.FilterableList.FilterableListView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/FilterableListView"
-        ></com.example.sadiq.test.FilterableList.FilterableListView>
-
+        android:id="@+id/NameFilter"
+        android:textColor="@color/caldroid_holo_blue_dark"
+        />
 
 </LinearLayout>

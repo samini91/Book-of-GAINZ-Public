@@ -1,13 +1,13 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat">
-
-
         <item name="windowActionBar">true</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
 
    </style>
 
@@ -44,5 +44,9 @@
     </style>
 
 
+    <style name="MyAnimation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/card_flip_right_in</item>
+        <item name="android:windowExitAnimation">@anim/card_flip_right_out</item>
+    </style>
 
 </resources>

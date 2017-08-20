@@ -51,6 +51,10 @@ public class ViewPagerFragment extends Fragment {
 
         }
 
+        public void setOffscreenPageLimit(int i ){
+                myViewPager.setOffscreenPageLimit(i);
+        }
+
         public FragmentManager getViewPagerFragmentTransaction() {
                 return getChildFragmentManager();
 

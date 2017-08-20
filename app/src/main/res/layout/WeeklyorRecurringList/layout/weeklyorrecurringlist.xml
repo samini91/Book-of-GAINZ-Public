@@ -5,22 +5,69 @@
               android:layout_height="match_parent"
               android:background="@color/Grey"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_weight=".05"
+        android:weightSum="1"
 
-    <ImageButton
+        >
+        <EditText
+            android:id="@+id/weeklyScheduleName"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight=".95"
+            android:maxLines="1"
+            />
+
+
+        <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:src="@android:drawable/ic_input_add"
         android:id="@+id/addinstances"
-
+        android:layout_weight=".05"
         />
 
+    </LinearLayout>
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/RecyclerView"
         android:layout_weight=".9"
         ></android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_weight=".02"
+
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/clear"
+            android:text="Clear"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/submit"
+            android:text="Submit"
+            />
+
+    </LinearLayout>
+
+
+
+
+    </LinearLayout>

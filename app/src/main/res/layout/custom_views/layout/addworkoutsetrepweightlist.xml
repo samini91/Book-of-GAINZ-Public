@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout android:layout_height="match_parent"
-             android:layout_width="match_parent"
-             android:background="@color/Grey"
-             xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/addworkoutsetrepweightlistroot"
-    >
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:weightSum="1"
-    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/Grey"
+              android:orientation="vertical"
+
     >
 
-
-<RelativeLayout
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/selectexercsieconfigurationId"
-    android:clickable="true"
-    android:layout_weight=".5"
-    android:weightSum="1"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView
-        android:layout_height="match_parent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/setrepweightconfigurationview"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight=".75"
+        android:orientation="vertical"
+        android:weightSum="1"
+        >
 
-</RelativeLayout>
 
-    <Button android:layout_height="wrap_content"
+        <RelativeLayout
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/selectexercsieconfigurationId"
             android:layout_width="match_parent"
-            android:id="@+id/SubmitButton"
-            android:text="Submit"
-        />
-</LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:clickable="true"
+            android:weightSum="1">
 
-    </FrameLayout>
+            <com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView
+                android:id="@+id/setrepweightconfigurationview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+            </com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/SubmitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:text="Submit"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"/>
+
+
+</LinearLayout>
