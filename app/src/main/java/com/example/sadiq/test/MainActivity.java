@@ -7,6 +7,7 @@ import android.os.Handler;
 
 //import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +54,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
         TextView textView;
 
 
-        ViewPagerFragment test, WorkoutConfig, test3;
+        ViewPagerFragment calendar, WorkoutConfig, test3;
         long startTime = 0;
 
         //runs without a timer by reposting this handler at the end of the runnable
@@ -188,13 +189,11 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                         fragmentList = new LinkedList<Class>();
                                         //fragmentList.add(AddWorkoutFragment.class);
                                         fragmentList.add(FilterableWeeklyorRecurringScheduleListFragment.class);
-                                        //fragmentList.add(FilterableExerciseListFragment.class);
+                                        fragmentList.add(FilterableExerciseListFragment.class);
                                         //fragmentList.add(WeeklyorRecurringListFragment.class);
-                                        //fragmentList.add(FilterableWorkoutListFragment.class);
+                                        fragmentList.add(FilterableWorkoutListFragment.class);
                                         //fragmentList.add(AddWorkoutFragment.class);
                                         //fragmentList.add(AddExercise.class);
-
-
                                 }
                                 //Fragment test =
                                 //fragmentTransaction.add(R.id., test);
@@ -210,9 +209,9 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 fragmentTransaction.commit();
 
                                 fragmentManager.executePendingTransactions();
-
                                 WorkoutConfig.setFragmentList(fragmentList);
-                                WorkoutConfig.setMyViewPagerCurrentItem(0);
+
+//                                WorkoutConfig.setMyViewPagerCurrentItem(0);
 
 
                         }
@@ -223,34 +222,26 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 Toast.makeText(thisActivity, "worksstill", Toast.LENGTH_SHORT).show();
 
                                 currentInflatedViewLevel++;
-                                root.removeAllViewsInLayout();
+                                //root.removeAllViewsInLayout();
 
                                 FragmentManager fragmentManager = getFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                                ViewPagerFragment test = new ViewPagerFragment();
+                                calendar = new ViewPagerFragment();
 
-                                //Fragment test =
-                                //fragmentTransaction.add(R.id., test);
-                                //fragmentTransaction.replace(R.id.mainlayout_test,test);
-                                fragmentTransaction.add(R.id.mainlayout_root, test);
+                                fragmentTransaction.add(R.id.mainlayout_root, calendar,"calendar");
 
-                                ///fragmentTransaction.add(R.id.mainlayout_test,test);
-                                fragmentTransaction.addToBackStack("ViewPager2");
-                                //fragmentTransaction.add(test,"option");
-
-                                //fragmentTransaction.add(test,"opiton");
+                                fragmentTransaction.addToBackStack("calendar");
 
                                 fragmentTransaction.commit();
-
                                 fragmentManager.executePendingTransactions();
-                                LinkedList fragmentList = new LinkedList<Fragment>();
 
+                                fragmentList = new LinkedList<Class>();
+                                fragmentList.add(AddExercise.class);
+                                fragmentList.add(AddWorkoutFragment.class);
+                                fragmentList.add(WeeklyorRecurringListFragment.class);
 
-                                fragmentList.add(SelectExerciseConfiguration.class);
-
-
-                                test.setFragmentList(fragmentList);
+                                calendar.setFragmentList(fragmentList);
                         }
                 });
 
@@ -375,11 +366,8 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                 if (WorkoutConfig != null && WorkoutConfig.getViewPagerFragmentTransaction().getBackStackEntryCount() != 0)
                         WorkoutConfig.getViewPagerFragmentTransaction().popBackStack();
-                        //good
-                        //int stackCount = getFragmentManager().getBackStackEntryCount();
-                        //if(currentInflatedViewLevel == 0)
-                        //if(stackCount != 0)
-//            getFragmentManager().popBackStack();
+                else if(calendar != null && calendar.getViewPagerFragmentTransaction().getBackStackEntryCount() !=0)
+                        calendar.getViewPagerFragmentTransaction().popBackStack();
                 else if (this.getFragmentManager().getBackStackEntryCount() != 0) {
                         this.getFragmentManager().popBackStack();
                         init(savedBundle);
@@ -463,25 +451,38 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
 */
         @Override
-        public void ActivityDataFactory(Fragment from, String to,int requestCode ,Bundle bundle) {
+        public void ActivityDataFactory(Fragment from, String to,int requestCode ,int type,Bundle bundle) {
 
                 try {
                         FragmentTransaction fragmentTransaction;
+                        ViewPagerFragment viewPagerFragment = null;
 
-                        if (from.getParentFragment().getTag() == "WorkoutConfig")
+                        if (from.getParentFragment().getTag() == "WorkoutConfig") {
                                 fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
+                                viewPagerFragment = WorkoutConfig;
+                        }
+                        else if(from.getParentFragment().getTag() == "calendar") {
+                                fragmentTransaction = calendar.getChildFragmentManager().beginTransaction();
+                                viewPagerFragment = calendar;
+                        }
                         else if(from.getParentFragment().getTag() ==  "WeeklyorRecurringListFragment" || from.getTag() == FragmentIdMappingSingleton.FindFragmentId(WeeklyorRecurringListFragment.class.toString())) {
 
-                                fragmentTransaction = WorkoutConfig.getChildFragmentManager().beginTransaction();
+                                fragmentTransaction = from.getChildFragmentManager().beginTransaction();
                         }
                         //this is temporary i want to make sure that everything i am funneling into this method is hitting the if statement above
                         else
                                 throw new Exception();
 
+
+                        if(viewPagerFragment.getChildFragmentManager().getBackStackEntryCount() != 0) {
+                                FragmentManager.BackStackEntry backStackEntry = viewPagerFragment.getChildFragmentManager().getBackStackEntryAt(viewPagerFragment.getChildFragmentManager().getBackStackEntryCount()-1);
+                                Log.i(backStackEntry.getName(),"");
+                        }
+
                 switch(to) {
                         case "AddWorkoutSetRepWeightListFragment":
 
-                                AddWorkoutSetRepWeightListFragment AddWorkoutSetRepWeightListFragment = (AddWorkoutSetRepWeightListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag("AddWorkoutSetRepWeightListFragment");
+                                AddWorkoutSetRepWeightListFragment AddWorkoutSetRepWeightListFragment = (AddWorkoutSetRepWeightListFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag("AddWorkoutSetRepWeightListFragment");
 
                                 if (AddWorkoutSetRepWeightListFragment == null) {
                                         AddWorkoutSetRepWeightListFragment = new AddWorkoutSetRepWeightListFragment();
@@ -504,28 +505,32 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 break;
                         case "AddWorkoutFragment":
 
-                                AddWorkoutFragment AddWorkoutFragment = (AddWorkoutFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(AddWorkoutFragment.class.toString()));
+                                AddWorkoutFragment addWorkoutFragment = null;
 
-                                if (AddWorkoutFragment == null)
-                                {
-                                        AddWorkoutFragment = new AddWorkoutFragment();
-                                        AddWorkoutFragment.setArguments(bundle);
+                                if(type == detail) {
 
-                                        fragmentTransaction.replace(R.id.viewpagerroot, AddWorkoutFragment,FragmentIdMappingSingleton.FindFragmentId(AddWorkoutFragment.class.toString()));
+                                        addWorkoutFragment = (AddWorkoutFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag(viewPagerFragment.getViewPagerFragmentId(AddWorkoutFragment.class.toString()));
+                                        if( addWorkoutFragment == null)
+                                                addWorkoutFragment = (AddWorkoutFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag("AddWorkoutFragment");
+                                        addWorkoutFragment.setTargetFragment(from,requestCode);
+                                        addWorkoutFragment.setWorkoutListExerciseSetRep(bundle,"ExerciseSetRepConfig");
+                                        viewPagerFragment.getChildFragmentManager().popBackStack();
                                 }
-                                else
-                                {
-                                        AddWorkoutFragment.setWorkoutListExerciseSetRep(bundle,"ExerciseSetRepConfig");
-                                        WorkoutConfig.getChildFragmentManager().popBackStack();
+                                else if(type == newInstance ){
+                                        addWorkoutFragment = new AddWorkoutFragment();
+                                        addWorkoutFragment.setArguments(bundle);
+                                        fragmentTransaction.replace(R.id.viewpagerroot, addWorkoutFragment,"AddWorkoutFragment");
+                                        addWorkoutFragment.setTargetFragment(from,requestCode);
                                 }
 
-                                fragmentTransaction.addToBackStack("AddWorkoutFragment");
+                                if(type == newInstance)
+                                        fragmentTransaction.addToBackStack("AddWorkoutFragment");
 
                                 fragmentTransaction.commit();
                                 break;
                         case "FilterableWorkoutListFragment":
 
-                                FilterableWorkoutListFragment filterableWorkoutListFragment = (FilterableWorkoutListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag("FilterableListWorkoutListFragment");
+                                FilterableWorkoutListFragment filterableWorkoutListFragment = (FilterableWorkoutListFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag("FilterableListWorkoutListFragment");
 
                                 if (filterableWorkoutListFragment == null) {
                                         filterableWorkoutListFragment  = new FilterableWorkoutListFragment();
@@ -537,9 +542,9 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                 }
 
-                                filterableWorkoutListFragment.setTargetFragment(from,1);
+                                filterableWorkoutListFragment.setTargetFragment(from,requestCode);
                              // fragmentTransaction.addToBackStack("FilterableWorkoutListFragment");
-                                filterableWorkoutListFragment.show(WorkoutConfig.getChildFragmentManager(),"Dialog");
+                                filterableWorkoutListFragment.show(viewPagerFragment.getChildFragmentManager(),"Dialog");
 
                                 break;
 
@@ -548,7 +553,38 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                 WeeklyorRecurringListFragment weeklyorRecurringListFragment = null;
 
-                                if(from.getClass() != FilterableWeeklyorRecurringScheduleListFragment.class )
+                                if(type == detail){
+                                       // WorkoutConfig.getChildFragmentManager().popBackStack();
+
+                                        weeklyorRecurringListFragment = (WeeklyorRecurringListFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag("WeeklyorRecurringListFragment");
+
+                                        if(weeklyorRecurringListFragment == null){
+                                                weeklyorRecurringListFragment = (WeeklyorRecurringListFragment) viewPagerFragment.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(WeeklyorRecurringListFragment.class.toString()));
+                                        }
+
+                                        weeklyorRecurringListFragment.setTargetFragment(from,requestCode);
+
+                                        if(requestCode == WeeklyorRecurringListFragment.defaultInstance)
+                                                weeklyorRecurringListFragment.updateWeeklyorRecurringList(bundle);
+                                        else if(requestCode == WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList)
+                                                weeklyorRecurringListFragment.selectWeeklyorRecurringList(bundle);
+
+                                }
+                                else if(type == newInstance)
+                                {
+                                        weeklyorRecurringListFragment = new WeeklyorRecurringListFragment();
+                                        weeklyorRecurringListFragment.setTargetFragment(from,requestCode);
+                                        weeklyorRecurringListFragment.setArguments(bundle);
+
+                                        fragmentTransaction.replace(R.id.viewpagerroot, weeklyorRecurringListFragment, "WeeklyorRecurringListFragment");
+                                }
+
+                                /*
+                                if(weeklyorRecurringListFragment == null)
+                                        weeklyorRecurringListFragment = (WeeklyorRecurringListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag("WeeklyorRecurringListFragment");
+
+                                if(from.getClass() != FilterableWeeklyorRecurringScheduleListFragment.class && weeklyorRecurringListFragment == null)
+                                        //weeklyorRecurringListFragment = (WeeklyorRecurringListFragment) from.getChildFragmentManager().findFragmentByTag("WeeklyorRecurringListFragment");
                                         weeklyorRecurringListFragment = (WeeklyorRecurringListFragment) WorkoutConfig.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(WeeklyorRecurringListFragment.class.toString()));
 
                                 if (weeklyorRecurringListFragment == null)
@@ -568,7 +604,7 @@ public class MainActivity extends Activity implements IActivityDataFactory {
 
                                 if(from.getClass() == FilterableWeeklyorRecurringScheduleListFragment.class ){
                                         try{
-                                                fragmentTransaction.replace(R.id.viewpagerroot, weeklyorRecurringListFragment, FragmentIdMappingSingleton.FindFragmentId(AddWorkoutFragment.class.toString()));
+                                                fragmentTransaction.replace(R.id.viewpagerroot, weeklyorRecurringListFragment, "WeeklyorRecurringListFragment");
                                         }
                                         catch (Exception e)
                                         {
@@ -582,28 +618,29 @@ public class MainActivity extends Activity implements IActivityDataFactory {
                                 }
 
                                 //WorkoutConfig.getChildFragmentManager().popBackStack();
-
-                                fragmentTransaction.addToBackStack("WeeklyorRecurringListFragment");
+*/
+                                if(type == newInstance)
+                                        fragmentTransaction.addToBackStack("WeeklyorRecurringListFragment");
 
                                 fragmentTransaction.commit();
 
+
+
                                 break;
                         case "AddExercise":
+                                AddExercise addExercise = null;
 
-                                AddExercise addExercise = (AddExercise) WorkoutConfig.getChildFragmentManager().findFragmentByTag("AddExercise");
-
-                                if (addExercise == null) {
+                                if(type == detail){
+                                        addExercise = (AddExercise) viewPagerFragment.getChildFragmentManager().findFragmentByTag(FragmentIdMappingSingleton.FindFragmentId(AddExercise.class.toString()));
+                                }
+                                else if(type == newInstance)
+                                {
                                         addExercise = new AddExercise();
                                         addExercise.setArguments(bundle);
-                                        fragmentTransaction.replace(R.id.viewpagerroot, addExercise, "FilterableListWorkoutListFragment");
-                                }
-                                else
-                                {
-                                        // call a method here to adhoc update the fragment
+                                        fragmentTransaction.replace(R.id.viewpagerroot, addExercise, "AddExercise");
                                 }
 
-                                addExercise.setTargetFragment(from, AddExercise.initWithExerciseName);
-                                //addExercise.show(WorkoutConfig.getChildFragmentManager(),"Dialog");
+                                addExercise.setTargetFragment(from, requestCode);
                                 fragmentTransaction.addToBackStack("AddExercise");
                                 fragmentTransaction.commit();
                                 break;

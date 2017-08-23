@@ -46,6 +46,10 @@ public class ViewPagerFragment extends Fragment {
                 }
         }
 
+        public String getViewPagerFragmentId(String id){
+                return childFragmentAdapter.getFragmentIdMappingHashMap().get(id);
+        }
+
         public void setMyViewPagerCurrentItem(int i) {
                 this.myViewPager.setCurrentItem(i, true);
 

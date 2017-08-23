@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/Grey"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/Grey"
     >
+
 
     <com.example.sadiq.test.FilterableList.FilterableListView
         android:layout_width="match_parent"
@@ -12,4 +13,15 @@
         android:id="@+id/FilterableListView"
         ></com.example.sadiq.test.FilterableList.FilterableListView>
 
-</LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/caldroid_sky_blue"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/fab_margin"
+        android:id="@+id/addWorkoutFAB"
+        />
+
+</FrameLayout>

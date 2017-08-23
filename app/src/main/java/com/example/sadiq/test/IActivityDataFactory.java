@@ -8,7 +8,9 @@ import android.os.Bundle;
  */
 
 public interface IActivityDataFactory {
+        int newInstance = 0;
+        int detail = 1;
 
-        void ActivityDataFactory(Fragment from, String to, int requestCode,Bundle bundle);
+        void ActivityDataFactory(Fragment from, String to, int requestCode,int type ,Bundle bundle);
 
 }

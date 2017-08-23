@@ -4,12 +4,15 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.sadiq.test.Database.Exercise;
+import com.example.sadiq.test.Exercise.AddExercise;
 import com.example.sadiq.test.IActivityDataFactory;
 import com.example.sadiq.test.R;
 
@@ -32,6 +35,8 @@ public class FilterableExerciseListFragment extends DialogFragment {
         RecyclerView recyclerView;
         @Bind(R.id.FilterableListView)
         FilterableListView filterableListView ;
+        @Bind(R.id.addExerciseFAB)
+        FloatingActionButton addExerciseFAB;
         FilterableExerciseListFragment filterableExerciseListFragment = this;
 
 
@@ -60,9 +65,18 @@ public class FilterableExerciseListFragment extends DialogFragment {
 
                                 bundle.putString("name",exercise.getName());
 
-                                ((IActivityDataFactory) filterableExerciseListFragment.getActivity()).ActivityDataFactory(filterableExerciseListFragment,"AddExercise",0, bundle);
+                                ((IActivityDataFactory) filterableExerciseListFragment.getActivity()).ActivityDataFactory(filterableExerciseListFragment,"AddExercise", AddExercise.initWithExerciseName,IActivityDataFactory.newInstance, bundle);
 
 
+                        }
+                });
+
+
+                addExerciseFAB.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                                ((IActivityDataFactory) filterableExerciseListFragment.getActivity()).ActivityDataFactory(filterableExerciseListFragment,"AddExercise", 0,IActivityDataFactory.newInstance, new Bundle());
                         }
                 });
 

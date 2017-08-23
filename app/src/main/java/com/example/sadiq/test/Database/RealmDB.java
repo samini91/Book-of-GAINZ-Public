@@ -100,11 +100,15 @@ public class RealmDB {
                 setRepWeightDBObject.setCompositePrimaryKey(workoutTemplate.getName(),exerciseSetRep.getExerciseName());
             }
         }
-
-
         realm.copyToRealmOrUpdate(workoutTemplate);
 
     }
+
+    public WorkoutTemplate getWorkoutTemplateFromName(String workoutName){
+
+        return realm.copyFromRealm(realm.where(WorkoutTemplate.class).equalTo("Name",workoutName).findFirst());
+    }
+
 
     public void addorUpdateOptionDB(OptionDB optionsDB){
 

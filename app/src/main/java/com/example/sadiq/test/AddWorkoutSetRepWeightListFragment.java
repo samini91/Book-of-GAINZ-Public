@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.sadiq.test.AddWorkout.AddWorkoutFragment;
 import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.Database.SetRepWeightDBObject;
 import com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView;
@@ -87,7 +88,7 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
 
                                 bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(exerciseSetRep));
 
-                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment,"AddWorkoutFragment",0,bundle);
+                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment,"AddWorkoutFragment", AddWorkoutFragment.in_WorkoutSetRepWeightListFragment,IActivityDataFactory.detail,bundle);
                                 //callback.setSetRepWeight(workoutTempl1ate);
                                 
                                 //setRepWeightConfigurationView.getAdapterList();

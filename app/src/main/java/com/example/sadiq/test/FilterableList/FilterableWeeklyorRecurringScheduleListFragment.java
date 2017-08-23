@@ -3,6 +3,7 @@ package com.example.sadiq.test.FilterableList;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,10 @@ public class FilterableWeeklyorRecurringScheduleListFragment extends DialogFragm
 
         @Bind(R.id.FilterableListView)
         FilterableListView filterableListView ;
+
+        @Bind(R.id.addWeeklyorRecurringListFAB)
+        FloatingActionButton addWeeklyorRecurringListFAB;
+
         FilterableWeeklyorRecurringScheduleListFragment filterableWeeklyorRecurringScheduleListFragment = this;
 
         FilterableListAdapter filterableListAdapter;
@@ -51,12 +56,24 @@ public class FilterableWeeklyorRecurringScheduleListFragment extends DialogFragm
 
                                 bundle.putString("name", ((WeeklyorRecurringListDB)filterableListAdapter.getRealmResultList().get(position)).getName());
 
-                                ((IActivityDataFactory)getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment,"WeeklyorRecurringListFragment", WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList,bundle);
+                                ((IActivityDataFactory)getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment,"WeeklyorRecurringListFragment", WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList,IActivityDataFactory.newInstance,bundle);
                                 Toast.makeText(filterableWeeklyorRecurringScheduleListFragment.getActivity(),filterableWeeklyorRecurringScheduleListFragment.getParentFragment().getTag(),Toast.LENGTH_SHORT).show();
                         }
                 });
+
+
+
                 filterableListView.setFilterView(filtersWeeklyorRecurringList);
                 filterableListView.setAdapter(filterableListAdapter);
+
+
+                addWeeklyorRecurringListFAB.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                ((IActivityDataFactory)getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment,"WeeklyorRecurringListFragment", 0,IActivityDataFactory.newInstance,new Bundle());
+                        }
+                });
+
 
 
 

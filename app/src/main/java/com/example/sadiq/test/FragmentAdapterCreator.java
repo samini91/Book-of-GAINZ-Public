@@ -22,8 +22,9 @@ import java.util.List;
  */
 public class FragmentAdapterCreator extends FragmentPagerAdapter  {
 
-    private List<Class> fragmentList;
-    SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
+        private List<Class> fragmentList;
+        SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
+        HashMap<String,String> fragmentIdMappingHashMap = new HashMap<>();
 
     public FragmentAdapterCreator(FragmentManager fm,List fragmentList){
         super(fm);
@@ -55,22 +56,25 @@ public class FragmentAdapterCreator extends FragmentPagerAdapter  {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Fragment returnVal = (Fragment) super.instantiateItem(container, position);
+            Fragment returnVal = (Fragment) super.instantiateItem(container, position);
 
-        registeredFragments.put(position,returnVal);
-        FragmentIdMappingSingleton.PutFragmentId(returnVal.getClass().toString(),returnVal.getTag().toString());
-        return returnVal;
-
+            registeredFragments.put(position,returnVal);
+            fragmentIdMappingHashMap.put(returnVal.getClass().toString(),returnVal.getTag().toString());
+            //FragmentIdMappingSingleton.PutFragmentId(returnVal.getClass().toString(),returnVal.getTag().toString());
+            return returnVal;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        registeredFragments.remove(position);
-
-        super.destroyItem(container, position, object);
+            fragmentIdMappingHashMap.remove(registeredFragments.get(position).getClass().toString());
+            registeredFragments.remove(position);
+            super.destroyItem(container, position, object);
     }
 
+        public HashMap<String, String> getFragmentIdMappingHashMap() {
+                return fragmentIdMappingHashMap;
+        }
 
-    //public List<Fragment> getFragmentList (){return fragmentList;}
+        //public List<Fragment> getFragmentList (){return fragmentList;}
 
 }

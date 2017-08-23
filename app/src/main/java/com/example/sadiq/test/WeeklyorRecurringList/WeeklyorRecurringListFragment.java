@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.sadiq.test.Database.RealmDB;
 import com.example.sadiq.test.Database.WeeklyorRecurringDayDB;
 import com.example.sadiq.test.Database.WeeklyorRecurringListDB;
+import com.example.sadiq.test.FilterableList.FilterableExerciseListFragment;
 import com.example.sadiq.test.FilterableList.FilterableWorkoutListFragment;
 import com.example.sadiq.test.IActivityDataFactory;
 import com.example.sadiq.test.R;
@@ -49,6 +50,7 @@ public class WeeklyorRecurringListFragment extends Fragment {
 
         public static int defaultInstance = 0;
         public static int fromFilterableWeeklyorRecurringList = 1;
+
 
 
         ViewGroup root;
@@ -117,7 +119,7 @@ public class WeeklyorRecurringListFragment extends Fragment {
                                         Bundle bundle = new Bundle();
                                         bundle.putInt("index", index);
 
-                                        ((IActivityDataFactory)getActivity()).ActivityDataFactory(weeklyorRecurringListFragment,"FilterableWorkoutListFragment",0,bundle);
+                                        ((IActivityDataFactory)getActivity()).ActivityDataFactory(weeklyorRecurringListFragment,"FilterableWorkoutListFragment", FilterableWorkoutListFragment.out_workOutInstance,IActivityDataFactory.detail,bundle);
                                 }
                         });
 

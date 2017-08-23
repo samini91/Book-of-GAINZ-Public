@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
+
 
    </style>
 
@@ -32,10 +32,7 @@
 
     </style>
 
-    <style name="Popupflip">
-        <item name="android:windowEnterAnimation">@anim/card_flip_right_in</item>
-        <item name="android:windowExitAnimation">@anim/card_flip_right_out</item>
-    </style>
+
 
     <style name="PopupWindow" parent="@android:style/Widget.PopupWindow">
         <item name="android:popupBackground">@android:color/white</item>
@@ -44,9 +41,6 @@
     </style>
 
 
-    <style name="MyAnimation.Window" parent="@android:style/Animation.Activity">
-        <item name="android:windowEnterAnimation">@anim/card_flip_right_in</item>
-        <item name="android:windowExitAnimation">@anim/card_flip_right_out</item>
-    </style>
+
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.sadiq.test.AddWorkout;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -43,7 +44,11 @@ import io.realm.RealmResults;
 /**
  * Created by Sadiq on 2/16/2016.
  */
-public class AddWorkoutFragment extends Fragment    {
+public class AddWorkoutFragment extends DialogFragment    {
+
+    public static int in_WorkoutSetRepWeightListFragment = 1;
+    public static int in_WorkoutName = 2;
+
 
     private BoardView mBoardView;
 
@@ -100,7 +105,7 @@ public class AddWorkoutFragment extends Fragment    {
             allExersice.add(exerciseSetRep);
         }
 
-        if(WorkOutExercisesSingleton.getWorkOutExercisesSingleton()!= null)
+        if(WorkOutExercisesSingleton.getWorkOutExercisesSingleton()!= null )
         {
             //workOutExersices = savedInstanceState.getParcelable("workOutExercises");
             //workOutExersices = (ArrayList<Pair<String,List<SetRepWeightDBObject>>>) WorkOutExercisesSingleton.getWorkOutExerciesSingleton();
@@ -120,7 +125,12 @@ public class AddWorkoutFragment extends Fragment    {
 
         if(getArguments() != null)
         {
-            setWorkoutListExerciseSetRep((ExerciseSetRep) Parcels.unwrap(getArguments().getParcelable("ExerciseSetRepConfig")));
+            if(getTargetRequestCode() == in_WorkoutSetRepWeightListFragment){}
+              //  setWorkoutListExerciseSetRep((ExerciseSetRep) Parcels.unwrap(getArguments().getParcelable("ExerciseSetRepConfig")));
+            else if(getTargetRequestCode() == in_WorkoutName){
+                setWorkoutListFromWorkoutName( ((WorkoutTemplate)Parcels.unwrap(getArguments().getParcelable("workoutTemplate"))).getName() );
+            }
+
 
         }
 
@@ -130,7 +140,7 @@ public class AddWorkoutFragment extends Fragment    {
             public void onCustomListenerEvent(String Exercise, int index) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("ExerciseSetRep", Parcels.wrap(workOutexersicesAdapter.getItemList().get(index)));
-                ((IActivityDataFactory)getActivity()).ActivityDataFactory(addWorkoutFragment,"AddWorkoutSetRepWeightListFragment",0,bundle);
+                ((IActivityDataFactory)getActivity()).ActivityDataFactory(addWorkoutFragment,"AddWorkoutSetRepWeightListFragment",0,IActivityDataFactory.detail,bundle);
             }
         });
 
@@ -422,7 +432,23 @@ public class AddWorkoutFragment extends Fragment    {
                 workOutexersicesAdapter.getItemList().set(i,exerciseSetRep);
             }
         }
+
+    }
+
+    public void setWorkoutListFromWorkoutName(String workoutName){
+        RealmDB realmDB = new RealmDB();
+
+        WorkoutTemplate workoutTemplate = realmDB.getWorkoutTemplateFromName(workoutName);
+
+        workOutexersicesAdapter.getItemList().clear();
+
+        for(ExerciseSetRep exerciseSetRep :workoutTemplate.getExerciseSetRep())
+            workOutexersicesAdapter.getItemList().add(exerciseSetRep);
+
+        new AsyncFilter().execute(allExersice,workOutExersices);
         workOutexersicesAdapter.notifyDataSetChanged();
+
+
     }
 
 
