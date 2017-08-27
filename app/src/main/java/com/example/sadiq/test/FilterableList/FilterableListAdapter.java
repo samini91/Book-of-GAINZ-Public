@@ -3,40 +3,32 @@ package com.example.sadiq.test.FilterableList;
 import android.content.Context;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.sadiq.test.Database.RealmDB;
-import com.example.sadiq.test.R;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmList;
+import io.realm.Case;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.annotations.RealmClass;
 
 /**
  * Created by Mugen on 8/9/2017.
  */
 
-public class FilterableListAdapter <T extends FilterableListViewHolder, O extends RealmObject> extends RecyclerView.Adapter<T> {
+public class FilterableListAdapter<T extends FilterableListViewHolder, O extends RealmObject> extends RecyclerView.Adapter<T> {
 
-        public interface FilterableListAdapterOnViewClick{
+        public interface FilterableListAdapterOnViewClick {
                 void FilterableListAdapterOnViewClick(int position);
         }
 
-        public void setFilterableListAdapterOnViewClick(FilterableListAdapterOnViewClick filterableListAdapterOnViewClick){
+        public void setFilterableListAdapterOnViewClick(FilterableListAdapterOnViewClick filterableListAdapterOnViewClick) {
                 this.filterableListAdapterOnViewClick = filterableListAdapterOnViewClick;
         }
 
@@ -47,8 +39,8 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
         int layout;
         RealmDB realmDB;
         FilterableListAdapterOnViewClick filterableListAdapterOnViewClick;
-        public FilterableListAdapter(Context context,Class<O> clazz, Class<T>cls, int layout)
-        {
+
+        public FilterableListAdapter(Context context, Class<O> clazz, Class<T> cls, int layout) {
                 super();
 
                 realmDB = new RealmDB();
@@ -58,32 +50,27 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
                 this.layout = layout;
                 where = realmDB.getRealm().where(clazz);
                 realmResults = where.findAll();
-                Log.i("ExerciseCount",Integer.toString(where.findAll().size()));
 
         }
 
         @Override
         public T onCreateViewHolder(ViewGroup parent, int viewType) {
 
-                View vh = LayoutInflater.from(parent.getContext()).inflate(layout,parent,false);
-                try
-                {
+                View vh = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+                try {
                         T retVal = cls.getConstructor(View.class).newInstance(vh);
                         retVal.setFilterableListAdapterOnViewClick(filterableListAdapterOnViewClick);
                         return retVal;
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                         e.printStackTrace();
                         return null;
                 }
         }
 
         @Override
-        public void onBindViewHolder( T holder, int position) {
+        public void onBindViewHolder(T holder, int position) {
 
-                //holder.textView.setText(list.get(position));
-                holder.bind(realmResults,position);
+                holder.bind(realmResults, position);
         }
 
         @Override
@@ -91,11 +78,10 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
                 return realmResults.size();
         }
 
-        public void updateFilter(HashMap<String,String> filterMap)
-        {
+        public void updateFilter(HashMap<String, String> filterMap) {
                 where = realmDB.getRealm().where(clazz);
-                for( Map.Entry<String, String> set :filterMap.entrySet()){
-                        where = where.beginsWith(set.getKey(),set.getValue());
+                for (Map.Entry<String, String> set : filterMap.entrySet()) {
+                        where = where.contains(set.getKey(), set.getValue(), Case.INSENSITIVE);
                 }
                 realmResults = where.findAll();
 
@@ -103,13 +89,13 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
         }
 
 
-        public void updateFilter(List<Pair<String,String>> filterList){
+        public void updateFilter(List<Pair<String, String>> filterList) {
 
                 where = realmDB.getRealm().where(clazz);
 
-                for(Pair<String,String> filterKeyVal: filterList){
+                for (Pair<String, String> filterKeyVal : filterList) {
                         //
-                        where = where.beginsWith(filterKeyVal.first,filterKeyVal.second);
+                        where = where.beginsWith(filterKeyVal.first, filterKeyVal.second);
                 }
 
                 realmResults = where.findAll();
@@ -117,16 +103,8 @@ public class FilterableListAdapter <T extends FilterableListViewHolder, O extend
                 this.notifyDataSetChanged();
         }
 
-        public RealmResults<O> getRealmResultList(){return realmResults;}
-
-        /*public static class ViewHolder extends RecyclerView.ViewHolder
-        {
-                @Bind (R.id.filterablelist_viewholder_textview) TextView textView;
-                public ViewHolder(View itemView) {
-                        super(itemView);
-                        ButterKnife.bind(this,itemView);
-                }
+        public RealmResults<O> getRealmResultList() {
+                return realmResults;
         }
-        */
 
 }

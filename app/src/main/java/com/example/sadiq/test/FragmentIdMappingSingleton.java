@@ -8,38 +8,32 @@ import java.util.HashMap;
 
 public class FragmentIdMappingSingleton {
 
-        private static HashMap<String,String> FragmentIdMappingHashMap;
+        private static HashMap<String, String> FragmentIdMappingHashMap;
 
-        private void FragmentIdMappingSingleton()
-        {
+        private void FragmentIdMappingSingleton() {
 
         }
 
-        public static HashMap<String, String> getFragmentIdMappingSingleton()
-        {
-                if(FragmentIdMappingHashMap == null)
-                {
+        public static HashMap<String, String> getFragmentIdMappingSingleton() {
+                if (FragmentIdMappingHashMap == null) {
                         FragmentIdMappingHashMap = new HashMap<>();
                 }
                 return FragmentIdMappingHashMap;
         }
 
-        public static String FindFragmentId(String s)
-        {
-                if(FragmentIdMappingHashMap == null)
+        public static String FindFragmentId(String s) {
+                if (FragmentIdMappingHashMap == null)
                         return null;
 
                 return FragmentIdMappingHashMap.get(s);
         }
 
-        public static void PutFragmentId(String key, String val)
-        {
-                if(FragmentIdMappingHashMap == null)
-                {
+        public static void PutFragmentId(String key, String val) {
+                if (FragmentIdMappingHashMap == null) {
                         FragmentIdMappingHashMap = new HashMap<>();
                 }
 
-                FragmentIdMappingHashMap.put(key,val);
+                FragmentIdMappingHashMap.put(key, val);
         }
 
 

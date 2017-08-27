@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:autofit="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:orientation="horizontal"
@@ -16,36 +15,37 @@
 
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/valueLabel"
-        android:layout_toLeftOf="@+id/valueLabel" />
+        android:layout_toLeftOf="@+id/valueLabel"/>
 
     <RelativeLayout
         android:layout_height="48dp"
         android:layout_width="wrap_content"
         android:layout_weight="0.74">
-    <me.grantland.widget.AutofitLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/valueSelector_text"
 
-        android:maxLines="4"
-        >
-
-        <EditText
+        <me.grantland.widget.AutofitLayout
             android:layout_width="wrap_content"
-            android:layout_height="69dp"
-            android:singleLine="true"
-            android:text="0"
-            android:enabled="false"
-            android:background="@null"
-            android:textColor="#000000"
-            android:id="@+id/valueTextView"
-            android:layout_weight="1.04"
-            android:layout_above="@+id/valueLabel"
-            android:layout_centerHorizontal="true" />
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/valueSelector_text"
+
+            android:maxLines="4"
+            >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="69dp"
+                android:singleLine="true"
+                android:text="0"
+                android:enabled="false"
+                android:background="@null"
+                android:textColor="#000000"
+                android:id="@+id/valueTextView"
+                android:layout_weight="1.04"
+                android:layout_above="@+id/valueLabel"
+                android:layout_centerHorizontal="true"/>
 
 
-    </me.grantland.widget.AutofitLayout>
+        </me.grantland.widget.AutofitLayout>
 
         <TextView
             android:id="@+id/valueLabel"
@@ -54,8 +54,7 @@
             android:textSize="@dimen/valueSelector_label_text"
             android:text="SETS"
             android:layout_below="@+id/valueTextView"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_centerHorizontal="true"/>
 
 
     </RelativeLayout>
@@ -72,7 +71,7 @@
 
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
 
 </LinearLayout>
     <!--</RelativeLayout>-->

@@ -3,16 +3,13 @@ package com.example.sadiq.test.FilterableList;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 /**
  * Created by Mugen on 8/18/2017.
  */
 
-public abstract class FiltersBase extends FrameLayout{
+public abstract class FiltersBase extends FrameLayout {
 
 
         IUpdateFilter iUpdateFilter;
@@ -30,6 +27,8 @@ public abstract class FiltersBase extends FrameLayout{
         }
 
 
-        public void setUpdateFilter(IUpdateFilter iUpdateFilter){this.iUpdateFilter=iUpdateFilter;}
+        public void setUpdateFilter(IUpdateFilter iUpdateFilter) {
+                this.iUpdateFilter = iUpdateFilter;
+        }
 
 }

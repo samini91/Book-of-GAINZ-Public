@@ -2,40 +2,52 @@ package com.example.sadiq.test;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sadiq.test.CustomDataTypes.myViewPager;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Mugen on 7/7/2017.
  */
 
 public class ViewPagerFragment extends Fragment {
-        List<Class> fragmentList;
+        List<Pair<Class, String>> fragmentList;
         ViewGroup root;
+
+        @Bind(R.id.pager)
         myViewPager myViewPager;
+
+        @Bind(R.id.tabLayout)
+        TabLayout tabLayout;
+
         FragmentAdapterCreator childFragmentAdapter;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
                 root = (ViewGroup) inflater.inflate(R.layout.viewpager, container, false);
 
-                myViewPager = (myViewPager) root.findViewById(R.id.pager);
+                ButterKnife.bind(this, root);
 
                 return root;
         }
 
-        public void setFragmentList(List<Class> fragmentList) {
+        public void setFragmentList(List<Pair<Class, String>> fragmentList) {
                 if (childFragmentAdapter == null) {
                         myViewPager = (myViewPager) root.findViewById(R.id.pager);
                         this.fragmentList = fragmentList;
+
+
+                        tabLayout.setupWithViewPager(myViewPager);
 
                         childFragmentAdapter = new FragmentAdapterCreator(getChildFragmentManager(), fragmentList);
                         ///FragmentAdapterCreator childFragmentAdapter = new FragmentAdapterCreator(getFragmentManager(),fragmentList);
@@ -46,7 +58,7 @@ public class ViewPagerFragment extends Fragment {
                 }
         }
 
-        public String getViewPagerFragmentId(String id){
+        public String getViewPagerFragmentId(String id) {
                 return childFragmentAdapter.getFragmentIdMappingHashMap().get(id);
         }
 
@@ -55,7 +67,7 @@ public class ViewPagerFragment extends Fragment {
 
         }
 
-        public void setOffscreenPageLimit(int i ){
+        public void setOffscreenPageLimit(int i) {
                 myViewPager.setOffscreenPageLimit(i);
         }
 
@@ -64,7 +76,7 @@ public class ViewPagerFragment extends Fragment {
 
         }
 
-        public List<Class> getFragmentList() {
+        public List<Pair<Class, String>> getFragmentList() {
                 return fragmentList;
         }
 

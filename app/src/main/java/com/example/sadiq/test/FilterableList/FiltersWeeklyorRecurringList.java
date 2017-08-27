@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
@@ -39,12 +40,16 @@ public class FiltersWeeklyorRecurringList extends FiltersBase {
                 init();
         }
 
-        private void init(){
+        private void init() {
 
 
                 root = (ViewGroup) inflate(getContext(), R.layout.filtersweeklyorreccuringlist, this);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
+
+
+                editTextView.setHint("Schedule Name");
+                editTextView.setGravity(Gravity.CENTER);
 
                 editTextView.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -59,10 +64,9 @@ public class FiltersWeeklyorRecurringList extends FiltersBase {
 
                         @Override
                         public void afterTextChanged(Editable s) {
-                                iUpdateFilter.UpdateFilter("name",s.toString());
+                                iUpdateFilter.UpdateFilter("name", s.toString());
                         }
                 });
-
 
 
         }

@@ -7,7 +7,7 @@ import android.test.ApplicationTestCase;
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class GAINZAppTest extends ApplicationTestCase<Application> {
-    public GAINZAppTest() {
-        super(Application.class);
-    }
+        public GAINZAppTest() {
+                super(Application.class);
+        }
 }

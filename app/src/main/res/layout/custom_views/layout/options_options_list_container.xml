@@ -21,7 +21,7 @@
             android:textColor="@color/caldroid_sky_blue"
             >
 
-            </TextView>
+        </TextView>
 
     </RelativeLayout>
 

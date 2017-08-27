@@ -1,15 +1,11 @@
 package com.example.sadiq.test.Options;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sadiq.test.R;
@@ -22,6 +18,7 @@ import java.util.List;
 
 public class Option_dynamic_values extends LinearLayout {
         View rootView;
+
         public Option_dynamic_values(Context context) {
                 super(context);
                 init(context);
@@ -37,24 +34,21 @@ public class Option_dynamic_values extends LinearLayout {
                 init(context);
         }
 
-        void init(Context context)
-        {
+        void init(Context context) {
                 rootView = inflate(context, R.layout.option_option_dynamic_values, this);
 
         }
 
 
-        public void setButtonList (Context context, List<String> list)
-        {
+        public void setButtonList(Context context, List<String> list) {
 
-                for (String  s : list)
-                {
-                        this.addOptionValue(context,s);
+                for (String s : list) {
+                        this.addOptionValue(context, s);
                 }
 
         }
-        public void addOptionValue(Context context,String s)
-        {
+
+        public void addOptionValue(Context context, String s) {
                 TextView myButton = new Button(context);
 
                 myButton.setText(s);
@@ -84,8 +78,7 @@ public class Option_dynamic_values extends LinearLayout {
 
         }
 
-        public void removeOptionValue()
-        {
+        public void removeOptionValue() {
 
 
         }

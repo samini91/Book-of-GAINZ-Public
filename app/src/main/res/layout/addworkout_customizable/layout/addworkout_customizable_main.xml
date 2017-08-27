@@ -7,17 +7,17 @@
 
     >
 
-<!--    <com.woxthebox.draglistview.DragListView
+    <!--    <com.woxthebox.draglistview.DragListView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            />
+            -->
+    <com.woxthebox.draglistview.DragListView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        />
-        -->
-<com.woxthebox.draglistview.DragListView
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:id="@+id/DragListRecyclerView"
+        android:id="@+id/DragListRecyclerView"
 
-    />
+        />
 
 
     <android.support.design.widget.FloatingActionButton

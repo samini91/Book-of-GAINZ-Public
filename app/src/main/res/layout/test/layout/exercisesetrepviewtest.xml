@@ -5,10 +5,11 @@
               android:layout_height="match_parent"
               android:background="@color/Grey"
     >
-        <com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/exercisesetrepviewx"
-            />
+
+    <com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/exercisesetrepviewx"
+        />
 
 </LinearLayout>

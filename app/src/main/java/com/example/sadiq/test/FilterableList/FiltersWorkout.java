@@ -5,9 +5,9 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.example.sadiq.test.R;
 
@@ -21,7 +21,7 @@ public class FiltersWorkout extends FiltersBase {
         @Bind(R.id.NameFilter)
         EditText editTextView;
 
-      //  IUpdateFilter iUpdateFilter;
+        //  IUpdateFilter iUpdateFilter;
 
         public FiltersWorkout(Context context) {
                 super(context);
@@ -41,9 +41,12 @@ public class FiltersWorkout extends FiltersBase {
 
         public void init() {
 
-                root = (ViewGroup) inflate(getContext(), R.layout.filtersworkout,this);
+                root = (ViewGroup) inflate(getContext(), R.layout.filtersworkout, this);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
+
+                editTextView.setHint("Workout Name");
+                editTextView.setGravity(Gravity.CENTER);
 
                 editTextView.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -58,11 +61,11 @@ public class FiltersWorkout extends FiltersBase {
 
                         @Override
                         public void afterTextChanged(Editable s) {
-                                iUpdateFilter.UpdateFilter("Name",s.toString());
+                                iUpdateFilter.UpdateFilter("Name", s.toString());
                         }
                 });
 
         }
 
-     //   public void setUpdateFilter(IUpdateFilter iUpdateFilter){this.iUpdateFilter=iUpdateFilter;}
+        //   public void setUpdateFilter(IUpdateFilter iUpdateFilter){this.iUpdateFilter=iUpdateFilter;}
 }

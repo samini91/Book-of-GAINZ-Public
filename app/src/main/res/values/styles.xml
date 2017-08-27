@@ -8,8 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
 
-
-   </style>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -21,17 +20,16 @@
         <item name="android:textColorSecondary">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <!--
     <style name="Theme.Custom" parent="@android:style/Theme">
         <item name="android:calendarViewStyle">@style/Widget.CalendarView.Custom</item>
     </style>
 -->
     <style name="Widget.CalendarView.Custom" parent="android:Widget.CalendarView">
-        <item name = "android:background">@android:color/white</item>>
+        <item name="android:background">@android:color/white</item>>
 
     </style>
-
 
 
     <style name="PopupWindow" parent="@android:style/Widget.PopupWindow">
@@ -39,8 +37,6 @@
         <item name="android:background">@android:color/white</item>
 
     </style>
-
-
 
 
 </resources>

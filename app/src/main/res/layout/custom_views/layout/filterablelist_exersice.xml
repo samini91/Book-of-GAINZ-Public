@@ -9,13 +9,14 @@
     android:clickable="true"
     android:layout_weight=".5"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/FilterSelector"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"/>
 
     <co.moonmonkeylabs.realmsearchview.RealmSearchView
         android:id="@+id/FilterableList"
@@ -25,6 +26,6 @@
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/FilterSelector" />
+        android:layout_below="@+id/FilterSelector"/>
 
 </RelativeLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="?styleCaldroidViewLayout"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              style="?styleCaldroidViewLayout"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/calendar_title_view"
@@ -13,7 +13,7 @@
 
         <Button
             android:id="@+id/calendar_left_arrow"
-            style="?styleCaldroidLeftArrow" />
+            style="?styleCaldroidLeftArrow"/>
 
         <TextView
             android:id="@+id/calendar_month_year_textview"
@@ -21,7 +21,7 @@
 
         <Button
             android:id="@+id/calendar_right_arrow"
-            style="?styleCaldroidRightArrow" />
+            style="?styleCaldroidRightArrow"/>
     </LinearLayout>
 
     <GridView
@@ -30,14 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-10dp"
         android:numColumns="7"
-        android:stretchMode="columnWidth" >
+        android:stretchMode="columnWidth">
     </GridView>
 
     <com.antonyt.infiniteviewpager.InfiniteViewPager
         android:id="@+id/months_infinite_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 
 
 </LinearLayout><!-- From: file:/Users/thomasdao/Documents/workspace/Caldroid/caldroid/src/main/res/layout/calendar_view.xml -->

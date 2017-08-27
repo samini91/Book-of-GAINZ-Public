@@ -10,65 +10,82 @@ import io.realm.annotations.PrimaryKey;
  * Created by Sadiq on 3/30/2016.
  */
 
-@Parcel(implementations = { SetRepWeightDBObjectRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { SetRepWeightDBObject.class })
+@Parcel(implementations = {SetRepWeightDBObjectRealmProxy.class}, value = Parcel.Serialization.BEAN, analyze = {SetRepWeightDBObject.class})
 public class SetRepWeightDBObject extends RealmObject {
-    //This is a workaround until realm allows composite keys
-    @PrimaryKey
-    public String PrimaryKey;
+        @PrimaryKey
+        public String PrimaryKey;
 
-    public int Set;
-    public String ExerciseInstance;
-
-
-    public int Rep;
-
-    public float Weight;
-
-    public SetRepWeightDBObject(){}
-
-    public SetRepWeightDBObject(int Set){
-        this.Set=Set;
-        Rep=0;
-        Weight=0;
-    }
+        public int Set;
+        public String ExerciseInstance;
 
 
-    public SetRepWeightDBObject(int set, int rep, float weight){
-        this.Set=set;
-        this.Rep=rep;
-        this.Weight=weight;
-    }
-    public void setRep(int Rep){this.Rep=Rep;}
-    public int getRep(){return this.Rep;}
+        public int Rep;
 
-    public void setSet(int Set){this.Set=Set;}
-    public int getSet(){return this.Set;}
+        public float Weight;
 
-    public void setWeight(float Weight){this.Weight=Weight;}
-    public float getWeight(){return this.Weight;}
+        public SetRepWeightDBObject() {
+        }
 
-
-    public void setExerciseInstance(String ExerciseInstance){this.ExerciseInstance=ExerciseInstance;}
-    public String getExerciseInstance(){return this.ExerciseInstance;}
+        public SetRepWeightDBObject(int Set) {
+                this.Set = Set;
+                Rep = 0;
+                Weight = 0;
+        }
 
 
-    public void setCompositePrimaryKey(String workout, String Exercise)
-    {
-        setPrimaryKey(workout + "|"+Exercise + "|"+ getSet());
-    }
+        public SetRepWeightDBObject(int set, int rep, float weight) {
+                this.Set = set;
+                this.Rep = rep;
+                this.Weight = weight;
+        }
 
-    public void setCompositePrimaryKey(String workout)
-    {
-        setPrimaryKey(workout + "|"+getExerciseInstance() + "|"+ getSet());
-    }
+        public void setRep(int Rep) {
+                this.Rep = Rep;
+        }
 
-    public void setPrimaryKey(String primaryKey) {
-        PrimaryKey=primaryKey;
-    }
+        public int getRep() {
+                return this.Rep;
+        }
 
-    public String getPrimaryKey() {
-        return PrimaryKey;
-    }
+        public void setSet(int Set) {
+                this.Set = Set;
+        }
+
+        public int getSet() {
+                return this.Set;
+        }
+
+        public void setWeight(float Weight) {
+                this.Weight = Weight;
+        }
+
+        public float getWeight() {
+                return this.Weight;
+        }
+
+
+        public void setExerciseInstance(String ExerciseInstance) {
+                this.ExerciseInstance = ExerciseInstance;
+        }
+
+        public String getExerciseInstance() {
+                return this.ExerciseInstance;
+        }
+
+
+        public void setCompositePrimaryKey(String workout, String Exercise) {
+                setPrimaryKey(workout + "|" + Exercise + "|" + getSet());
+        }
+
+        public void setCompositePrimaryKey(String workout) {
+                setPrimaryKey(workout + "|" + getExerciseInstance() + "|" + getSet());
+        }
+
+        public void setPrimaryKey(String primaryKey) {
+                PrimaryKey = primaryKey;
+        }
+
+        public String getPrimaryKey() {
+                return PrimaryKey;
+        }
 }

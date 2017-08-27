@@ -3,6 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:id="@+id/viewpagerroot"
+             android:background="@color/Grey"
     >
 
 
@@ -10,9 +11,16 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:id="@+id/tabLayout"
+            />
 
+    </com.example.sadiq.test.CustomDataTypes.myViewPager>
 
 
 </FrameLayout>

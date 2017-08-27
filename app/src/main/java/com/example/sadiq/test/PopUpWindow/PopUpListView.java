@@ -9,31 +9,18 @@ import android.widget.ListView;
  * Created by Sadiq on 2/18/2016.
  */
 public class PopUpListView extends ListView {
-    ArrayAdapter<String> adapter;
+        ArrayAdapter<String> adapter;
 
-    public PopUpListView(Context activityContext){
-        super(activityContext);
+        public PopUpListView(Context activityContext) {
+                super(activityContext);
 
-    }
+        }
+        public PopUpListView(Context context, AttributeSet attrs, int defStyle) {
+                super(context, attrs, defStyle);
+        }
 
-
-    public PopUpListView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    public PopUpListView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-
-    public void getAssociatedDataFromDB(int Id){
-        //get primary movers of the muscle from  the db create adapter
-
-
-    }
-
-
-
-
+        public PopUpListView(Context context, AttributeSet attrs) {
+                super(context, attrs);
+        }
 
 }

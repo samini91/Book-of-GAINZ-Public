@@ -6,11 +6,8 @@ import com.example.sadiq.test.GenericMethods.IMerge;
 
 import org.parceler.Parcel;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
-
 import io.realm.RealmStringRealmProxy;
 import io.realm.annotations.PrimaryKey;
 
@@ -19,28 +16,24 @@ import io.realm.annotations.PrimaryKey;
  */
 
 
-@Parcel(implementations = { RealmStringRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { RealmString.class })
-public class RealmString extends RealmObject implements Comparable<RealmString> , IMerge<RealmString,RealmString>{
+@Parcel(implementations = {RealmStringRealmProxy.class}, value = Parcel.Serialization.BEAN, analyze = {RealmString.class})
+public class RealmString extends RealmObject implements Comparable<RealmString>, IMerge<RealmString, RealmString> {
         @PrimaryKey
         private String value;
 
-        public RealmString(){}
+        public RealmString() {
+        }
 
-        public RealmString(String s){
+        public RealmString(String s) {
                 value = s;
 
         }
 
-
-
-        public void setValue(String s)
-        {
+        public void setValue(String s) {
                 this.value = s;
         }
-        public String getValue()
-        {
+
+        public String getValue() {
                 return value;
         }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
-xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -8,6 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_margin="5dp"
 
         >
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -16,7 +18,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
             />
 
-</RelativeLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.sadiq.test;
+package com.example.sadiq.test.SetRepWeightConfigurationView;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -11,7 +11,9 @@ import android.widget.Button;
 import com.example.sadiq.test.AddWorkout.AddWorkoutFragment;
 import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.Database.SetRepWeightDBObject;
-import com.example.sadiq.test.SetRepWeightConfigurationView.SetRepWeightConfigurationView;
+import com.example.sadiq.test.IActivityDataFactory;
+import com.example.sadiq.test.R;
+import com.example.sadiq.test.Database.WorkoutTemplate;
 
 import org.parceler.Parcels;
 
@@ -27,8 +29,8 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
 
         IActivityDataFactory callback;
 
-        public interface setSetRepWeight{
-               void setSetRepWeight(WorkoutTemplate workoutTemplate);
+        public interface setSetRepWeight {
+                void setSetRepWeight(WorkoutTemplate workoutTemplate);
         }
 
         WorkoutTemplate workoutTemplate;
@@ -37,28 +39,24 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
         ViewGroup root;
         Button submitButton;
         SetRepWeightConfigurationView setRepWeightConfigurationView;
-        ExerciseSetRep  exerciseSetRepFromAddWorkout;
+        ExerciseSetRep exerciseSetRepFromAddWorkout;
 
         AddWorkoutSetRepWeightListFragment addWorkoutSetRepWeightListFragment = this;
 
         @Override
-        public void onAttach(Context context){
+        public void onAttach(Context context) {
                 super.onAttach(context);
-                try
-                {
+                try {
                         callback = (IActivityDataFactory) context;
-                }
-                catch(ClassCastException e)
-                {
-                        throw new ClassCastException(context.toString()
-                                + " must implement setSetRepWeightListener");
+                } catch (ClassCastException e) {
+                        throw new ClassCastException(context.toString() + " must implement setSetRepWeightListener");
                 }
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-                root = (ViewGroup) inflater.inflate(R.layout.addworkoutsetrepweightlist,root);
+                root = (ViewGroup) inflater.inflate(R.layout.addworkoutsetrepweightlist, root);
 
                 submitButton = (Button) root.findViewById(R.id.SubmitButton);
 
@@ -67,9 +65,8 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
                 setRepWeightConfigurationView.getAdapterList();
 
 
-                if(getArguments()!=null)
-                {
-                        unpackageExerciseSetRepWeight(getArguments(),"ExerciseSetRep");
+                if (getArguments() != null) {
+                        unpackageExerciseSetRepWeight(getArguments(), "ExerciseSetRep");
 
                 }
 
@@ -80,18 +77,13 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
                                 exerciseSetRepFromAddWorkout = Parcels.unwrap(getArguments().getParcelable("ExerciseSetRep"));
 
                                 Bundle bundle = new Bundle();
-
-                                //bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(packageExerciseSetRepWeight(setRepWeightConfigurationView.getAdapterList())));
                                 ExerciseSetRep exerciseSetRep = packageExerciseSetRepWeight(setRepWeightConfigurationView.getAdapterList());
 
                                 exerciseSetRep.setExerciseName(exerciseSetRepFromAddWorkout.getExerciseName());
 
                                 bundle.putParcelable("ExerciseSetRepConfig", Parcels.wrap(exerciseSetRep));
 
-                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment,"AddWorkoutFragment", AddWorkoutFragment.in_WorkoutSetRepWeightListFragment,IActivityDataFactory.detail,bundle);
-                                //callback.setSetRepWeight(workoutTempl1ate);
-                                
-                                //setRepWeightConfigurationView.getAdapterList();
+                                callback.ActivityDataFactory(addWorkoutSetRepWeightListFragment, "AddWorkoutFragment", AddWorkoutFragment.in_WorkoutSetRepWeightListFragment, IActivityDataFactory.detail, bundle);
 
                         }
                 });
@@ -102,21 +94,18 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
         @Override
         public void onResume() {
                 super.onResume();
-                //Bind the Exercisesetrep
 
         }
 
-        public void setExerciseSetRepArgs(ExerciseSetRep exerciseSetRepArgs)
-        {
+        public void setExerciseSetRepArgs(ExerciseSetRep exerciseSetRepArgs) {
                 this.exerciseSetRep = exerciseSetRepArgs;
         }
 
-        public ExerciseSetRep packageExerciseSetRepWeight(List<SetRepWeightDBObject> SetRepWeightDBObjectList)
-        {
+        public ExerciseSetRep packageExerciseSetRepWeight(List<SetRepWeightDBObject> SetRepWeightDBObjectList) {
                 ExerciseSetRep exerciseSetRep = new ExerciseSetRep();
-                RealmList<SetRepWeightDBObject>  setRepWeightDBObjectRealmList = new RealmList<>();
+                RealmList<SetRepWeightDBObject> setRepWeightDBObjectRealmList = new RealmList<>();
 
-                for (SetRepWeightDBObject s: SetRepWeightDBObjectList) {
+                for (SetRepWeightDBObject s : SetRepWeightDBObjectList) {
                         SetRepWeightDBObject setRepWeightDBObject = new SetRepWeightDBObject();
                         setRepWeightDBObjectRealmList.add(setRepWeightDBObject);
 
@@ -130,14 +119,12 @@ public class AddWorkoutSetRepWeightListFragment extends Fragment {
 
         }
 
-        public void unpackageExerciseSetRepWeight(Bundle bundle, String key)
-        {
+        public void unpackageExerciseSetRepWeight(Bundle bundle, String key) {
                 unpackageExerciseSetRepWeight((ExerciseSetRep) Parcels.unwrap(bundle.getParcelable(key)));
         }
 
-        public void unpackageExerciseSetRepWeight(ExerciseSetRep exerciseSetRep)
-        {
-                if(exerciseSetRep.getSetRepWeightDBObjectRealmList() != null)
+        public void unpackageExerciseSetRepWeight(ExerciseSetRep exerciseSetRep) {
+                if (exerciseSetRep.getSetRepWeightDBObjectRealmList() != null)
                         setRepWeightConfigurationView.getAdapter().setAdapterList(exerciseSetRep.getSetRepWeightDBObjectRealmList());
         }
 

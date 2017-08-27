@@ -9,10 +9,9 @@ import android.widget.LinearLayout;
 
 import com.example.sadiq.test.Database.ExerciseSetRep;
 import com.example.sadiq.test.ExerciseSetRep.ExerciseSetRepView;
-import com.example.sadiq.test.WorkoutTemplate;
+import com.example.sadiq.test.Database.WorkoutTemplate;
 
 import io.realm.RealmList;
-import io.realm.RealmResults;
 
 /**
  * Created by Mugen on 8/14/2017.
@@ -35,35 +34,28 @@ public class WorkoutExerciseSetRepTableView extends LinearLayout {
         }
 
 
-        private void init(Context context){
+        private void init(Context context) {
 
         }
 
-        public void bind( WorkoutTemplate workOutTemplate){
+        public void bind(WorkoutTemplate workOutTemplate) {
                 RealmList<ExerciseSetRep> setRepRealmList = workOutTemplate.getExerciseSetRep();
 
                 this.removeAllViews();
 
-                for(ExerciseSetRep exerciseSetRep : setRepRealmList) {
+                for (ExerciseSetRep exerciseSetRep : setRepRealmList) {
 
                         ExerciseSetRepView exerciseSetRepView = new ExerciseSetRepView(this.getContext());
 
-                        exerciseSetRepView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                                FrameLayout.LayoutParams.WRAP_CONTENT));
+                        exerciseSetRepView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
 
-                        exerciseSetRepView.Bindexercisesetrep(exerciseSetRep);
+                        exerciseSetRepView.Bindexercisesetrep(exerciseSetRep, true);
 
                         this.addView(exerciseSetRepView);
 
 
                 }
 
-
-
-
         }
-
-
-
 
 }

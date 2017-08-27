@@ -1,14 +1,10 @@
 package com.example.sadiq.test.CustomDataTypes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +16,7 @@ import java.util.TimerTask;
 public class TextViewTimer extends android.support.v7.widget.AppCompatTextView {
 
         int time;
+
         public TextViewTimer(Context context) {
                 super(context);
                 init();
@@ -35,8 +32,7 @@ public class TextViewTimer extends android.support.v7.widget.AppCompatTextView {
                 init();
         }
 
-        public void init()
-        {
+        public void init() {
                 this.setText("swag");
                 final TextViewTimer textViewTimer = this;
                 time = 0;
@@ -44,10 +40,10 @@ public class TextViewTimer extends android.support.v7.widget.AppCompatTextView {
                 timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                        //        textViewTimer.setText(Integer.toString(time));
+                                //        textViewTimer.setText(Integer.toString(time));
                                 time++;
                         }
-                },1);
+                }, 1);
 
 
                 HandlerThread thread = new HandlerThread("thread");

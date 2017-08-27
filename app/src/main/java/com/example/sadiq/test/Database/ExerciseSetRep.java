@@ -10,13 +10,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Mugen on 7/17/2017.
- */
-
-@Parcel(implementations = { ExerciseSetRepRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { ExerciseSetRep.class })
+@Parcel(implementations = {ExerciseSetRepRealmProxy.class}, value = Parcel.Serialization.BEAN, analyze = {ExerciseSetRep.class})
 public class ExerciseSetRep extends RealmObject {
 
         @PrimaryKey
@@ -51,9 +45,8 @@ public class ExerciseSetRep extends RealmObject {
                 return setRepWeightDBObjectRealmList;
         }
 
-        public void setCompositePrimaryKey(String workout)
-        {
-                setPrimaryKey(workout+"|"+getExerciseName());
+        public void setCompositePrimaryKey(String workout) {
+                setPrimaryKey(workout + "|" + getExerciseName());
         }
 
         public String getPrimaryKey() {
@@ -66,6 +59,6 @@ public class ExerciseSetRep extends RealmObject {
 
         @Override
         public boolean equals(Object o) {
-                return this.getExerciseName().equals(((ExerciseSetRep)o).getExerciseName());
+                return this.getExerciseName().equals(((ExerciseSetRep) o).getExerciseName());
         }
 }

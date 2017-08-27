@@ -4,11 +4,39 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/NameFilter"
         android:textColor="@color/caldroid_holo_blue_dark"
         />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/primaryMoverSpinner"
+            android:layout_weight=".5"
+
+
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondaryMoverSpinner"
+            android:layout_weight=".5"
+
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -1,47 +1,48 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context="com.example.sadiq.test.BlankFragment"
-    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  tools:context="com.example.sadiq.test.BlankFragment"
+                  android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_dialog_email"/>
 
-    <!-- fragment_screen_slide_page.xml -->
+        <!-- fragment_screen_slide_page.xml -->
 
 
-        <TextView style="?android:textAppearanceMedium"
+        <TextView
+            style="?android:textAppearanceMedium"
             android:padding="16dp"
             android:lineSpacingMultiplier="1.2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1" />
-    <!--
-        <CalendarView
-            android:id="@+id/calendar"
-            android:layout_centerInParent="true"
+            android:text="1"/>
+        <!--
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_centerInParent="true"
 
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>-->
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
 
     </LinearLayout>
 
-        </ScrollView>
+</ScrollView>

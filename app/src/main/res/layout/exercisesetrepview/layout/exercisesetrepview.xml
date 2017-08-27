@@ -10,19 +10,22 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-    android:id="@+id/exercisesetrepview_exercisename"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/Black"
-    android:text="exercisename"
-    xmlns:android="http://schemas.android.com/apk/res/android"/>
+        android:id="@+id/exercisesetrepview_exercisename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/LightBlue"
+        android:text="exercisename"
+        xmlns:android="http://schemas.android.com/apk/res/android"/>
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/caldroid_middle_gray"
         android:id="@+id/exercisesetrepview_setrep"
         />
 
+    <View
+        android:background="@color/caldroid_middle_gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
 </merge>

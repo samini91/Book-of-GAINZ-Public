@@ -8,13 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sadiq.test.CustomDataTypes.BodyPartHolder;
-import com.example.sadiq.test.CustomDataTypes.muscleGroupList;
-import com.example.sadiq.test.CustomDataTypes.muscleGroupListAdpater;
 import com.example.sadiq.test.Database.Exercise;
 import com.example.sadiq.test.Database.RealmDB;
 import com.example.sadiq.test.R;
-
-import java.util.zip.Inflater;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,7 +31,7 @@ public class PrimaryAndSecondaryMovers extends LinearLayout {
 
         @Bind(R.id.secondarymoverlist)
         LinearLayout secondaryMovers;
-        BodyPartHolder secondaryBodyPartHolder [];
+        BodyPartHolder secondaryBodyPartHolder[];
 
         public PrimaryAndSecondaryMovers(Context context) {
                 super(context);
@@ -52,24 +48,22 @@ public class PrimaryAndSecondaryMovers extends LinearLayout {
                 init();
         }
 
-        private void init(){
+        private void init() {
 
-                root = (ViewGroup) this.inflate(getContext(),R.layout.primarysecondarymover,this);
+                root = (ViewGroup) this.inflate(getContext(), R.layout.primarysecondarymover, this);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
 
         }
 
 
-
-        public void bind(String exerciseName)
-        {
+        public void bind(String exerciseName) {
 
 
                 RealmDB realmDB = new RealmDB();
 
                 RealmQuery<Exercise> exerciseRealmQuery = RealmQuery.createQuery(realmDB.getRealm(), Exercise.class);
-                exerciseRealmQuery.equalTo("name",exerciseName);
+                exerciseRealmQuery.equalTo("name", exerciseName);
                 RealmResults<Exercise> exerciseRealmResults = realmDB.getWhereAllExercises(exerciseRealmQuery);
 
 
@@ -100,10 +94,6 @@ public class PrimaryAndSecondaryMovers extends LinearLayout {
                         secondaryMovers.addView(textView);
 
                 }
-
-                //primaryMovers.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-                //secondaryMovers.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
         }
 
 

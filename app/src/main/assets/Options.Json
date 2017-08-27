@@ -1,20 +1,73 @@
-{"Options":
-[
-  { "weightMetricd":["jI","adsi","aaabababba"]},
-  { "test":["jas5dfIb"]},
-  { "asdf":["Peterg"]},
-  { "WeightMetric":["jIb","adsi","zasdf"]},
-
-  { "aasdf1":["1"]},
-  { "aasdf2":["2"]},
-  { "aasdf3":["3"]},
-  { "aasdf4":["4"]},
-  { "aasdf5":["5"]},
-  { "aasdf6":["6"]},
-  { "aasdf7":["7"]},
-  { "aasdf8":["8"]},
-  { "aasdf9":["9"]}
-
-
-]
+{
+  "Options": [
+    {
+      "weightMetricd": [
+        "jI",
+        "adsi",
+        "aaabababba"
+      ]
+    },
+    {
+      "test": [
+        "jas5dfIb"
+      ]
+    },
+    {
+      "asdf": [
+        "Peterg"
+      ]
+    },
+    {
+      "WeightMetric": [
+        "jIb",
+        "adsi",
+        "zasdf"
+      ]
+    },
+    {
+      "aasdf1": [
+        "1"
+      ]
+    },
+    {
+      "aasdf2": [
+        "2"
+      ]
+    },
+    {
+      "aasdf3": [
+        "3"
+      ]
+    },
+    {
+      "aasdf4": [
+        "4"
+      ]
+    },
+    {
+      "aasdf5": [
+        "5"
+      ]
+    },
+    {
+      "aasdf6": [
+        "6"
+      ]
+    },
+    {
+      "aasdf7": [
+        "7"
+      ]
+    },
+    {
+      "aasdf8": [
+        "8"
+      ]
+    },
+    {
+      "aasdf9": [
+        "9"
+      ]
+    }
+  ]
 }

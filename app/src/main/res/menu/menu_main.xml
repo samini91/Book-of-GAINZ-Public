@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.sadiq.test.MainActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.sadiq.test.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="9999"
         android:title="@string/action_settings"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 </menu>

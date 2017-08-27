@@ -13,28 +13,20 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.example.sadiq.test.Database.RealmDB;
 import com.example.sadiq.test.Database.WeeklyorRecurringDayDB;
 import com.example.sadiq.test.Database.WeeklyorRecurringListDB;
-import com.example.sadiq.test.FilterableList.FilterableExerciseListFragment;
 import com.example.sadiq.test.FilterableList.FilterableWorkoutListFragment;
 import com.example.sadiq.test.IActivityDataFactory;
 import com.example.sadiq.test.R;
-import com.example.sadiq.test.WorkoutTemplate;
+import com.example.sadiq.test.Database.WorkoutTemplate;
 
 import org.parceler.Parcels;
-
-import java.lang.reflect.Array;
-import java.text.ParseException;
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,14 +44,13 @@ public class WeeklyorRecurringListFragment extends Fragment {
         public static int fromFilterableWeeklyorRecurringList = 1;
 
 
-
         ViewGroup root;
 
         @Bind(R.id.RecyclerView)
         RecyclerView recyclerView;
         //@Bind(R.id.)
         //Spinner addScheduledWorkoutInstanceSpinner;
-        @Bind (R.id.addinstances)
+        @Bind(R.id.addinstances)
         ImageButton addInstances;
 
         @Bind(R.id.weeklyScheduleName)
@@ -81,16 +72,12 @@ public class WeeklyorRecurringListFragment extends Fragment {
 
 
         @Override
-        public void onAttach(Context context){
+        public void onAttach(Context context) {
                 super.onAttach(context);
-                try
-                {
+                try {
                         callback = (IActivityDataFactory) getActivity();
-                }
-                catch(ClassCastException e)
-                {
-                        throw new ClassCastException(getActivity().toString()
-                                + " must implement setSetRepWeightListener");
+                } catch (ClassCastException e) {
+                        throw new ClassCastException(getActivity().toString() + " must implement setSetRepWeightListener");
                 }
         }
 
@@ -98,30 +85,30 @@ public class WeeklyorRecurringListFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
                 super.onCreateView(inflater, container, savedInstanceState);
 
-                root = (ViewGroup) inflater.inflate(R.layout.weeklyorrecurringlist,root,false);
+                root = (ViewGroup) inflater.inflate(R.layout.weeklyorrecurringlist, root, false);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
 
                 final RealmDB realmDB = new RealmDB();
 
-                if(getTargetRequestCode() == defaultInstance)
+                if (getTargetRequestCode() == defaultInstance)
                         weeklyorRecurringListAdapter = WeeklyorRecurringListSingleton.getWeeklyorRecurringListSingleton().getWeeklyorRecurringListAdapter();
 
-                if(weeklyorRecurringListAdapter == null) {
+                if (weeklyorRecurringListAdapter == null) {
                         weeklyorRecurringDayDBs = new RealmList<>();
                         weeklyorRecurringListAdapter = new WeeklyorRecurringListAdapter(weeklyorRecurringDayDBs);
                 }
 
                 weeklyorRecurringListAdapter.setCustomListener(new WeeklyorRecurringListAdapter.CustomListener() {
-                                @Override
-                                public void onWorkoutDayPlusButton( int index) {
+                        @Override
+                        public void onWorkoutDayPlusButton(int index) {
 
-                                        Bundle bundle = new Bundle();
-                                        bundle.putInt("index", index);
+                                Bundle bundle = new Bundle();
+                                bundle.putInt("index", index);
 
-                                        ((IActivityDataFactory)getActivity()).ActivityDataFactory(weeklyorRecurringListFragment,"FilterableWorkoutListFragment", FilterableWorkoutListFragment.out_workOutInstance,IActivityDataFactory.detail,bundle);
-                                }
-                        });
+                                ((IActivityDataFactory) getActivity()).ActivityDataFactory(weeklyorRecurringListFragment, "FilterableWorkoutListFragment", FilterableWorkoutListFragment.out_workOutInstance, IActivityDataFactory.detail, bundle);
+                        }
+                });
 
 
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -133,9 +120,9 @@ public class WeeklyorRecurringListFragment extends Fragment {
                 addInstances.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                PopupMenu popupMenu = new PopupMenu(getActivity(),addInstances);
+                                PopupMenu popupMenu = new PopupMenu(getActivity(), addInstances);
 
-                                popupMenu.getMenuInflater().inflate(R.menu.addinstancesval,popupMenu.getMenu());
+                                popupMenu.getMenuInflater().inflate(R.menu.addinstancesval, popupMenu.getMenu());
 
                                 popupMenu.show();
 
@@ -144,10 +131,9 @@ public class WeeklyorRecurringListFragment extends Fragment {
                                         public boolean onMenuItemClick(MenuItem item) {
 
                                                 try {
-                                                        for (int i = 0 ; i < Integer.parseInt(item.getTitle().toString()); i++)
+                                                        for (int i = 0; i < Integer.parseInt(item.getTitle().toString()); i++)
                                                                 weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList.add(new WeeklyorRecurringDayDB(weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList.size()));
-                                                }
-                                                catch (Exception e ){
+                                                } catch (Exception e) {
                                                         e.printStackTrace();
                                                         return false;
                                                 }
@@ -161,7 +147,6 @@ public class WeeklyorRecurringListFragment extends Fragment {
                 });
 
 
-
                 submitButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -169,17 +154,14 @@ public class WeeklyorRecurringListFragment extends Fragment {
                                         realmDB.getRealm().executeTransaction(new Realm.Transaction() {
                                                 @Override
                                                 public void execute(Realm realm) {
-                                                        realmDB.addOrUpdateWeeklyorReccuringList(weeklyScheduleName.getText().toString(),weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList);
-                                                        Toast.makeText(getActivity(),"Schedule Created",Toast.LENGTH_SHORT).show();
+                                                        realmDB.addOrUpdateWeeklyorReccuringList(weeklyScheduleName.getText().toString(), weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList);
+                                                        Toast.makeText(getActivity(), "Schedule Created", Toast.LENGTH_SHORT).show();
                                                 }
                                         });
-                                }
-                                catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                         e.printStackTrace();
                                         throw e;
-                                }
-                                finally {
+                                } finally {
                                         realmDB.getRealm().close();
                                 }
 
@@ -218,18 +200,18 @@ public class WeeklyorRecurringListFragment extends Fragment {
         public void onResume() {
                 super.onResume();
 
-                if(getTargetRequestCode() == WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList)
+                if (getTargetRequestCode() == WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList)
                         selectWeeklyorRecurringList(getArguments());
         }
 
         @Override
         public void onPause() {
                 super.onPause();
-                if(getTargetRequestCode() == defaultInstance)
+                if (getTargetRequestCode() == defaultInstance)
                         WeeklyorRecurringListSingleton.getWeeklyorRecurringListSingleton().setWeeklyorRecurringListAdapter(weeklyorRecurringListAdapter);
         }
 
-        public void updateWeeklyorRecurringList(Bundle bundle){
+        public void updateWeeklyorRecurringList(Bundle bundle) {
 
                 int index = bundle.getInt("index");
                 int order = bundle.getInt("order");
@@ -247,14 +229,12 @@ public class WeeklyorRecurringListFragment extends Fragment {
                         weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList.set(index, weeklyorRecurringDayDB);
 
                         weeklyorRecurringListAdapter.notifyDataSetChanged();
-                }
-                catch (NullPointerException e)
-                {
+                } catch (NullPointerException e) {
                         e.printStackTrace();
                 }
         }
 
-        public void selectWeeklyorRecurringList(Bundle bundle){
+        public void selectWeeklyorRecurringList(Bundle bundle) {
 
                 String name = bundle.getString("name");
 
@@ -262,13 +242,7 @@ public class WeeklyorRecurringListFragment extends Fragment {
 
                 WeeklyorRecurringListDB weeklyorRecurringListDB = realmDB.getWeeklyorRecurringListDB(name);
 
-
                 weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList = weeklyorRecurringListDB.getWeeklyorRecurringDayDB();
-
-//                for(WeeklyorRecurringDayDB weeklyorRecurringDayDBs: weeklyorRecurringListDB.getWeeklyorRecurringDayDB()){
-  //                      weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList.add(weeklyorRecurringDayDBs);
-    //            }
-                //weeklyorRecurringListAdapter.weeklyorRecurringDayDBRealmList.
 
                 weeklyorRecurringListAdapter.notifyDataSetChanged();
 

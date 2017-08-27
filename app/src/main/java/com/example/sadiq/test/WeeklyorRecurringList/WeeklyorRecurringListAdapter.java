@@ -6,15 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView;
-import com.example.sadiq.test.AddWorkout.addWorkoutListAdapter;
 import com.example.sadiq.test.Database.WeeklyorRecurringDayDB;
 import com.example.sadiq.test.R;
 import com.example.sadiq.test.WeeklyList.WeekDayVariables;
-
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +23,7 @@ import io.realm.RealmList;
 public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorRecurringListAdapter.WeeklyorRecurringListViewHolder> {
 
 
-        public interface CustomListener{
+        public interface CustomListener {
 
                 void onWorkoutDayPlusButton(int index);
 
@@ -36,7 +32,7 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
         CustomListener customListener;
 
 
-        public void setCustomListener(CustomListener customListener){
+        public void setCustomListener(CustomListener customListener) {
                 this.customListener = customListener;
 
         }
@@ -44,15 +40,14 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
         RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList;
 
 
-        public WeeklyorRecurringListAdapter(RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList)
-        {
+        public WeeklyorRecurringListAdapter(RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList) {
                 super();
                 this.weeklyorRecurringDayDBRealmList = weeklyorRecurringDayDBRealmList;
         }
 
         @Override
         public WeeklyorRecurringListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View weeklyorRecurringListViewHolderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.weeklyorrecurringlistviewholder,parent,false);
+                View weeklyorRecurringListViewHolderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.weeklyorrecurringlistviewholder, parent, false);
 
                 WeeklyorRecurringListViewHolder weeklyorRecurringListViewHolder = new WeeklyorRecurringListViewHolder(weeklyorRecurringListViewHolderView);
 
@@ -63,11 +58,8 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
 
         @Override
         public void onBindViewHolder(WeeklyorRecurringListViewHolder holder, int index) {
-                //holder.setIsRecyclable(false);
-                holder.bind(weeklyorRecurringDayDBRealmList,index);
+                holder.bind(weeklyorRecurringDayDBRealmList, index);
                 holder.itemView.setTag(weeklyorRecurringDayDBRealmList.get(index));
-
-                //holder.textView.setText(Integer.toString(weeklyorRecurringDayDBRealmList.get(position).getOrder()));
         }
 
         @Override
@@ -76,7 +68,7 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
         }
 
 
-        private void setUpObservers(){
+        private void setUpObservers() {
 
                 final WeeklyorRecurringListAdapter weeklyorRecurringListAdapter = this;
 
@@ -84,8 +76,6 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
                         @Override
                         public void onChanged() {
                                 super.onChanged();
-
-
                         }
 
                         @Override
@@ -118,7 +108,7 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
         }
 
 
-        public  static class WeeklyorRecurringListViewHolder extends RecyclerView.ViewHolder {
+        public static class WeeklyorRecurringListViewHolder extends RecyclerView.ViewHolder {
 
 
                 CustomListener customListener;
@@ -133,34 +123,34 @@ public class WeeklyorRecurringListAdapter extends RecyclerView.Adapter<WeeklyorR
 
                 public WeeklyorRecurringListViewHolder(View v) {
                         super(v);
-                        ButterKnife.bind(this,v);
+                        ButterKnife.bind(this, v);
 
 
                         addWorkoutPlusButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                        if(customListener != null)
+                                        if (customListener != null)
                                                 customListener.onWorkoutDayPlusButton(getAdapterPosition());
                                 }
                         });
                 }
 
-                public void bind( RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList,int position){
-                       WeeklyorRecurringDayDB weeklyorRecurringDayDB = weeklyorRecurringDayDBRealmList.get(position);
+                public void bind(RealmList<WeeklyorRecurringDayDB> weeklyorRecurringDayDBRealmList, int position) {
+                        WeeklyorRecurringDayDB weeklyorRecurringDayDB = weeklyorRecurringDayDBRealmList.get(position);
 
-                        textView.setText(WeekDayVariables.WeekDayIntToString(weeklyorRecurringDayDB.getOrder() % 7) + " - Week - " + ((weeklyorRecurringDayDB.getOrder()/7) + 1 ));
+                        textView.setText(WeekDayVariables.WeekDayIntToString(weeklyorRecurringDayDB.getOrder() % 7) + " - Week - " + ((weeklyorRecurringDayDB.getOrder() / 7) + 1));
 
                         workoutExerciseSetRepTableView.removeAllViews();
-                        if(weeklyorRecurringDayDB.getWorkoutTemplates().size() > 0)
+                        if (weeklyorRecurringDayDB.getWorkoutTemplates().size() > 0)
                                 workoutExerciseSetRepTableView.bind(weeklyorRecurringDayDB.getWorkoutTemplates().first());
                 }
 
-                public void setCustomListener(CustomListener customListener){this.customListener = customListener;}
+                public void setCustomListener(CustomListener customListener) {
+                        this.customListener = customListener;
+                }
 
 
         }
-
-
 
 
 }

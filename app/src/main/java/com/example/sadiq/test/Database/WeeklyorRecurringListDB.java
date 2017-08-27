@@ -15,9 +15,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Mugen on 8/12/2017.
  */
 
-@Parcel(implementations = {WeeklyorRecurringListDBRealmProxy.class },
-        value = Parcel.Serialization.BEAN,
-        analyze = { SetRepWeightDBObject.class })
+@Parcel(implementations = {WeeklyorRecurringListDBRealmProxy.class}, value = Parcel.Serialization.BEAN, analyze = {SetRepWeightDBObject.class})
 
 public class WeeklyorRecurringListDB extends RealmObject {
 

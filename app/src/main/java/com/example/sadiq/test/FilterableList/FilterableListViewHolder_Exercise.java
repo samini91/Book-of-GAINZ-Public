@@ -15,7 +15,7 @@ import io.realm.RealmResults;
  * Created by Mugen on 8/9/2017.
  */
 
-public class FilterableListViewHolder_Exercise extends FilterableListViewHolder  {
+public class FilterableListViewHolder_Exercise extends FilterableListViewHolder {
 
         @Bind(R.id.filterablelist_viewholder_textview)
         TextView textView;
@@ -30,7 +30,7 @@ public class FilterableListViewHolder_Exercise extends FilterableListViewHolder 
                 itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                if(filterableListAdapterOnViewClick != null)
+                                if (filterableListAdapterOnViewClick != null)
                                         filterableListAdapterOnViewClick.FilterableListAdapterOnViewClick(getAdapterPosition());
                         }
                 });

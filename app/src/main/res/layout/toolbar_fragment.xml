@@ -12,7 +12,7 @@
         android:layout_below="@+id/seekBar1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:text="@string/button_text" />
+        android:text="@string/button_text"/>
 
     <EditText
         android:id="@+id/editText1"
@@ -22,8 +22,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text" >
-        <requestFocus />
+        android:inputType="text">
+
+        <requestFocus/>
     </EditText>
 
     <SeekBar
@@ -32,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/editText1"
-        android:layout_marginTop="14dp" />
+        android:layout_marginTop="14dp"/>
 
 </RelativeLayout>

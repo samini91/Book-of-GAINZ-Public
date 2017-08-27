@@ -2,14 +2,13 @@ package com.example.sadiq.test.WeeklyList;
 
 import android.app.Fragment;
 import android.os.Bundle;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.sadiq.test.WeeklyList.WeekDayVariables;
+
 import com.example.sadiq.test.R;
 
 import java.util.ArrayList;
@@ -19,38 +18,35 @@ import java.util.ArrayList;
  */
 public class WeeklyList extends Fragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstances){
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstances) {
 
 
-        ViewGroup root =  (ViewGroup) inflater.inflate(R.layout.recyclerviewlayout, container, false);
+                ViewGroup root = (ViewGroup) inflater.inflate(R.layout.recyclerviewlayout, container, false);
 
-        RecyclerView list = (RecyclerView) root.findViewById(R.id.my_recycler_view);
+                RecyclerView list = (RecyclerView) root.findViewById(R.id.my_recycler_view);
 
-        list.setHasFixedSize(true);
+                list.setHasFixedSize(true);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        list.setLayoutManager(mLayoutManager);
-        //WeekDayInfo[] a = new WeekDayInfo[]{e};
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                list.setLayoutManager(mLayoutManager);
 
-        ArrayList<WeekDayInfo> weekDayAdapterInfo= WeekDayInfo.initilizeWeeklySchedule();
+                ArrayList<WeekDayInfo> weekDayAdapterInfo = WeekDayInfo.initilizeWeeklySchedule();
 
-        Adapter adapter = new Adapter(weekDayAdapterInfo,getActivity());
+                Adapter adapter = new Adapter(weekDayAdapterInfo, getActivity());
 
-        list.setAdapter(adapter);
-
+                list.setAdapter(adapter);
 
 
-        list.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
+                list.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                                v.getParent().requestDisallowInterceptTouchEvent(true);
+                                return false;
+                        }
+                });
 
 
-
-        return root;
-    }
+                return root;
+        }
 }

@@ -27,7 +27,7 @@ public class FilterableWeeklyorRecurringScheduleListFragment extends DialogFragm
         ViewGroup root;
 
         @Bind(R.id.FilterableListView)
-        FilterableListView filterableListView ;
+        FilterableListView filterableListView;
 
         @Bind(R.id.addWeeklyorRecurringListFAB)
         FloatingActionButton addWeeklyorRecurringListFAB;
@@ -41,26 +41,25 @@ public class FilterableWeeklyorRecurringScheduleListFragment extends DialogFragm
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
                 super.onCreateView(inflater, container, savedInstanceState);
 
-                root = (ViewGroup) inflater.inflate(R.layout.filterablelistweekklyorreccuringlist,container,false);
+                root = (ViewGroup) inflater.inflate(R.layout.filterablelistweekklyorreccuringlist, container, false);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
 
                 FiltersWeeklyorRecurringList filtersWeeklyorRecurringList = new FiltersWeeklyorRecurringList(getActivity());
 
-                filterableListAdapter = new FilterableListAdapter<FilterableListViewHolder_WeeklyorRecurringList,WeeklyorRecurringListDB>(getActivity(),WeeklyorRecurringListDB.class, FilterableListViewHolder_WeeklyorRecurringList.class,R.layout.filterablelist_viewholder_weeklyorreccuringlist);
+                filterableListAdapter = new FilterableListAdapter<FilterableListViewHolder_WeeklyorRecurringList, WeeklyorRecurringListDB>(getActivity(), WeeklyorRecurringListDB.class, FilterableListViewHolder_WeeklyorRecurringList.class, R.layout.filterablelist_viewholder_weeklyorreccuringlist);
 
                 filterableListAdapter.setFilterableListAdapterOnViewClick(new FilterableListAdapter.FilterableListAdapterOnViewClick() {
                         @Override
                         public void FilterableListAdapterOnViewClick(int position) {
                                 Bundle bundle = new Bundle();
 
-                                bundle.putString("name", ((WeeklyorRecurringListDB)filterableListAdapter.getRealmResultList().get(position)).getName());
+                                bundle.putString("name", ((WeeklyorRecurringListDB) filterableListAdapter.getRealmResultList().get(position)).getName());
 
-                                ((IActivityDataFactory)getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment,"WeeklyorRecurringListFragment", WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList,IActivityDataFactory.newInstance,bundle);
-                                Toast.makeText(filterableWeeklyorRecurringScheduleListFragment.getActivity(),filterableWeeklyorRecurringScheduleListFragment.getParentFragment().getTag(),Toast.LENGTH_SHORT).show();
+                                ((IActivityDataFactory) getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment, "WeeklyorRecurringListFragment", WeeklyorRecurringListFragment.fromFilterableWeeklyorRecurringList, IActivityDataFactory.newInstance, bundle);
+                                Toast.makeText(filterableWeeklyorRecurringScheduleListFragment.getActivity(), filterableWeeklyorRecurringScheduleListFragment.getParentFragment().getTag(), Toast.LENGTH_SHORT).show();
                         }
                 });
-
 
 
                 filterableListView.setFilterView(filtersWeeklyorRecurringList);
@@ -70,11 +69,9 @@ public class FilterableWeeklyorRecurringScheduleListFragment extends DialogFragm
                 addWeeklyorRecurringListFAB.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                ((IActivityDataFactory)getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment,"WeeklyorRecurringListFragment", 0,IActivityDataFactory.newInstance,new Bundle());
+                                ((IActivityDataFactory) getActivity()).ActivityDataFactory(filterableWeeklyorRecurringScheduleListFragment, "WeeklyorRecurringListFragment", 0, IActivityDataFactory.newInstance, new Bundle());
                         }
                 });
-
-
 
 
                 return root;

@@ -6,88 +6,95 @@
              android:id="@+id/addworkoutroot"
     >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/add_workout_topVertical"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:weightSum="1"
-    >
-<EditText
-    android:layout_height="50dp"
-    android:layout_width="match_parent"
-    android:hint="Enter Workout Name"
-    android:id="@+id/workoutname"
-    android:imeOptions="actionDone"
-    android:singleLine="true"
-    android:gravity="center"
-
-    />
-
-    <LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:weightSum="1"
-    android:layout_weight=".10"
-    >
-        <EditText
-            android:id="@+id/addworkout_exercisefilter_edittext"
-            android:layout_height="35dp"
-            android:layout_width = "0dp"
-            android:hint="Enter Exercise"
-            android:textSize="13sp"
-            android:imeOptions="actionDone"
-            android:gravity="center"
-            android:layout_weight=".40"
-            />
-        <Spinner
-            android:id="@+id/addworkout_exercisefilter_spinner"
-            android:layout_height="35dp"
-            android:layout_width="0dp"
-            android:layout_weight=".10"
-            />
-        <View
-            android:layout_width="2dp"
-            android:layout_height="fill_parent"
-
-            android:background="#c0c0c0"/>
-
-    </LinearLayout>
-
-    <com.woxthebox.draglistview.BoardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/addWorkoutBoardView"
-        android:layout_gravity="start"
-        android:layout_weight=".80" />
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:weightSum="1"
-        android:layout_weight=".09"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/add_workout_topVertical"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:clickable="true"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true"
+                  android:weightSum="1"
         >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Clear"
-            android:id="@+id/clear"
-            android:layout_weight=".50"
+
+        <EditText
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:hint="Enter Workout Name"
+            android:id="@+id/workoutname"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:gravity="center"
+
             />
-        <Button
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1"
+            android:layout_weight=".10"
+            >
+
+            <EditText
+                android:id="@+id/addworkout_exercisefilter_edittext"
+                android:layout_height="35dp"
+                android:layout_width="0dp"
+                android:hint="Enter Exercise"
+                android:textSize="13sp"
+                android:imeOptions="actionDone"
+                android:gravity="center"
+                android:layout_weight=".40"
+                />
+
+            <Spinner
+                android:id="@+id/addworkout_exercisefilter_spinner"
+                android:layout_height="35dp"
+                android:layout_width="0dp"
+                android:layout_weight=".10"
+                />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="fill_parent"
+
+                android:background="#c0c0c0"/>
+
+        </LinearLayout>
+
+        <com.woxthebox.draglistview.BoardView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Submit"
-            android:id="@+id/submit"
-            android:layout_weight=".50"
-            />
+            android:id="@+id/addWorkoutBoardView"
+            android:layout_gravity="start"
+            android:layout_weight=".80"/>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1"
+            android:layout_weight=".09"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Clear"
+                android:id="@+id/clear"
+                android:layout_weight=".50"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Submit"
+                android:id="@+id/submit"
+                android:layout_weight=".50"
+                />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-    </FrameLayout>
+</FrameLayout>

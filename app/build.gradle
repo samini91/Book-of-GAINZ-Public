@@ -43,6 +43,8 @@ android {
                             'src/main/res/layout/addworkout_customizable',
                             'src/main/res/layout/popup',
                             'src/main/res/layout/addworkout',
+                            'src/main/res/layout/CalendarMenu',
+                            'src/main/res/layout/OneRepMax',
                             'src/main/res/layout/addexersice',
                             'src/main/res/layout/FilterableList',
                             'src/main/res/layout/exercisesetrepview',
@@ -58,8 +60,8 @@ android {
 
 buildscript {
     repositories {
-        maven { url "https://jitpack.io"}
-        maven{url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'}
+        maven { url "https://jitpack.io" }
+        maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
         mavenCentral()
         jcenter()
     }

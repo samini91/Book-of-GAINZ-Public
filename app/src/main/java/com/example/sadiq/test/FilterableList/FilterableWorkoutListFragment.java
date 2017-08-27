@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.sadiq.test.AddWorkout.AddWorkoutFragment;
 import com.example.sadiq.test.IActivityDataFactory;
 import com.example.sadiq.test.R;
-import com.example.sadiq.test.WorkoutTemplate;
+import com.example.sadiq.test.Database.WorkoutTemplate;
 
 import org.parceler.Parcels;
 
@@ -31,11 +31,11 @@ public class FilterableWorkoutListFragment extends DialogFragment {
         public static int out_workOutInstance = 1;
 
 
-        ViewGroup root ;
+        ViewGroup root;
 
         RecyclerView recyclerView;
         @Bind(R.id.FilterableListView)
-        FilterableListView filterableListView ;
+        FilterableListView filterableListView;
 
         @Bind(R.id.addWorkoutFAB)
         FloatingActionButton addWorkoutFAB;
@@ -45,13 +45,12 @@ public class FilterableWorkoutListFragment extends DialogFragment {
 
         int order;
         int index;
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-                final Dialog dialog =  super.onCreateDialog(savedInstanceState);
+                final Dialog dialog = super.onCreateDialog(savedInstanceState);
 
-                //dialog.getWindow().setWindowAnimations(R.style.AppTheme);
                 dialog.getWindow().getAttributes().windowAnimations = R.style.AppTheme;
-                //dialog.getWindow().setWindowAnimations(R.style.AppBaseTheme);
 
                 return dialog;
         }
@@ -60,17 +59,17 @@ public class FilterableWorkoutListFragment extends DialogFragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
 
-                root = (ViewGroup) inflater.inflate(R.layout.filterablelistworkout,container,false);
+                root = (ViewGroup) inflater.inflate(R.layout.filterablelistworkout, container, false);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
 
-                if(getArguments()!=null){
+                if (getArguments() != null) {
                         order = getArguments().getInt("order");
                         index = getArguments().getInt("index");
                 }
 
 //                FilterableListAdapter filterableListAdapter = new FilterableListAdapter<FilterableListViewHolder_Exercise,Exercise>(getActivity(),Exercise.class, FilterableListViewHolder_Exercise.class,R.layout.filterablelist_viewholder_exercise);
-                final FilterableListAdapter filterableListAdapter = new FilterableListAdapter<FilterableListViewHolder_Workout,WorkoutTemplate>(getActivity(),WorkoutTemplate.class, FilterableListViewHolder_Workout.class,R.layout.filterablelist_viewholder_workouttemplate);
+                final FilterableListAdapter filterableListAdapter = new FilterableListAdapter<FilterableListViewHolder_Workout, WorkoutTemplate>(getActivity(), WorkoutTemplate.class, FilterableListViewHolder_Workout.class, R.layout.filterablelist_viewholder_workouttemplate);
 
                 filterableListView.setAdapter(filterableListAdapter);
 
@@ -79,7 +78,7 @@ public class FilterableWorkoutListFragment extends DialogFragment {
                 filterableListView.setFilterView(filtersWorkout);
 
 
-                if(getTargetRequestCode() == 0){
+                if (getTargetRequestCode() == 0) {
                         filterableListAdapter.setFilterableListAdapterOnViewClick(new FilterableListAdapter.FilterableListAdapterOnViewClick() {
                                 @Override
                                 public void FilterableListAdapterOnViewClick(int position) {
@@ -98,8 +97,7 @@ public class FilterableWorkoutListFragment extends DialogFragment {
                                 }
                         });
 
-                }
-                else if(getTargetRequestCode() == 1 ) {
+                } else if (getTargetRequestCode() == 1) {
                         filterableListAdapter.setFilterableListAdapterOnViewClick(new FilterableListAdapter.FilterableListAdapterOnViewClick() {
                                 @Override
                                 public void FilterableListAdapterOnViewClick(int position) {
@@ -122,14 +120,12 @@ public class FilterableWorkoutListFragment extends DialogFragment {
                 }
 
 
-
                 addWorkoutFAB.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                                 ((IActivityDataFactory) filterableWorkoutListFragment.getActivity()).ActivityDataFactory(filterableWorkoutListFragment, "AddWorkoutFragment", 0, IActivityDataFactory.newInstance, new Bundle());
                         }
                 });
-
 
 
                 return root;
@@ -139,22 +135,21 @@ public class FilterableWorkoutListFragment extends DialogFragment {
         @Override
         public void onResume() {
                 super.onResume();
-                if(getTargetRequestCode()==1 || getDialog() !=null) {
-                        getDialog().getWindow().setLayout(
-                                getResources().getDisplayMetrics().widthPixels*4/5,
-                                getResources().getDisplayMetrics().heightPixels*6/7
+                if (getTargetRequestCode() == 1 || getDialog() != null) {
+                        getDialog().getWindow().setLayout(getResources().getDisplayMetrics().widthPixels * 4 / 5, getResources().getDisplayMetrics().heightPixels * 6 / 7
 
                         );
 
                         WindowManager.LayoutParams lp = getDialog().getWindow().getAttributes();
-                        lp.gravity = Gravity.BOTTOM|Gravity.RIGHT;
-                        lp.x = 1000;
-                        lp.y = 1000;
+                        lp.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+                        //lp.x = 1000;
+                        //lp.y = 1000;
 
                         getDialog().getWindow().setAttributes(lp);
 
                 }
         }
 
-        private void getTargetRequestCodeTransformation(){}
+        private void getTargetRequestCodeTransformation() {
+        }
 }

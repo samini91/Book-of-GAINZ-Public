@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
     <shape xmlns:android="http://schemas.android.com/apk/res/android">
+
         <solid android:color="#FFFFFF"/>
-        <stroke android:width="2dp" android:color="#515151"/>
-        <corners android:radius="3dp" />
-        <padding android:left="10dp" android:top="5dp"
-            android:right="10dp" android:bottom="5dp" />
+
+        <stroke
+            android:width="2dp"
+            android:color="#515151"/>
+
+        <corners android:radius="3dp"/>
+
+        <padding
+            android:left="10dp"
+            android:top="5dp"
+            android:right="10dp"
+            android:bottom="5dp"/>
     </shape>
 
 </LinearLayout>

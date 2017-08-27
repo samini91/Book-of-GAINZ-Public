@@ -22,20 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/filterablelist_viewholder_textview"
-            android:textColor="@color/Black"
+            android:textColor="@color/DarkBlue"
+            android:textSize="20dp"
             android:text="Test"
 
             />
 
-<!--        <LinearLayout
-
+        <View
+            android:background="#000000"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ExerciseSetRepTable"
-            android:orientation="vertical">
+            android:layout_height="1dp"/>
 
-            </LinearLayout>
-            -->
 
         <com.example.sadiq.test.AddWorkout.WorkoutExerciseSetRepTableView
             android:layout_width="match_parent"

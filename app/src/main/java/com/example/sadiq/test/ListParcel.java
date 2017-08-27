@@ -34,7 +34,7 @@ public class ListParcel implements TypeRangeParcelConverter<RealmList<? extends 
                 int size = parcel.readInt();
                 RealmList list = new RealmList();
 
-                for (int i=0; i<size; i++) {
+                for (int i = 0; i < size; i++) {
                         Parcelable parcelable = parcel.readParcelable(getClass().getClassLoader());
                         list.add((RealmObject) Parcels.unwrap(parcelable));
                 }

@@ -12,16 +12,16 @@ public class WeekDayInfo {
         protected int dayOfTheWeek;
 
 
-
-        public WeekDayInfo(){}
-
-        private WeekDayInfo(int dayOfTheWeek){
-                this.dayOfTheWeek=dayOfTheWeek;
-                Id=dayOfTheWeek;
+        public WeekDayInfo() {
         }
 
-        public static ArrayList<WeekDayInfo> initilizeWeeklySchedule(){
-                ArrayList<WeekDayInfo> weekDayInfoArrayList= new ArrayList<>();
+        private WeekDayInfo(int dayOfTheWeek) {
+                this.dayOfTheWeek = dayOfTheWeek;
+                Id = dayOfTheWeek;
+        }
+
+        public static ArrayList<WeekDayInfo> initilizeWeeklySchedule() {
+                ArrayList<WeekDayInfo> weekDayInfoArrayList = new ArrayList<>();
 
                 weekDayInfoArrayList.add(new WeekDayInfo(WeekDayVariables.Sunday));
                 weekDayInfoArrayList.add(new WeekDayInfo(WeekDayVariables.Monday));
@@ -30,7 +30,6 @@ public class WeekDayInfo {
                 weekDayInfoArrayList.add(new WeekDayInfo(WeekDayVariables.Thursday));
                 weekDayInfoArrayList.add(new WeekDayInfo(WeekDayVariables.Friday));
                 weekDayInfoArrayList.add(new WeekDayInfo(WeekDayVariables.Saturday));
-
 
 
                 return weekDayInfoArrayList;

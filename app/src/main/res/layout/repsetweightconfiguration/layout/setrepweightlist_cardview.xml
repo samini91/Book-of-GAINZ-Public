@@ -6,43 +6,42 @@
     >
 
 
+    <LinearLayout
+        android:orientation="vertical"
 
-<LinearLayout
-    android:orientation="vertical"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
-
-    <TextView
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:id="@+id/textviewtestsetrepweight"
-        />
+        android:layout_height="match_parent"
 
-    <!--
-    <com.example.sadiq.test.CustomDataTypes.Counter
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/setrepweightlist_cardview_repCounter"
-        />
--->
-    <com.example.sadiq.test.CustomDataTypes.RepCounter
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/setrepweightlist_cardview_repCounter"
-        />
-<!--
+        >
 
-TODO need to make another implementation of this. Have to add on touch functionality so they can put percentages and add weights from a prompt instead of the counter.
--->
-    <com.example.sadiq.test.CustomDataTypes.WeightCounter
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/setrepweightlist_cardview_weightCounter"
-        />
-</LinearLayout>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/textviewtestsetrepweight"
+            />
+
+        <!--
+        <com.example.sadiq.test.CustomDataTypes.Counter
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/setrepweightlist_cardview_repCounter"
+            />
+    -->
+        <com.example.sadiq.test.CustomDataTypes.RepCounter
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/setrepweightlist_cardview_repCounter"
+            />
+        <!--
+
+        TODO need to make another implementation of this. Have to add on touch functionality so they can put percentages and add weights from a prompt instead of the counter.
+        -->
+        <com.example.sadiq.test.CustomDataTypes.WeightCounter
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/setrepweightlist_cardview_weightCounter"
+            />
+    </LinearLayout>
 
 
 </android.support.v7.widget.CardView>

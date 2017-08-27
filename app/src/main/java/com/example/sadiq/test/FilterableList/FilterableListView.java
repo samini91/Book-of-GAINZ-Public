@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -21,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by Mugen on 8/10/2017.
  */
 
-public class FilterableListView extends LinearLayout implements IUpdateFilter{
+public class FilterableListView extends LinearLayout implements IUpdateFilter {
 
 
         ViewGroup root;
@@ -29,11 +28,11 @@ public class FilterableListView extends LinearLayout implements IUpdateFilter{
         RecyclerView recyclerView;
         @Bind(R.id.FilterRoot)
         FrameLayout filterRoot;
-        //List<Pair<String,String>> filterList;
 
-        HashMap<String,String> filterMap;
+        HashMap<String, String> filterMap;
 
         IUpdateFilter filterViewInterface;
+
         public FilterableListView(Context context) {
                 super(context);
                 init();
@@ -49,14 +48,12 @@ public class FilterableListView extends LinearLayout implements IUpdateFilter{
                 init();
         }
 
-        void init()
-        {
-                root = (ViewGroup) inflate(getContext(),R.layout.filterablelist,this);
+        void init() {
+                root = (ViewGroup) inflate(getContext(), R.layout.filterablelist, this);
 
-                ButterKnife.bind(this,root);
+                ButterKnife.bind(this, root);
 
                 filterMap = new HashMap<>();
-                //recyclerView = (RecyclerView) findViewById(R.id.FilterableList_RecyclerView);
 
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                 mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -65,34 +62,22 @@ public class FilterableListView extends LinearLayout implements IUpdateFilter{
 
         }
 
-        public void setAdapter(FilterableListAdapter adapter){recyclerView.setAdapter(adapter);}
+        public void setAdapter(FilterableListAdapter adapter) {
+                recyclerView.setAdapter(adapter);
+        }
 
-
-        //public void setFilterView(int layoutId){
-//
-//                Filters filterView = (Filters) inflate(getContext(),layoutId,null);
-//                filterView.setUpdateFilter(this);
-//                filterRoot.addView(filterView);
-//        }
-
-        public void setFilterView(FiltersBase filterView){
-                //EditText textView = new EditText(getContext());
-                //ViewGroup.LayoutParams params = filterView.getLayoutParams();
-                //params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                //params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                //filterView.requestLayout();
+        public void setFilterView(FiltersBase filterView) {
                 filterView.setLayoutParams(new ViewGroup.LayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
-                //filterRoot.addView(textView);
                 filterRoot.addView(filterView);
                 filterView.setUpdateFilter(this);
         }
 
 
-        public void UpdateFilter(String key, String val){
+        public void UpdateFilter(String key, String val) {
 
-                filterMap.put(key,val);
+                filterMap.put(key, val);
 
-                ((FilterableListAdapter)recyclerView.getAdapter()).updateFilter(filterMap);
+                ((FilterableListAdapter) recyclerView.getAdapter()).updateFilter(filterMap);
         }
 
 }
